@@ -37,7 +37,7 @@
                 </div>
 
                 <div class="form-group {{ $errors->has('password') ? ' has-error' : '' }}">
-                    <input id="sign-in-password" type="password" class="form-control" placeholder="Contraseña">
+                    <input id="sign-in-password" type="password" name="password" class="form-control" placeholder="Contraseña">
                     @if ($errors->has('password'))
                         <span class="help-block">
                             {{ $errors->first('password') }}
