@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}">
+<html lang="es">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,7 +11,21 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('libs/bower/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('libs/bower/material-design-iconic-font/dist/css/material-design-iconic-font.css') }}" rel="stylesheet">
+    <link href="{{ asset('libs/bower/animate.css/animate.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('libs/bower/fullcalendar/dist/fullcalendar.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('libs/bower/perfect-scrollbar/css/perfect-scrollbar.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/bootstrap.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,500,600,700,800,900,300">
+    <script src="{{ asset('libs/bower/breakpoints.js/dist/breakpoints.min.js') }}"></script>
+    <!--<link href="{{ asset('css/app.css') }}" rel="stylesheet">-->
+    @yield('css')
+
+    <script>
+        Breakpoints();
+    </script>
 </head>
 <body>
     <div id="app">
@@ -75,6 +89,18 @@
     </div>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
+
+    <script src="{{ asset('libs/bower/jquery/dist/jquery.js') }}"></script>
+    <script src="{{ asset('libs/bower/jquery-ui/jquery-ui.min.js') }}"></script>
+    <script src="{{ asset('libs/bower/jQuery-Storage-API/jquery.storageapi.min.js') }}"></script>
+    <script src="{{ asset('libs/bower/bootstrap-sass/assets/javascripts/bootstrap.js') }}"></script>
+    <script src="{{ asset('libs/bower/jquery-slimscroll/jquery.slimscroll.js') }}"></script>
+    <script src="{{ asset('libs/bower/perfect-scrollbar/js/perfect-scrollbar.jquery.js') }}"></script>
+    <script src="{{ asset('assets/js/library.js') }}"></script>
+    <script src="{{ asset('assets/js/plugins.js') }}"></script>
+    <script src="{{ asset('assets/js/app.js') }}"></script>
+    <script src="{{ asset('libs/bower/moment/moment.js') }}"></script>
+    <script src="{{ asset('libs/bower/fullcalendar/dist/fullcalendar.min.js') }}"></script>
+    <script src="{{ asset('assets/js/fullcalendar.js') }}"></script>
 </body>
 </html>
