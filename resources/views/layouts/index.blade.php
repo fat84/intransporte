@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -32,85 +32,6 @@
 </head>
 <body>
 @yield('content')
-<div class="app no-padding no-footer layout-static">
-    <div class="session-panel">
-        <div class="session">
-            <div class="session-content">
-                <div class="card card-block form-layout">
-                    <form role="form" action="index.html" id="validate">
-                        <div class="text-xs-center m-b-3">
-                            <img src="images/logo-icon.png" height="80" alt="" class="m-b-1"/>
-                            <h5>
-                                Welcome back!
-                            </h5>
-                            <p class="text-muted">
-                                Sign in with your app id to continue.
-                            </p>
-                        </div>
-                        <fieldset class="form-group">
-                            <label for="username">
-                                Enter your username
-                            </label>
-                            <input type="text" class="form-control form-control-lg" id="username" placeholder="username" required/>
-                        </fieldset>
-                        <fieldset class="form-group">
-                            <label for="password">
-                                Enter your password
-                            </label>
-                            <input type="password" class="form-control form-control-lg" id="password" placeholder="********" required/>
-                        </fieldset>
-                        <label class="custom-control custom-checkbox m-b-1">
-                            <input type="checkbox" class="custom-control-input">
-                            <span class="custom-control-indicator"></span>
-                            <span class="custom-control-description">Stay logged in</span>
-                        </label>
-                        <button class="btn btn-primary btn-block btn-lg" type="submit">
-                            Login
-                        </button>
-                        <div class="divider">
-                  <span>
-                    OR
-                  </span>
-                        </div>
-                        <div class="text-xs-center">
-                            <p>
-                                Login with your social account
-                            </p>
-                            <button href="javascript:;" class="btn btn-icon-icon btn-facebook btn-lg m-b-1 m-r-1">
-                                <i class="fa fa-facebook">
-                                </i>
-                            </button>
-                            <button href="javascript:;" class="btn btn-icon-icon btn-github btn-lg m-b-1 m-r-1">
-                                <i class="fa fa-github">
-                                </i>
-                            </button>
-                            <button href="javascript:;" class="btn btn-icon-icon btn-google btn-lg m-b-1 m-r-1">
-                                <i class="fa fa-google-plus">
-                                </i>
-                            </button>
-                            <button href="javascript:;" class="btn btn-icon-icon btn-linkedin btn-lg m-b-1 m-r-1">
-                                <i class="fa fa-linkedin">
-                                </i>
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <footer class="text-xs-center p-y-1">
-                <p>
-                    <a href="extra-forgot.html">
-                        Forgot password?
-                    </a>
-                    &nbsp;&nbsp;·&nbsp;&nbsp;
-                    <a href="extra-signup.html">
-                        Create an account
-                    </a>
-                </p>
-            </footer>
-        </div>
-
-    </div>
-</div>
 
 <script type="text/javascript">
     window.paceOptions = {

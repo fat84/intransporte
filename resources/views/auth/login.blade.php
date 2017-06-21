@@ -1,69 +1,74 @@
 @extends('layouts.index')
 
 @section('css')
-    <link rel="stylesheet" href="{{asset('assets/css/core.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/css/misc-pages.css')}}">
-    <style>
-        body {
-            background-color: #002a80;
-        }
-    </style>
 @endsection
 
 @section('content')
-    <div id="back-to-home">
-        <!--<a href="#" class="btn btn-outline btn-default"><i class="fa fa-home animated zoomIn"></i></a>-->
-    </div>
-    <div class="simple-page-wrap">
-        <div class="simple-page-logo animated swing">
-            <a href="index.html">
-                <span><i class="fa fa-gg"></i></span>
-                <span style="font-weight: bold">{{config('app.name')}}</span>
-            </a>
-        </div><!-- logo -->
-        <div class="simple-page-form animated flipInY" id="login-form">
-            <h4 class="form-title m-b-xl text-center">Inicio de sesión obligatorio</h4>
-            <form role="form" method="POST" action="{{ route('login') }}">
-                {{ csrf_field() }}
-                {{ csrf_field() }}
-                <div class="form-group {{ $errors->has('email') ? ' has-error' : '' }}">
-                    <input id="sign-in-email" name="email" type="email" class="form-control"
-                           placeholder="Correo electrónico" {{ old('email') }}>
-                    @if ($errors->has('email'))
-                        <span class="help-block">
-                                        {{ $errors->first('email') }}
-                                    </span>
-                    @endif
-                </div>
 
-                <div class="form-group {{ $errors->has('password') ? ' has-error' : '' }}">
-                    <input id="sign-in-password" type="password" name="password" class="form-control" placeholder="Contraseña">
-                    @if ($errors->has('password'))
-                        <span class="help-block">
+    <div class="app no-padding no-footer layout-static" style="background-color: #62a2d5;">
+        <div class="session-panel">
+            <div class="session">
+                <div class="session-content">
+                    <div class="card card-block form-layout">
+                        <form role="form"  id="validate" method="POST" action="{{ route('login') }}">
+                            {{ csrf_field() }}
+                            <div class="text-xs-center m-b-3">
+                                <img src="images/logo-icon.png" height="80" alt="" class="m-b-1"/>
+                                <h5>
+                                    {{config('app.name')}}
+                                </h5>
+                                <p class="text-muted">
+                                    Inicio de sesión obligatorio
+                                </p>
+                            </div>
+                            <fieldset class="form-group  {{ $errors->has('password') ? ' has-error' : '' }}">
+                                <label for="username">
+                                    Ingrese su correo electrónico:
+                                </label>
+                                <input type="email" class="form-control form-control-lg" id="username" name="email" value="{{ old('email') }}" required/>
+                                @if ($errors->has('password'))
+                                    <span class="help-block">
                             {{ $errors->first('password') }}
                                     </span>
-                    @endif
-                </div>
-
-                <div class="form-group m-b-xl">
-                    <div class="checkbox checkbox-primary">
-                        <input type="checkbox" id="keep_me_logged_in"
-                               name="remember" {{ old('remember') ? 'checked' : '' }}/>
-                        <label for="keep_me_logged_in">mantener mi sesión abierta</label>
+                                @endif
+                            </fieldset>
+                            <fieldset class="form-group  {{ $errors->has('password') ? ' has-error' : '' }}">
+                                <label for="password">
+                                    Ingrese su contraseña de acceso:
+                                </label>
+                                <input type="password" class="form-control form-control-lg" name="password" id="password" value="{{ old('password') }}" required/>
+                                @if ($errors->has('password'))
+                                    <span class="help-block">
+                            {{ $errors->first('password') }}
+                                    </span>
+                                @endif
+                            </fieldset>
+                            <label class="custom-control custom-checkbox m-b-1">
+                                <input type="checkbox" class="custom-control-input" name="remember" {{ old('remember') ? 'checked' : '' }}>
+                                <span class="custom-control-indicator"></span>
+                                <span class="custom-control-description">Mantener mi sesión abierta en este equipo</span>
+                            </label>
+                            <button class="btn btn-primary btn-block btn-lg" type="submit">
+                                Ingresar al sistema
+                            </button>
+                            <div class="divider">
+                            </div>
+                            <div class="text-center">
+                                <p class="text-xs-center m-b-1">
+                                    <a href="{{ route('password.request') }}">
+                                        ¿Olvitaste tu contraseña?
+                                    </a>
+                                </p>
+                            </div>
+                        </form>
                     </div>
                 </div>
-                <input type="submit" class="btn btn-primary" value="INGRESAR">
-            </form>
-        </div><!-- #login-form -->
+                <footer class="text-xs-center p-y-1">
 
-        <div class="simple-page-footer">
-            <p><a href="{{ route('password.request') }}">¿OLVIDO SU CONTRASEÑA?</a></p>
-            <p>
-                <!--<small>Don't have an account ?</small>
-                <a href="·">CREATE AN ACCOUNT</a>-->
-            </p>
-        </div><!-- .simple-page-footer -->
+                </footer>
+            </div>
 
+        </div>
+    </div>
 
-    </div><!-- .simple-page-wrap -->
 @endsection
