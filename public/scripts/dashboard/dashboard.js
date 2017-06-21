@@ -161,7 +161,7 @@
   });
 
   /******** Notification ********/
-  noty({
+  /*noty({
    theme: 'app-noty',
     text: 'Welcome! You are now using Milestone Bootstrap 4 dashboard template.',
     type: 'success',
@@ -172,5 +172,5 @@
       open: 'animated fadeInDown', // Animate.css class names
       close: 'animated fadeOutUp', // Animate.css class names
     }
-  });
+  });*/
 })(jQuery);

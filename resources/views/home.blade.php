@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('nombre_pagina')
+    Inicio
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row">
@@ -14,4 +18,21 @@
         </div>
     </div>
 </div>
+@endsection
+
+
+@section('scripts')
+    <!--
+<script type="text/javascript">
+    window.paceOptions = {
+        document: true,
+        eventLag: true,
+        restartOnPushState: true,
+        restartOnRequestAfter: true,
+        ajax: {
+            trackMethods: ['POST', 'GET']
+        }
+    };
+</script>
+    -->
 @endsection

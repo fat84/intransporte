@@ -8,11 +8,11 @@
     <meta name="msapplication-tap-highlight" content="no">
 
     <meta name="mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="Milestone">
+    <meta name="application-name" content="{{config('app.name')}}">
 
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="Milestone">
+    <meta name="apple-mobile-web-app-title" content="{{config('app.name')}}">
 
     <meta name="theme-color" content="#4C7FF0">
     <!-- CSRF Token -->
@@ -47,511 +47,257 @@
             </a>
             <!-- /toggle offscreen menu -->
             <!-- logo -->
-            <a class="brand-logo">
-                <img class="expanding-hidden" src="images/logo.png" alt=""/>
+            <a class="brand-logo text-center">
+                <!--<img class="expanding-hidden" src="images/logo.png" alt=""/>-->
+                <h4><b>{{config('app.name')}}</b></h4>
             </a>
             <!-- /logo -->
         </div>
-        <div class="nav-profile dropdown">
+        <div class="nav-profile dropdown" style="background-color: #e8e7e7">
             <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
                 <div class="user-image">
                     <img src="images/avatar.jpg" class="avatar img-circle" alt="user" title="user"/>
                 </div>
                 <div class="user-info expanding-hidden">
-                    Betty Simmons
+                    {{Auth::user()->name}}
                     <small class="bold">Administrator</small>
                 </div>
             </a>
             <div class="dropdown-menu">
-                <a class="dropdown-item" href="javascript:;">Settings</a>
-                <a class="dropdown-item" href="javascript:;">Upgrade</a>
+                <a class="dropdown-item" href="javascript:;">Configuración</a>
+                <a class="dropdown-item" href="javascript:;">Mi perfil</a>
                 <a class="dropdown-item" href="javascript:;">
-                    <span>Notifications</span>
+                    <span>Notificaciones</span>
                     <span class="tag bg-primary">34</span>
                 </a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="javascript:;">Help</a>
-                <a class="dropdown-item" href="">Logout</a>
+                <a class="dropdown-item" href="javascript:;">Ayuda</a>
+                <a class="dropdown-item" href="{{ route('logout') }}"
+                   onclick="event.preventDefault();
+                   document.getElementById('logout-form').submit();">Salir</a>
             </div>
         </div>
         <!-- main navigation -->
         <nav>
-            <p class="nav-title">NAVIGATION</p>
+            <p class="nav-title"><u>NAVEGACIÓN</u></p>
             <ul class="nav">
                 <!-- dashboard -->
                 <li>
-                    <a href="index.html">
+                    <a href="{{url('/home')}}">
                         <i class="material-icons text-primary">home</i>
-                        <span>Home</span>
+                        <span>Inicio</span>
                     </a>
                 </li>
                 <!-- /dashboard -->
-                <!-- apps -->
+
+                <!-- productos -->
+                <li>
+                    <a href="#">
+                        <i class="material-icons text-primary">shopping_basket</i>
+                        <span>Productos</span>
+                    </a>
+                </li>
+                <!-- /productos -->
+
+                <!-- Terceros -->
                 <li>
                     <a href="javascript:;">
                 <span class="menu-caret">
                   <i class="material-icons">arrow_drop_down</i>
                 </span>
-                        <i class="material-icons text-success">font_download</i>
-                        <span class="badge bg-primary pull-right">08</span>
-                        <span>Apps</span>
+                        <i class="material-icons text-success">people</i>
+                        <span>Terceros</span>
                     </a>
                     <ul class="sub-menu">
                         <li>
-                            <a href="app-calendar.html">
-                                <span>Calendar</span>
+                            <a href="#">
+                                <span>Nuevo tercero</span>
                             </a>
                         </li>
                         <li>
-                            <a href="app-media.html">
-                                <span>Media</span>
+                            <a href="#">
+                                <span>Lista de terceros</span>
                             </a>
                         </li>
                         <li>
-                            <a href="app-messages.html">
-                                <span>Messages</span>
+                            <a href="#">
+                                <span>Nueva obra</span>
                             </a>
                         </li>
                         <li>
-                            <a href="app-social.html">
-                                <span>Social</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="app-people.html">
-                                <span>People</span>
+                            <a href="#">
+                                <span>Listado de obras</span>
                             </a>
                         </li>
                     </ul>
                 </li>
-                <!-- /apps -->
-                <!-- ui -->
+                <!-- /Terceros -->
+
+                <!-- Vehiculos -->
                 <li>
                     <a href="javascript:;">
                 <span class="menu-caret">
                   <i class="material-icons">arrow_drop_down</i>
                 </span>
-                        <i class="material-icons text-danger">explore</i>
-                        <span>Components</span>
+                        <i class="material-icons text-success">directions_car</i>
+                        <span>Vehiculos</span>
                     </a>
                     <ul class="sub-menu">
-                        <!-- cards -->
                         <li>
-                            <a href="javascript:;">
-                    <span class="menu-caret">
-                      <i class="material-icons">arrow_drop_down</i></span>
-                                <span>Cards</span>
-                            </a>
-                            <ul class="sub-menu">
-                                <li>
-                                    <a href="card-basic.html"><span>Basic</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="card-portlets.html"><span>Portlets</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="card-draggable.html"><span>Draggable</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <!-- /cards -->
-                        <!-- forms -->
-                        <li>
-                            <a href="javascript:;">
-                    <span class="menu-caret">
-                      <i class="material-icons">arrow_drop_down</i></span>
-                                <span>Forms</span>
-                            </a>
-                            <ul class="sub-menu">
-                                <li>
-                                    <a href="form-basic.html">
-                                        <span>Basic</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="form-plugins.html">
-                                        <span>Plugins</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="form-editors.html">
-                                        <span>Editors</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="form-validation.html">
-                                        <span>Validation</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="form-masks.html">
-                                        <span>Masks</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="form-upload.html">
-                                        <span>Upload</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="form-wizard.html">
-                                        <span>Wizard</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <!-- /forms -->
-                        <!-- tables -->
-                        <li>
-                            <a href="javascript:;">
-                    <span class="menu-caret">
-                      <i class="material-icons">arrow_drop_down</i></span>
-                                <span>Tables</span>
-                            </a>
-                            <ul class="sub-menu">
-                                <li>
-                                    <a href="table-basic.html">
-                                        <span>Basic</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="table-responsive.html">
-                                        <span>Responsive</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="table-datatables.html">
-                                        <span>Datatables</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="table-xeditable.html">
-                                        <span>xeditable</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <!-- /tables -->
-                        <li>
-                            <a href="ui-buttons.html">
-                                <span>Buttons</span>
+                            <a href="#">
+                                <span>Nuevo vehiculo</span>
                             </a>
                         </li>
                         <li>
-                            <a href="ui-social-buttons.html">
-                                <span>Social buttons</span>
+                            <a href="#">
+                                <span>Listado de vehiculos</span>
                             </a>
                         </li>
                         <li>
-                            <a href="ui-general.html">
-                                <span>General</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="ui-navs.html">
-                                <span>Navs</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="ui-progressbars.html">
-                                <span>Progress bars</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="ui-pagination.html">
-                                <span>Pagination</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="ui-sliders.html">
-                                <span>Sliders</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="ui-notifications.html">
-                                <span>Notifications</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="ui-spinners.html">
-                                <span>Spinners</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="ui-alerts.html">
-                                <span>Alerts</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="ui-palette.html">
-                                <span>Palette</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="ui-material.html">
-                                <span>Material icons</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="ui-fontawesome.html">
-                                <span>Fontawesome</span>
+                            <a href="#">
+                                <span>Conductores asignados</span>
                             </a>
                         </li>
                     </ul>
                 </li>
-                <!-- /ui -->
-                <!-- charts -->
+                <!-- /Vehiculos -->
+
+                <!-- Despachos -->
                 <li>
                     <a href="javascript:;">
                 <span class="menu-caret">
                   <i class="material-icons">arrow_drop_down</i>
                 </span>
-                        <i class="material-icons text-warning">assessment</i>
-                        <span>Charts</span>
+                        <i class="material-icons text-success">rv_hookup</i>
+                        <span>Despachos</span>
                     </a>
                     <ul class="sub-menu">
                         <li>
-                            <a href="chart-flot.html">
-                                <span>Flot</span>
+                            <a href="#">
+                                <span>Nuevo despacho</span>
                             </a>
                         </li>
                         <li>
-                            <a href="chart-easypie.html">
-                                <span>Easypie</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="chart-chartjs.html">
-                                <span>ChartJS</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="chart-rickshaw.html">
-                                <span>Rickshaw</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="chart-c3.html">
-                                <span>C3js</span>
+                            <a href="#">
+                                <span>Listado de despachos</span>
                             </a>
                         </li>
                     </ul>
                 </li>
-                <!-- /charts -->
+                <!-- /Despachos -->
+
+                <!-- Facturacion -->
+                <li>
+                    <a href="javascript:;">
+                <span class="menu-caret">
+                  <i class="material-icons">arrow_drop_down</i>
+                </span>
+                        <i class="material-icons text-success">attach_money</i>
+                        <span>Facturación</span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a href="#">
+                                <span>Nuevo factura</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span>Registrar pago de factura</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span>Estado de cartera</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- /facturacion -->
             </ul>
-            <p class="nav-title">BONUS</p>
+            <p class="nav-title"><u>REPORTES</u></p>
             <ul class="nav">
-                <!-- maps -->
+                <!-- Reportes generales, que incluyen saldos globales -->
                 <li>
                     <a href="javascript:;">
                 <span class="menu-caret">
                   <i class="material-icons">arrow_drop_down</i>
                 </span>
-                        <i class="material-icons">beenhere</i>
-                        <span>Maps</span>
+                        <i class="material-icons text-success">trending_up</i>
+                        <span>Generales</span>
                     </a>
                     <ul class="sub-menu">
                         <li>
-                            <a href="map-google.html">
-                                <span>Google</span>
+                            <a href="#">
+                                <span>Reporte de productos</span>
                             </a>
                         </li>
                         <li>
-                            <a href="map-googlefull.html">
-                                <span>Google fullscreen</span>
+                            <a href="#">
+                                <span>Reporte de despachos</span>
                             </a>
                         </li>
                         <li>
-                            <a href="map-vector.html">
-                                <span>Vector</span>
+                            <a href="#">
+                                <span>Reporte de vehiculos</span>
                             </a>
                         </li>
                     </ul>
                 </li>
-                <!-- /maps -->
-                <!-- extras -->
+                <!-- /Reportes generales, que incluyen saldos globales  -->
+
+                <!-- Reportes especificos, de un cliente, o un vehiculo, o un producto-->
                 <li>
                     <a href="javascript:;">
                 <span class="menu-caret">
                   <i class="material-icons">arrow_drop_down</i>
                 </span>
-                        <span class="badge bg-danger pull-right">HOT</span>
-                        <i class="material-icons">stars</i>
-                        <span>Extras</span>
+                        <i class="material-icons text-success">trending_up</i>
+                        <span>Especificos</span>
                     </a>
                     <ul class="sub-menu">
-                        <!-- emails -->
                         <li>
-                            <a href="javascript:;">
-                    <span class="menu-caret">
-                      <i class="material-icons">arrow_drop_down</i></span>
-                                <span>Transactional Emails</span>
-                            </a>
-                            <ul class="sub-menu">
-                                <li>
-                                    <a href="http://milestone.nyasha.me/latest/emails/action.html" target="_blank">
-                                        <span>Action</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="http://milestone.nyasha.me/latest/emails/alert.html" target="_blank">
-                                        <span>Alert</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="http://milestone.nyasha.me/latest/emails/billing.html" target="_blank">
-                                        <span>Billing</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="http://milestone.nyasha.me/latest/emails/progress.html" target="_blank">
-                                        <span>Progress</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="http://milestone.nyasha.me/latest/emails/survey.html" target="_blank">
-                                        <span>Survey</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="http://milestone.nyasha.me/latest/emails/welcome.html" target="_blank">
-                                        <span>Welcome</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <!-- /emails -->
-                        <li>
-                            <a href="extra-invoice.html">
-                                <span>Invoice</span>
+                            <a href="#">
+                                <span>Reporte un producto</span>
                             </a>
                         </li>
                         <li>
-                            <a href="extra-timeline.html">
-                                <span>Timeline</span>
+                            <a href="#">
+                                <span>Reporte un cliente</span>
                             </a>
                         </li>
                         <li>
-                            <a href="extra-lists.html">
-                                <span>Lists</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="extra-signin.html">
-                                <span>Signin</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="extra-signup.html">
-                                <span>Signup</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="extra-forgot.html">
-                                <span>Forgot</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="extra-lockscreen.html">
-                                <span>Lockscreen</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="extra-404.html">
-                                <span>404</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="extra-500.html">
-                                <span>500</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="extra-pricing.html">
-                                <span>Pricing tables</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="blank.html">
-                                <span>Starter page</span>
+                            <a href="#">
+                                <span>Reporte un vehiculo</span>
                             </a>
                         </li>
                     </ul>
                 </li>
-                <!-- /extras -->
-                <!-- menu levels -->
+                <!-- Reportes especificos, de un cliente, o un vehiculo, o un producto-->
                 <li>
-                    <a href="javascript:;">
-                <span class="menu-caret">
-                  <i class="material-icons">arrow_drop_down</i>
-                </span>
-                        <i class="material-icons">line_weight</i>
-                        <span>Menu levels</span>
-                    </a>
-                    <ul class="sub-menu">
-                        <li>
-                            <a href="javascript:;">
-                    <span class="menu-caret">
-                      <i class="material-icons">arrow_drop_down</i>
-                    </span>
-                                <span>Menu Item 1.1</span>
-                            </a>
-                            <ul class="sub-menu">
-                                <li>
-                                    <a href="javascript:;">
-                        <span class="menu-caret">
-                          <i class="material-icons">arrow_drop_down</i>
-                        </span>
-                                        <span>Menu Item 2.1</span>
-                                    </a>
-                                    <ul class="sub-menu">
-                                        <li>
-                                            <a href="javascript:;">
-                                                <span>Menu Item 3.1</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:;">
-                                                <span>Menu Item 3.1</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="javascript:;">
-                                        <span>Menu Item 2.2</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="javascript:;">
-                                <span>Menu Item 1.2</span>
-                            </a>
-                        </li>
-                    </ul>
+                    <hr/>
                 </li>
-                <!-- menu levels -->
-                <li><hr/></li>
-                <!-- static -->
+                <!-- Configuracion, (manejo de usuarios, información de la empresa, etc) -->
                 <li>
-                    <a href="http://milestone.nyasha.me/latest/angular" target="_blank">
-                        <i class="material-icons">navigation</i>
-                        <span>Angular version</span>
+                    <a href="#">
+                        <i class="material-icons text-primary">settings</i>
+                        <span>Configuración</span>
                     </a>
                 </li>
-                <!-- /static -->
-                <!-- documentation -->
+                <!-- /Configuracion -->
+                <!-- Salir -->
                 <li>
-                    <a href="http://milestone.nyasha.me/latest/documentation" target="_blank">
-                        <i class="material-icons">local_library</i>
-                        <span>Documentation</span>
+                    <a href="{{ route('logout') }}"
+                       onclick="event.preventDefault();
+                   document.getElementById('logout-form').submit();">
+                        <i class="material-icons">exit_to_app</i>
+                        Cerrar sesión
                     </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        {{ csrf_field() }}
+                    </form>
                 </li>
-                <!-- /documentation -->
+                <!-- /salir -->
             </ul>
         </nav>
         <!-- /main navigation -->
@@ -570,32 +316,24 @@
                     <!-- /toggle offscreen menu -->
                     <!-- logo -->
                     <a class="brand-logo hidden-xs-down">
-                        <img src="images/logo_white.png" alt="logo"/>
+                        <!--<img src="images/logo_white.png" alt="logo"/>-->
+                        <b style="color:white; font-size: 1.3em">{{config('app.name')}}</b>
                     </a>
                     <!-- /logo -->
                 </div>
                 <a class="navbar-item navbar-spacer-right navbar-heading hidden-md-down" href="#">
-                    <span>Dashboard</span>
+                    <span>@yield('nombre_pagina')</span>
                 </a>
-                <div class="navbar-search navbar-item">
+                <!--<div class="navbar-search navbar-item">
                     <form class="search-form">
-                        <i class="material-icons">search</i>
-                        <input class="form-control" type="text" placeholder="Search" />
+                        <i class="material-icons">Buscador</i>
+                        <input class="form-control" type="text" placeholder="Search"/>
                     </form>
-                </div>
+                </div>-->
                 <div class="navbar-item nav navbar-nav">
                     <div class="nav-item nav-link dropdown">
                         <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
-                            <span>English</span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="javascript:;">English</a>
-                            <a class="dropdown-item" href="javascript:;">Russian</a>
-                        </div>
-                    </div>
-                    <div class="nav-item nav-link dropdown">
-                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="material-icons">notifications</i>
+                            <i class="material-icons">Notificaciones</i>
                             <span class="tag tag-danger">4</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right notifications">
@@ -662,7 +400,8 @@
                             </div>
                         </div>
                     </div>
-                    <a href="javascript:;" class="nav-item nav-link nav-link-icon" data-toggle="modal" data-target=".chat-panel" data-backdrop="false">
+                    <a href="javascript:;" class="nav-item nav-link nav-link-icon" data-toggle="modal"
+                       data-target=".chat-panel" data-backdrop="false">
                         <i class="material-icons">chat_bubble</i>
                     </a>
                 </div>
@@ -673,291 +412,7 @@
         <!-- main area -->
         <div class="main-content">
             <div class="content-view">
-                <div class="row">
-                    <div class="col-sm-6 col-md-4 col-lg-2">
-                        <div class="card card-block">
-                            <h5 class="m-b-0 v-align-middle text-overflow">
-                    <span class="small pull-xs-right">
-                      <i class="material-icons text-success" style="width: 16px;">arrow_drop_up</i>
-                      <span style="line-height: 24px;">+76%</span>
-                    </span>
-                                <span>804</span>
-                            </h5>
-                            <div class="small text-overflow text-muted">
-                                Memory usage
-                            </div>
-                            <div class="small text-overflow">
-                                Updated:&nbsp;<span>05:35 AM</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-md-4 col-lg-2">
-                        <div class="card card-block">
-                            <h5 class="m-b-0 v-align-middle text-overflow">
-                    <span class="small pull-xs-right tag bg-success p-y-0 p-x-xs" style="line-height: 24px;">
-                      <span >+20K</span>
-                    </span>
-                                <span>403</span>
-                            </h5>
-                            <div class="small text-overflow text-muted">
-                                Disk usage
-                            </div>
-                            <div class="small text-overflow">
-                                Updated:&nbsp;<span>12:42 PM</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-md-4 col-lg-2">
-                        <div class="card card-block">
-                            <h5 class="m-b-0 v-align-middle text-overflow">
-                    <span class="small pull-xs-right">
-                      <i class="material-icons text-danger" style="width: 16px;">arrow_drop_down</i>
-                      <span style="line-height: 24px;">+40%</span>
-                    </span>
-                                <span>976</span>
-                            </h5>
-                            <div class="small text-overflow text-muted">
-                                GPU compute
-                            </div>
-                            <div class="small text-overflow">
-                                Updated:&nbsp;<span>09:26 AM</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-md-4 col-lg-2">
-                        <div class="card card-block">
-                            <h5 class="m-b-0 v-align-middle text-overflow">
-                    <span class="small pull-xs-right">
-                      <i class="material-icons text-success" style="width: 16px;">arrow_drop_up</i>
-                      <span style="line-height: 24px;">+94%</span>
-                    </span>
-                                <span>457</span>
-                            </h5>
-                            <div class="small text-overflow text-muted">
-                                CPU usage
-                            </div>
-                            <div class="small text-overflow">
-                                Updated:&nbsp;<span>06:45 AM</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-md-4 col-lg-2">
-                        <div class="card card-block">
-                            <h5 class="m-b-0 v-align-middle text-overflow">
-                    <span class="small pull-xs-right">
-                      <i class="material-icons text-danger" style="width: 16px;">arrow_drop_down</i>
-                      <span style="line-height: 24px;">+04%</span>
-                    </span>
-                                <span>239</span>
-                            </h5>
-                            <div class="small text-overflow text-muted">
-                                Ram usage
-                            </div>
-                            <div class="small text-overflow">
-                                Updated:&nbsp;<span>11:23 PM</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-md-4 col-lg-2">
-                        <div class="card card-block">
-                            <h5 class="m-b-0 v-align-middle text-overflow">
-                    <span class="small pull-xs-right">
-                      <i class="material-icons text-success" style="width: 16px;">arrow_drop_up</i>
-                      <span style="line-height: 24px;">+67%</span>
-                    </span>
-                                <span>392</span>
-                            </h5>
-                            <div class="small text-overflow text-muted">
-                                RAM test
-                            </div>
-                            <div class="small text-overflow">
-                                Updated:&nbsp;<span>08:52 AM</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-block">
-                        <div class="m-b-1">
-                            <div class="dropdown pull-right">
-                                <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
-                      <span>
-                        Period
-                      </span>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right" role="menu">
-                                    <a class="dropdown-item" href="#">
-                                        Today
-                                    </a>
-                                    <a class="dropdown-item" href="#">
-                                        This week
-                                    </a>
-                                    <a class="dropdown-item" href="#">
-                                        This month
-                                    </a>
-                                    <a class="dropdown-item" href="#">
-                                        This year
-                                    </a>
-                                </div>
-                            </div>
-                            <h6>
-                                Activity
-                            </h6>
-                        </div>
-                        <div class="dashboard-line chart" style="height:300px"></div>
-                        <div class="row text-xs-center m-t-1">
-                            <div class="col-sm-3 col-xs-6 p-t-1 p-b-1">
-                                <h6 class="m-t-0 m-b-0">
-                                    $ 89.34
-                                </h6>
-                                <small class="text-muted bold block">
-                                    Daily Sales
-                                </small>
-                            </div>
-                            <div class="col-sm-3 col-xs-6 p-t-1 p-b-1">
-                                <h6 class="m-t-0 m-b-0">
-                                    $ 498.00
-                                </h6>
-                                <small class="text-muted bold block">
-                                    Weekly Sales
-                                </small>
-                            </div>
-                            <div class="col-sm-3 col-xs-6 p-t-1 p-b-1">
-                                <h6 class="m-t-0 m-b-0">
-                                    $ 34,903
-                                </h6>
-                                <small class="text-muted bold block">
-                                    Monthly Sales
-                                </small>
-                            </div>
-                            <div class="col-sm-3 col-xs-6 p-t-1 p-b-1">
-                                <h6 class="m-t-0 m-b-0">
-                                    $ 98,343.49
-                                </h6>
-                                <small class="text-muted bold block">
-                                    Yearly Sales
-                                </small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="card card-block p-b-0">
-                            <div class="piechart center-block m-b-1" style="width: 120px; height: 120px;">
-                                <div class="tasks-pie" data-percent="86">
-                                    <div>
-                                        Tasks
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="text-xs-center m-b-2">
-                                <p class="m-a-0">
-                      <span class="task-percent">
-                      </span>
-                                    % complete
-                                </p>
-                            </div>
-                            <ul class="list-unstyled m-x-n m-b-0">
-                                <li class="b-t p-a-1">
-                      <span class="pull-right">
-                        45,677
-                      </span>
-                                    Accelaration
-                                </li>
-                                <li class="b-t p-a-1">
-                      <span class="pull-right">
-                        234,456
-                      </span>
-                                    Braking
-                                </li>
-                                <li class="b-t p-a-1">
-                      <span class="pull-right">
-                        43,554
-                      </span>
-                                    Cornering
-                                </li>
-                                <li class="b-t p-a-1">
-                      <span class="pull-right">
-                        223,545
-                      </span>
-                                    Mixing
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md-5">
-                        <div class="card card-block">
-                            <div class="">
-                                <div>Memory usage</div>
-                                <h5 class="m-b-0">
-                                    <span>804</span> &nbsp;
-                                    <span class="small">
-                        <i class="fa fa-level-up text-success"></i>
-                        +76%
-                      </span>
-                                </h5>
-                                <div class="small">
-                                    Updated:&nbsp;
-                                    <span>
-                        05:35 AM
-                      </span>
-                                </div>
-                            </div>
-                            <hr class="m-x-n m-y-2" />
-                            <div class="dashboard-bar chart" style="height:269px"></div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card card-block p-b-0">
-                            <div class="text-overflow">
-                    <span class="text-success">
-                      10 minutes
-                    </span>
-                                to Space Headquaters
-                            </div>
-                            <small>1 Infinite Loop</small>
-                            <div class="us-map" style="height: 292px"></div>
-                            <div class="m-x-n">
-                                <a href="javascript:;" class="b-t p-a-1 block l-h">
-                                    <i class="material-icons">arrow_forward</i>
-                                    <span>Navigate to this location</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <h6>Recent notifications</h6>
-                <ul class="list-group m-b-1">
-                    <li class="list-group-item notification-bar-success">
-                        <div href="#" class="notification-bar-icon">
-                            <div><i></i></div>
-                        </div>
-                        <div class="notification-bar-details">
-                            <a href="#" class="notification-bar-title">
-                                Betty Simmons completed a task
-                            </a>
-                            <span class="text-muted">
-                    14 hours ago
-                  </span>
-                        </div>
-                    </li>
-                </ul>
-                <ul class="list-group">
-                    <li class="list-group-item notification-bar-fail">
-                        <div href="#" class="notification-bar-icon">
-                            <div><i></i></div>
-                        </div>
-                        <div class="notification-bar-details">
-                            <a href="#" class="notification-bar-title">
-                                You have 8 projects still pending
-                            </a>
-                            <span class="text-muted">
-                    26 mins ago
-                  </span>
-                        </div>
-                    </li>
-                </ul>
+                @yield('content')
             </div>
             <!-- bottom footer -->
             <div class="content-footer">
@@ -973,17 +428,8 @@
                         <li>
                             <a href="javascript:;">
                                 <span>Copyright</span>
-                                &copy; 2016 Your App
+                                &copy; 2017
                             </a>
-                        </li>
-                        <li class="hidden-md-down">
-                            <a href="javascript:;">Privacy</a>
-                        </li>
-                        <li class="hidden-md-down">
-                            <a href="javascript:;">Terms</a>
-                        </li>
-                        <li class="hidden-md-down">
-                            <a href="javascript:;">help</a>
                         </li>
                     </ul>
                 </nav>
@@ -995,7 +441,8 @@
     <!-- /content panel -->
 
     <!--Chat panel-->
-    <div class="modal fade sidebar-modal chat-panel" tabindex="-1" role="dialog" aria-labelledby="chat-panel" aria-hidden="true">
+    <div class="modal fade sidebar-modal chat-panel" tabindex="-1" role="dialog" aria-labelledby="chat-panel"
+         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="chat-header">
@@ -1176,7 +623,8 @@
                     </div>
                     <div class="chat-conversation-user them">
                         <div class="chat-conversation-message">
-                            <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.</p>
+                            <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem
+                                nec elit.</p>
                         </div>
                     </div>
                 </div>
@@ -1195,18 +643,6 @@
     <!--/Chat panel-->
 
 </div>
-
-<script type="text/javascript">
-    window.paceOptions = {
-        document: true,
-        eventLag: true,
-        restartOnPushState: true,
-        restartOnRequestAfter: true,
-        ajax: {
-            trackMethods: [ 'POST','GET']
-        }
-    };
-</script>
 
 <!-- build:js({.tmp,app}) scripts/app.min.js -->
 <script src="{{asset('vendor/jquery/dist/jquery.js')}}"></script>
@@ -1233,6 +669,8 @@
 <!-- initialize page scripts -->
 <script src="{{asset('scripts/dashboard/dashboard.js')}}"></script>
 <!-- end initialize page scripts -->
+
+@yield('scripts')
 
 </body>
 </html>
