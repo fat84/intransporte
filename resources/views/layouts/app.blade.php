@@ -1,507 +1,1238 @@
-<!DOCTYPE html>
-<html lang="es">
+<!doctype html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="description" content=""/>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1"/>
+    <meta name="msapplication-tap-highlight" content="no">
 
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="Milestone">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Milestone">
+
+    <meta name="theme-color" content="#4C7FF0">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Styles -->
-    <link href="{{ asset('libs/bower/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('libs/bower/material-design-iconic-font/dist/css/material-design-iconic-font.css') }}" rel="stylesheet">
-    <link href="{{ asset('libs/bower/animate.css/animate.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('libs/bower/fullcalendar/dist/fullcalendar.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('libs/bower/perfect-scrollbar/css/perfect-scrollbar.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/css/bootstrap.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/css/app.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,500,600,700,800,900,300">
-    <script src="{{ asset('libs/bower/breakpoints.js/dist/breakpoints.min.js') }}"></script>
+    <!-- page stylesheets -->
+    <link rel="stylesheet" href="{{asset('vendor/bower-jvectormap/jquery-jvectormap-1.2.2.css')}}"/>
+    <!-- end page stylesheets -->
+
+    <!-- build:css({.tmp,app}) styles/app.min.css -->
+    <link rel="stylesheet" href="{{asset('vendor/bootstrap/dist/css/bootstrap.css')}}"/>
+    <link rel="stylesheet" href="{{asset('vendor/pace/themes/blue/pace-theme-minimal.css')}}"/>
+    <link rel="stylesheet" href="{{asset('vendor/font-awesome/css/font-awesome.css')}}"/>
+    <link rel="stylesheet" href="{{asset('vendor/animate.css/animate.css')}}"/>
+    <link rel="stylesheet" href="{{asset('styles/app.css')}}" id="load_styles_before"/>
+    <link rel="stylesheet" href="{{asset('styles/app.skins.css')}}"/>
+    <!-- endbuild -->
     @yield('css')
-
-    <script>
-        Breakpoints();
-    </script>
 </head>
-<body @if(Auth::guest() == false) class="menubar-top menubar-light theme-primary" @endif >
-    @if(Auth::guest()==false)
-        <!-- APP NAVBAR ==========-->
-        <nav id="app-navbar" class="navbar navbar-inverse navbar-fixed-top primary">
+<body>
 
-            <!-- navbar header -->
-            <div class="navbar-header">
-                <button type="button" id="menubar-toggle-btn" class="navbar-toggle visible-xs-inline-block navbar-toggle-left hamburger hamburger--collapse js-hamburger">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="hamburger-box"><span class="hamburger-inner"></span></span>
-                </button>
-
-                <button type="button" class="navbar-toggle navbar-toggle-right collapsed" data-toggle="collapse" data-target="#app-navbar-collapse" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="zmdi zmdi-hc-lg zmdi-more"></span>
-                </button>
-
-                <button type="button" class="navbar-toggle navbar-toggle-right collapsed" data-toggle="collapse" data-target="#navbar-search" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="zmdi zmdi-hc-lg zmdi-search"></span>
-                </button>
-
-                <a href="../index.html" class="navbar-brand">
-                    <span class="brand-icon"><i class="fa fa-gg"></i></span>
-                    <span class="brand-name">{{config('app.name')}}</span>
+<div class="app">
+    <!--sidebar panel-->
+    <div class="off-canvas-overlay" data-toggle="sidebar"></div>
+    <div class="sidebar-panel">
+        <div class="brand">
+            <!-- toggle offscreen menu -->
+            <a href="javascript:;" data-toggle="sidebar" class="toggle-offscreen hidden-lg-up">
+                <i class="material-icons">menu</i>
+            </a>
+            <!-- /toggle offscreen menu -->
+            <!-- logo -->
+            <a class="brand-logo">
+                <img class="expanding-hidden" src="images/logo.png" alt=""/>
+            </a>
+            <!-- /logo -->
+        </div>
+        <div class="nav-profile dropdown">
+            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+                <div class="user-image">
+                    <img src="images/avatar.jpg" class="avatar img-circle" alt="user" title="user"/>
+                </div>
+                <div class="user-info expanding-hidden">
+                    Betty Simmons
+                    <small class="bold">Administrator</small>
+                </div>
+            </a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="javascript:;">Settings</a>
+                <a class="dropdown-item" href="javascript:;">Upgrade</a>
+                <a class="dropdown-item" href="javascript:;">
+                    <span>Notifications</span>
+                    <span class="tag bg-primary">34</span>
                 </a>
-            </div><!-- .navbar-header -->
-
-            <div class="navbar-container container-fluid">
-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <ul class="nav navbar-toolbar navbar-toolbar-left navbar-left">
-                        <li class="hidden-float hidden-menubar-top">
-                            <a href="javascript:void(0)" role="button" id="menubar-fold-btn" class="hamburger hamburger--arrowalt is-active js-hamburger">
-                                <span class="hamburger-box"><span class="hamburger-inner"></span></span>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="javascript:;">Help</a>
+                <a class="dropdown-item" href="">Logout</a>
+            </div>
+        </div>
+        <!-- main navigation -->
+        <nav>
+            <p class="nav-title">NAVIGATION</p>
+            <ul class="nav">
+                <!-- dashboard -->
+                <li>
+                    <a href="index.html">
+                        <i class="material-icons text-primary">home</i>
+                        <span>Home</span>
+                    </a>
+                </li>
+                <!-- /dashboard -->
+                <!-- apps -->
+                <li>
+                    <a href="javascript:;">
+                <span class="menu-caret">
+                  <i class="material-icons">arrow_drop_down</i>
+                </span>
+                        <i class="material-icons text-success">font_download</i>
+                        <span class="badge bg-primary pull-right">08</span>
+                        <span>Apps</span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a href="app-calendar.html">
+                                <span>Calendar</span>
                             </a>
                         </li>
                         <li>
-                            <h5 class="page-title hidden-menubar-top">Dashboard</h5>
-                        </li>
-                    </ul>
-
-                    <ul class="nav navbar-toolbar navbar-toolbar-right navbar-right">
-                        <li class="nav-item dropdown hidden-float">
-                            <a href="javascript:void(0)" data-toggle="collapse" data-target="#navbar-search" aria-expanded="false">
-                                <i class="zmdi zmdi-hc-lg zmdi-search"></i>
+                            <a href="app-media.html">
+                                <span>Media</span>
                             </a>
                         </li>
-
-                        <li class="dropdown">
-                            <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="zmdi zmdi-hc-lg zmdi-notifications"></i></a>
-                            <div class="media-group dropdown-menu animated flipInY">
-                                <a href="javascript:void(0)" class="media-group-item">
-                                    <div class="media">
-                                        <div class="media-left">
-                                            <div class="avatar avatar-xs avatar-circle">
-                                                <img src="../assets/images/221.jpg" alt="">
-                                                <i class="status status-online"></i>
-                                            </div>
-                                        </div>
-                                        <div class="media-body">
-                                            <h5 class="media-heading">John Doe</h5>
-                                            <small class="media-meta">Active now</small>
-                                        </div>
-                                    </div>
-                                </a><!-- .media-group-item -->
-
-                                <a href="javascript:void(0)" class="media-group-item">
-                                    <div class="media">
-                                        <div class="media-left">
-                                            <div class="avatar avatar-xs avatar-circle">
-                                                <img src="../assets/images/205.jpg" alt="">
-                                                <i class="status status-offline"></i>
-                                            </div>
-                                        </div>
-                                        <div class="media-body">
-                                            <h5 class="media-heading">John Doe</h5>
-                                            <small class="media-meta">2 hours ago</small>
-                                        </div>
-                                    </div>
-                                </a><!-- .media-group-item -->
-
-                                <a href="javascript:void(0)" class="media-group-item">
-                                    <div class="media">
-                                        <div class="media-left">
-                                            <div class="avatar avatar-xs avatar-circle">
-                                                <img src="../assets/images/207.jpg" alt="">
-                                                <i class="status status-away"></i>
-                                            </div>
-                                        </div>
-                                        <div class="media-body">
-                                            <h5 class="media-heading">Sara Smith</h5>
-                                            <small class="media-meta">idle 5 min ago</small>
-                                        </div>
-                                    </div>
-                                </a><!-- .media-group-item -->
-
-                                <a href="javascript:void(0)" class="media-group-item">
-                                    <div class="media">
-                                        <div class="media-left">
-                                            <div class="avatar avatar-xs avatar-circle">
-                                                <img src="../assets/images/211.jpg" alt="">
-                                                <i class="status status-away"></i>
-                                            </div>
-                                        </div>
-                                        <div class="media-body">
-                                            <h5 class="media-heading">Donia Dyab</h5>
-                                            <small class="media-meta">idle 5 min ago</small>
-                                        </div>
-                                    </div>
-                                </a><!-- .media-group-item -->
-                            </div>
+                        <li>
+                            <a href="app-messages.html">
+                                <span>Messages</span>
+                            </a>
                         </li>
-
-                        <li class="dropdown">
-                            <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="zmdi zmdi-hc-lg zmdi-settings"></i></a>
-                            <ul class="dropdown-menu animated flipInY">
-                                <li><a href="javascript:void(0)"><i class="zmdi m-r-md zmdi-hc-lg zmdi-account-box"></i>My Profile</a></li>
-                                <li><a href="javascript:void(0)"><i class="zmdi m-r-md zmdi-hc-lg zmdi-balance-wallet"></i>Balance</a></li>
-                                <li><a href="javascript:void(0)"><i class="zmdi m-r-md zmdi-hc-lg zmdi-phone-msg"></i>Connection<span class="label label-primary">3</span></a></li>
-                                <li><a href="javascript:void(0)"><i class="zmdi m-r-md zmdi-hc-lg zmdi-info"></i>privacy</a></li>
-                            </ul>
+                        <li>
+                            <a href="app-social.html">
+                                <span>Social</span>
+                            </a>
                         </li>
-
-                        <li class="dropdown">
-                            <a href="javascript:void(0)" class="side-panel-toggle" data-toggle="class" data-target="#side-panel" data-class="open" role="button"><i class="zmdi zmdi-hc-lg zmdi-apps"></i></a>
+                        <li>
+                            <a href="app-people.html">
+                                <span>People</span>
+                            </a>
                         </li>
                     </ul>
-                </div>
-            </div><!-- navbar-container -->
-        </nav>
-        <!--========== END app navbar -->
-
-        <!-- APP ASIDE ==========-->
-        <aside id="menubar" class="menubar light">
-            <div class="app-user">
-                <div class="media">
-                    <div class="media-left">
-                        <div class="avatar avatar-md avatar-circle">
-                            <a href="javascript:void(0)"><img class="img-responsive" src="../assets/images/221.jpg" alt="avatar"/></a>
-                        </div><!-- .avatar -->
-                    </div>
-                    <div class="media-body">
-                        <div class="foldable">
-                            <h5><a href="javascript:void(0)" class="username">John Doe</a></h5>
-                            <ul>
-                                <li class="dropdown">
-                                    <a href="javascript:void(0)" class="dropdown-toggle usertitle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <small>Web Developer</small>
-                                        <span class="caret"></span>
+                </li>
+                <!-- /apps -->
+                <!-- ui -->
+                <li>
+                    <a href="javascript:;">
+                <span class="menu-caret">
+                  <i class="material-icons">arrow_drop_down</i>
+                </span>
+                        <i class="material-icons text-danger">explore</i>
+                        <span>Components</span>
+                    </a>
+                    <ul class="sub-menu">
+                        <!-- cards -->
+                        <li>
+                            <a href="javascript:;">
+                    <span class="menu-caret">
+                      <i class="material-icons">arrow_drop_down</i></span>
+                                <span>Cards</span>
+                            </a>
+                            <ul class="sub-menu">
+                                <li>
+                                    <a href="card-basic.html"><span>Basic</span>
                                     </a>
-                                    <ul class="dropdown-menu animated flipInY">
+                                </li>
+                                <li>
+                                    <a href="card-portlets.html"><span>Portlets</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="card-draggable.html"><span>Draggable</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- /cards -->
+                        <!-- forms -->
+                        <li>
+                            <a href="javascript:;">
+                    <span class="menu-caret">
+                      <i class="material-icons">arrow_drop_down</i></span>
+                                <span>Forms</span>
+                            </a>
+                            <ul class="sub-menu">
+                                <li>
+                                    <a href="form-basic.html">
+                                        <span>Basic</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="form-plugins.html">
+                                        <span>Plugins</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="form-editors.html">
+                                        <span>Editors</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="form-validation.html">
+                                        <span>Validation</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="form-masks.html">
+                                        <span>Masks</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="form-upload.html">
+                                        <span>Upload</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="form-wizard.html">
+                                        <span>Wizard</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- /forms -->
+                        <!-- tables -->
+                        <li>
+                            <a href="javascript:;">
+                    <span class="menu-caret">
+                      <i class="material-icons">arrow_drop_down</i></span>
+                                <span>Tables</span>
+                            </a>
+                            <ul class="sub-menu">
+                                <li>
+                                    <a href="table-basic.html">
+                                        <span>Basic</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="table-responsive.html">
+                                        <span>Responsive</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="table-datatables.html">
+                                        <span>Datatables</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="table-xeditable.html">
+                                        <span>xeditable</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- /tables -->
+                        <li>
+                            <a href="ui-buttons.html">
+                                <span>Buttons</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="ui-social-buttons.html">
+                                <span>Social buttons</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="ui-general.html">
+                                <span>General</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="ui-navs.html">
+                                <span>Navs</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="ui-progressbars.html">
+                                <span>Progress bars</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="ui-pagination.html">
+                                <span>Pagination</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="ui-sliders.html">
+                                <span>Sliders</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="ui-notifications.html">
+                                <span>Notifications</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="ui-spinners.html">
+                                <span>Spinners</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="ui-alerts.html">
+                                <span>Alerts</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="ui-palette.html">
+                                <span>Palette</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="ui-material.html">
+                                <span>Material icons</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="ui-fontawesome.html">
+                                <span>Fontawesome</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- /ui -->
+                <!-- charts -->
+                <li>
+                    <a href="javascript:;">
+                <span class="menu-caret">
+                  <i class="material-icons">arrow_drop_down</i>
+                </span>
+                        <i class="material-icons text-warning">assessment</i>
+                        <span>Charts</span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a href="chart-flot.html">
+                                <span>Flot</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="chart-easypie.html">
+                                <span>Easypie</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="chart-chartjs.html">
+                                <span>ChartJS</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="chart-rickshaw.html">
+                                <span>Rickshaw</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="chart-c3.html">
+                                <span>C3js</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- /charts -->
+            </ul>
+            <p class="nav-title">BONUS</p>
+            <ul class="nav">
+                <!-- maps -->
+                <li>
+                    <a href="javascript:;">
+                <span class="menu-caret">
+                  <i class="material-icons">arrow_drop_down</i>
+                </span>
+                        <i class="material-icons">beenhere</i>
+                        <span>Maps</span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a href="map-google.html">
+                                <span>Google</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="map-googlefull.html">
+                                <span>Google fullscreen</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="map-vector.html">
+                                <span>Vector</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- /maps -->
+                <!-- extras -->
+                <li>
+                    <a href="javascript:;">
+                <span class="menu-caret">
+                  <i class="material-icons">arrow_drop_down</i>
+                </span>
+                        <span class="badge bg-danger pull-right">HOT</span>
+                        <i class="material-icons">stars</i>
+                        <span>Extras</span>
+                    </a>
+                    <ul class="sub-menu">
+                        <!-- emails -->
+                        <li>
+                            <a href="javascript:;">
+                    <span class="menu-caret">
+                      <i class="material-icons">arrow_drop_down</i></span>
+                                <span>Transactional Emails</span>
+                            </a>
+                            <ul class="sub-menu">
+                                <li>
+                                    <a href="http://milestone.nyasha.me/latest/emails/action.html" target="_blank">
+                                        <span>Action</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="http://milestone.nyasha.me/latest/emails/alert.html" target="_blank">
+                                        <span>Alert</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="http://milestone.nyasha.me/latest/emails/billing.html" target="_blank">
+                                        <span>Billing</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="http://milestone.nyasha.me/latest/emails/progress.html" target="_blank">
+                                        <span>Progress</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="http://milestone.nyasha.me/latest/emails/survey.html" target="_blank">
+                                        <span>Survey</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="http://milestone.nyasha.me/latest/emails/welcome.html" target="_blank">
+                                        <span>Welcome</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- /emails -->
+                        <li>
+                            <a href="extra-invoice.html">
+                                <span>Invoice</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="extra-timeline.html">
+                                <span>Timeline</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="extra-lists.html">
+                                <span>Lists</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="extra-signin.html">
+                                <span>Signin</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="extra-signup.html">
+                                <span>Signup</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="extra-forgot.html">
+                                <span>Forgot</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="extra-lockscreen.html">
+                                <span>Lockscreen</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="extra-404.html">
+                                <span>404</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="extra-500.html">
+                                <span>500</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="extra-pricing.html">
+                                <span>Pricing tables</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="blank.html">
+                                <span>Starter page</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- /extras -->
+                <!-- menu levels -->
+                <li>
+                    <a href="javascript:;">
+                <span class="menu-caret">
+                  <i class="material-icons">arrow_drop_down</i>
+                </span>
+                        <i class="material-icons">line_weight</i>
+                        <span>Menu levels</span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a href="javascript:;">
+                    <span class="menu-caret">
+                      <i class="material-icons">arrow_drop_down</i>
+                    </span>
+                                <span>Menu Item 1.1</span>
+                            </a>
+                            <ul class="sub-menu">
+                                <li>
+                                    <a href="javascript:;">
+                        <span class="menu-caret">
+                          <i class="material-icons">arrow_drop_down</i>
+                        </span>
+                                        <span>Menu Item 2.1</span>
+                                    </a>
+                                    <ul class="sub-menu">
                                         <li>
-                                            <a class="text-color" href="/index.html">
-                                                <span class="m-r-xs"><i class="fa fa-home"></i></span>
-                                                <span>Home</span>
+                                            <a href="javascript:;">
+                                                <span>Menu Item 3.1</span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a class="text-color" href="profile.html">
-                                                <span class="m-r-xs"><i class="fa fa-user"></i></span>
-                                                <span>Profile</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="text-color" href="settings.html">
-                                                <span class="m-r-xs"><i class="fa fa-gear"></i></span>
-                                                <span>Settings</span>
-                                            </a>
-                                        </li>
-                                        <li role="separator" class="divider"></li>
-                                        <li>
-                                            <a class="text-color" href="logout.html">
-                                                <span class="m-r-xs"><i class="fa fa-power-off"></i></span>
-                                                <span>Home</span>
+                                            <a href="javascript:;">
+                                                <span>Menu Item 3.1</span>
                                             </a>
                                         </li>
                                     </ul>
+                                </li>
+                                <li>
+                                    <a href="javascript:;">
+                                        <span>Menu Item 2.2</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript:;">
+                                <span>Menu Item 1.2</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- menu levels -->
+                <li><hr/></li>
+                <!-- static -->
+                <li>
+                    <a href="http://milestone.nyasha.me/latest/angular" target="_blank">
+                        <i class="material-icons">navigation</i>
+                        <span>Angular version</span>
+                    </a>
+                </li>
+                <!-- /static -->
+                <!-- documentation -->
+                <li>
+                    <a href="http://milestone.nyasha.me/latest/documentation" target="_blank">
+                        <i class="material-icons">local_library</i>
+                        <span>Documentation</span>
+                    </a>
+                </li>
+                <!-- /documentation -->
+            </ul>
+        </nav>
+        <!-- /main navigation -->
+    </div>
+    <!-- /sidebar panel -->
+    <!-- content panel -->
+    <div class="main-panel">
+        <!-- top header -->
+        <nav class="header navbar">
+            <div class="header-inner">
+                <div class="navbar-item navbar-spacer-right brand hidden-lg-up">
+                    <!-- toggle offscreen menu -->
+                    <a href="javascript:;" data-toggle="sidebar" class="toggle-offscreen">
+                        <i class="material-icons">menu</i>
+                    </a>
+                    <!-- /toggle offscreen menu -->
+                    <!-- logo -->
+                    <a class="brand-logo hidden-xs-down">
+                        <img src="images/logo_white.png" alt="logo"/>
+                    </a>
+                    <!-- /logo -->
+                </div>
+                <a class="navbar-item navbar-spacer-right navbar-heading hidden-md-down" href="#">
+                    <span>Dashboard</span>
+                </a>
+                <div class="navbar-search navbar-item">
+                    <form class="search-form">
+                        <i class="material-icons">search</i>
+                        <input class="form-control" type="text" placeholder="Search" />
+                    </form>
+                </div>
+                <div class="navbar-item nav navbar-nav">
+                    <div class="nav-item nav-link dropdown">
+                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+                            <span>English</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="javascript:;">English</a>
+                            <a class="dropdown-item" href="javascript:;">Russian</a>
+                        </div>
+                    </div>
+                    <div class="nav-item nav-link dropdown">
+                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="material-icons">notifications</i>
+                            <span class="tag tag-danger">4</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right notifications">
+                            <div class="dropdown-item">
+                                <div class="notifications-wrapper">
+                                    <ul class="notifications-list">
+                                        <li>
+                                            <a href="javascript:;">
+                                                <div class="notification-icon">
+                                                    <div class="circle-icon bg-success text-white">
+                                                        <i class="material-icons">arrow_upward</i>
+                                                    </div>
+                                                </div>
+                                                <div class="notification-message">
+                                                    <b>Sean</b>
+                                                    launched a new application
+                                                    <span class="time">2 seconds ago</span>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;">
+                                                <div class="notification-icon">
+                                                    <div class="circle-icon bg-danger text-white">
+                                                        <i class="material-icons">check</i>
+                                                    </div>
+                                                </div>
+                                                <div class="notification-message">
+                                                    <b>Removed calendar</b>
+                                                    from app list
+                                                    <span class="time">4 hours ago</span>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;">
+                            <span class="notification-icon">
+                              <span class="circle-icon bg-info text-white">J</span>
+                            </span>
+                                                <div class="notification-message">
+                                                    <b>Jack Hunt</b>
+                                                    has
+                                                    <b>joined</b>
+                                                    mailing list
+                                                    <span class="time">9 days ago</span>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;">
+                            <span class="notification-icon">
+                              <span class="circle-icon bg-primary text-white">C</span>
+                            </span>
+                                                <div class="notification-message">
+                                                    <b>Conan Johns</b>
+                                                    created a new list
+                                                    <span class="time">9 days ago</span>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="notification-footer">Notifications</div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="javascript:;" class="nav-item nav-link nav-link-icon" data-toggle="modal" data-target=".chat-panel" data-backdrop="false">
+                        <i class="material-icons">chat_bubble</i>
+                    </a>
+                </div>
+            </div>
+        </nav>
+        <!-- /top header -->
+
+        <!-- main area -->
+        <div class="main-content">
+            <div class="content-view">
+                <div class="row">
+                    <div class="col-sm-6 col-md-4 col-lg-2">
+                        <div class="card card-block">
+                            <h5 class="m-b-0 v-align-middle text-overflow">
+                    <span class="small pull-xs-right">
+                      <i class="material-icons text-success" style="width: 16px;">arrow_drop_up</i>
+                      <span style="line-height: 24px;">+76%</span>
+                    </span>
+                                <span>804</span>
+                            </h5>
+                            <div class="small text-overflow text-muted">
+                                Memory usage
+                            </div>
+                            <div class="small text-overflow">
+                                Updated:&nbsp;<span>05:35 AM</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-lg-2">
+                        <div class="card card-block">
+                            <h5 class="m-b-0 v-align-middle text-overflow">
+                    <span class="small pull-xs-right tag bg-success p-y-0 p-x-xs" style="line-height: 24px;">
+                      <span >+20K</span>
+                    </span>
+                                <span>403</span>
+                            </h5>
+                            <div class="small text-overflow text-muted">
+                                Disk usage
+                            </div>
+                            <div class="small text-overflow">
+                                Updated:&nbsp;<span>12:42 PM</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-lg-2">
+                        <div class="card card-block">
+                            <h5 class="m-b-0 v-align-middle text-overflow">
+                    <span class="small pull-xs-right">
+                      <i class="material-icons text-danger" style="width: 16px;">arrow_drop_down</i>
+                      <span style="line-height: 24px;">+40%</span>
+                    </span>
+                                <span>976</span>
+                            </h5>
+                            <div class="small text-overflow text-muted">
+                                GPU compute
+                            </div>
+                            <div class="small text-overflow">
+                                Updated:&nbsp;<span>09:26 AM</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-lg-2">
+                        <div class="card card-block">
+                            <h5 class="m-b-0 v-align-middle text-overflow">
+                    <span class="small pull-xs-right">
+                      <i class="material-icons text-success" style="width: 16px;">arrow_drop_up</i>
+                      <span style="line-height: 24px;">+94%</span>
+                    </span>
+                                <span>457</span>
+                            </h5>
+                            <div class="small text-overflow text-muted">
+                                CPU usage
+                            </div>
+                            <div class="small text-overflow">
+                                Updated:&nbsp;<span>06:45 AM</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-lg-2">
+                        <div class="card card-block">
+                            <h5 class="m-b-0 v-align-middle text-overflow">
+                    <span class="small pull-xs-right">
+                      <i class="material-icons text-danger" style="width: 16px;">arrow_drop_down</i>
+                      <span style="line-height: 24px;">+04%</span>
+                    </span>
+                                <span>239</span>
+                            </h5>
+                            <div class="small text-overflow text-muted">
+                                Ram usage
+                            </div>
+                            <div class="small text-overflow">
+                                Updated:&nbsp;<span>11:23 PM</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-lg-2">
+                        <div class="card card-block">
+                            <h5 class="m-b-0 v-align-middle text-overflow">
+                    <span class="small pull-xs-right">
+                      <i class="material-icons text-success" style="width: 16px;">arrow_drop_up</i>
+                      <span style="line-height: 24px;">+67%</span>
+                    </span>
+                                <span>392</span>
+                            </h5>
+                            <div class="small text-overflow text-muted">
+                                RAM test
+                            </div>
+                            <div class="small text-overflow">
+                                Updated:&nbsp;<span>08:52 AM</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-block">
+                        <div class="m-b-1">
+                            <div class="dropdown pull-right">
+                                <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+                      <span>
+                        Period
+                      </span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" role="menu">
+                                    <a class="dropdown-item" href="#">
+                                        Today
+                                    </a>
+                                    <a class="dropdown-item" href="#">
+                                        This week
+                                    </a>
+                                    <a class="dropdown-item" href="#">
+                                        This month
+                                    </a>
+                                    <a class="dropdown-item" href="#">
+                                        This year
+                                    </a>
+                                </div>
+                            </div>
+                            <h6>
+                                Activity
+                            </h6>
+                        </div>
+                        <div class="dashboard-line chart" style="height:300px"></div>
+                        <div class="row text-xs-center m-t-1">
+                            <div class="col-sm-3 col-xs-6 p-t-1 p-b-1">
+                                <h6 class="m-t-0 m-b-0">
+                                    $ 89.34
+                                </h6>
+                                <small class="text-muted bold block">
+                                    Daily Sales
+                                </small>
+                            </div>
+                            <div class="col-sm-3 col-xs-6 p-t-1 p-b-1">
+                                <h6 class="m-t-0 m-b-0">
+                                    $ 498.00
+                                </h6>
+                                <small class="text-muted bold block">
+                                    Weekly Sales
+                                </small>
+                            </div>
+                            <div class="col-sm-3 col-xs-6 p-t-1 p-b-1">
+                                <h6 class="m-t-0 m-b-0">
+                                    $ 34,903
+                                </h6>
+                                <small class="text-muted bold block">
+                                    Monthly Sales
+                                </small>
+                            </div>
+                            <div class="col-sm-3 col-xs-6 p-t-1 p-b-1">
+                                <h6 class="m-t-0 m-b-0">
+                                    $ 98,343.49
+                                </h6>
+                                <small class="text-muted bold block">
+                                    Yearly Sales
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="card card-block p-b-0">
+                            <div class="piechart center-block m-b-1" style="width: 120px; height: 120px;">
+                                <div class="tasks-pie" data-percent="86">
+                                    <div>
+                                        Tasks
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-xs-center m-b-2">
+                                <p class="m-a-0">
+                      <span class="task-percent">
+                      </span>
+                                    % complete
+                                </p>
+                            </div>
+                            <ul class="list-unstyled m-x-n m-b-0">
+                                <li class="b-t p-a-1">
+                      <span class="pull-right">
+                        45,677
+                      </span>
+                                    Accelaration
+                                </li>
+                                <li class="b-t p-a-1">
+                      <span class="pull-right">
+                        234,456
+                      </span>
+                                    Braking
+                                </li>
+                                <li class="b-t p-a-1">
+                      <span class="pull-right">
+                        43,554
+                      </span>
+                                    Cornering
+                                </li>
+                                <li class="b-t p-a-1">
+                      <span class="pull-right">
+                        223,545
+                      </span>
+                                    Mixing
                                 </li>
                             </ul>
                         </div>
-                    </div><!-- .media-body -->
-                </div><!-- .media -->
-            </div><!-- .app-user -->
-
-            <div class="menubar-scroll">
-                <div class="menubar-scroll-inner">
-                    <ul class="app-menu">
-                        <li class="has-submenu">
-                            <a href="javascript:void(0)" class="submenu-toggle">
-                                <i class="menu-icon zmdi zmdi-view-dashboard zmdi-hc-lg"></i>
-                                <span class="menu-text">Dashboards</span>
-                                <i class="menu-caret zmdi zmdi-hc-sm zmdi-chevron-right"></i>
-                            </a>
-                            <ul class="submenu">
-                                <li><a href="index.html"><span class="menu-text">Dashboard 1</span></a></li>
-                                <li><a href="dashboard.2.html"><span class="menu-text">Dashboard 2</span></a></li>
-                                <li><a href="dashboard.3.html"><span class="menu-text">Dashboard 3</span></a></li>
-                            </ul>
-                        </li>
-
-                        <li class="has-submenu">
-                            <a href="javascript:void(0)" class="submenu-toggle">
-                                <i class="menu-icon zmdi zmdi-layers zmdi-hc-lg"></i>
-                                <span class="menu-text">Layouts</span>
-                                <span class="label label-warning menu-label">2</span>
-                                <i class="menu-caret zmdi zmdi-hc-sm zmdi-chevron-right"></i>
-                            </a>
-                            <ul class="submenu">
-                                <li><a href="../default/index.html"><span class="menu-text">Default</span></a></li>
-                                <li><a href="../topbar/index.html"><span class="menu-text">Topbar</span></a></li>
-                            </ul>
-                        </li>
-
-                        <li class="has-submenu">
-                            <a href="javascript:void(0)" class="submenu-toggle">
-                                <i class="menu-icon zmdi zmdi-puzzle-piece zmdi-hc-lg"></i>
-                                <span class="menu-text">UI Kit</span>
-                                <i class="menu-caret zmdi zmdi-hc-sm zmdi-chevron-right"></i>
-                            </a>
-                            <ul class="submenu">
-                                <li><a href="buttons.html"><span class="menu-text">Buttons</span></a></li>
-                                <li><a href="alerts.html"><span class="menu-text">Alerts</span></a></li>
-                                <li><a href="panels.html"><span class="menu-text">Panels</span></a></li>
-                                <li><a href="lists.html"><span class="menu-text">Lists</span></a></li>
-                                <li><a href="icons.html"><span class="menu-text">Icons</span></a></li>
-                                <li><a href="media.html"><span class="menu-text">Media</span></a></li>
-                                <li><a href="widgets.html"><span class="menu-text">Widgets</span></a></li>
-                                <li><a href="tabs.html"><span class="menu-text">Tabs &amp; Accordions</span></a></li>
-                                <li><a href="progress.html"><span class="menu-text">Progress</span></a></li>
-                            </ul>
-                        </li>
-
-                        <li class="has-submenu">
-                            <a href="javascript:void(0)" class="submenu-toggle">
-                                <i class="menu-icon zmdi zmdi-inbox zmdi-hc-lg"></i>
-                                <span class="menu-text">Mail Box</span>
-                                <i class="menu-caret zmdi zmdi-hc-sm zmdi-chevron-right"></i>
-                            </a>
-                            <ul class="submenu">
-                                <li>
-                                    <a href="inbox.html">
-                                        <span class="menu-text">Inbox</span>
-                                        <span class="label label-primary menu-label">12</span>
-                                    </a>
-                                </li>
-                                <li><a href="compose.html"><span class="menu-text">Compose</span></a></li>
-                            </ul>
-                        </li>
-
-                        <li>
-                            <a href="search.web.html">
-                                <i class="menu-icon zmdi zmdi-search zmdi-hc-lg"></i>
-                                <span class="menu-text">Search</span>
-                            </a>
-                        </li>
-
-                        <li class="has-submenu">
-                            <a href="javascript:void(0)" class="submenu-toggle">
-                                <i class="menu-icon zmdi zmdi-pages zmdi-hc-lg"></i>
-                                <span class="menu-text">Pages</span>
-                                <i class="menu-caret zmdi zmdi-hc-sm zmdi-chevron-right"></i>
-                            </a>
-                            <ul class="submenu">
-                                <li><a href="profile.html"><span class="menu-text">Profile</span></a></li>
-                                <li><a href="price.html"><span class="menu-text">Prices</span></a></li>
-                                <li><a href="invoice.html"><span class="menu-text">Invoice</span></a></li>
-                                <li><a href="gallery.1.html"><span class="menu-text">Gallery</span></a></li>
-                                <li><a href="gallery.2.html"><span class="menu-text">Gallery 2</span></a></li>
-                                <li><a href="support.html"><span class="menu-text">FAQ</span></a></li>
-                                <li class="has-submenu">
-                                    <a href="javascript:void(0)" class="submenu-toggle">
-                                        <i class="menu-icon zmdi zmdi-plus zmdi-hc-lg"></i>
-                                        <span class="menu-text">Misc Pages</span>
-                                        <i class="menu-caret zmdi zmdi-hc-sm zmdi-chevron-right"></i>
-                                    </a>
-                                    <ul class="submenu">
-                                        <li><a href="login.html"><span class="menu-text">Login</span></a></li>
-                                        <li><a href="signup.html"><span class="menu-text">Sign Up</span></a></li>
-                                        <li><a href="password-forget.html"><span class="menu-text">Reset Password</span></a></li>
-                                        <li><a href="unlock.html"><span class="menu-text">Unlock Screen</span></a></li>
-                                        <li><a href="404.html"><span class="menu-text">404 Error</span></a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li class="has-submenu">
-                            <a href="javascript:void(0)" class="submenu-toggle">
-                                <i class="menu-icon zmdi zmdi-check zmdi-hc-lg"></i>
-                                <span class="menu-text">Forms</span>
-                                <i class="menu-caret zmdi zmdi-hc-sm zmdi-chevron-right"></i>
-                            </a>
-                            <ul class="submenu">
-                                <li><a href="form.layouts.html"><span class="menu-text">Form Layouts</span></a></li>
-                                <li><a href="form.elements.html"><span class="menu-text">Form Elements</span></a></li>
-                                <li><a href="form.custom.html"><span class="menu-text">Customized Elements</span></a></li>
-                                <li><a href="form.plugins.html"><span class="menu-text">Form Plugins</span></a></li>
-                                <li><a href="file-upload.html"><span class="menu-text">File Upload</span></a></li>
-                                <li><a href="form.datetime.html"><span class="menu-text">DateTime Pickers</span></a></li>
-                                <li><a href="editors.html"><span class="menu-text">Editors</span></a></li>
-                            </ul>
-                        </li>
-
-                        <li class="has-submenu">
-                            <a href="javascript:void(0)" class="submenu-toggle">
-                                <i class="menu-icon zmdi zmdi-storage zmdi-hc-lg"></i>
-                                <span class="menu-text">Tables</span>
-                                <i class="menu-caret zmdi zmdi-hc-sm zmdi-chevron-right"></i>
-                            </a>
-                            <ul class="submenu">
-                                <li><a href="tables.basic.html"><span class="menu-text">Basic Tables</span></a></li>
-                                <li><a href="datatables.html"><span class="menu-text">DataTables</span></a></li>
-                            </ul>
-                        </li>
-
-                        <li class="has-submenu">
-                            <a href="javascript:void(0)" class="submenu-toggle">
-                                <i class="menu-icon zmdi zmdi-chart zmdi-hc-lg"></i>
-                                <span class="menu-text">Charts</span>
-                                <span class="label label-success menu-label">7</span>
-                                <i class="menu-caret zmdi zmdi-hc-sm zmdi-chevron-right"></i>
-                            </a>
-                            <ul class="submenu">
-                                <li><a href="charts.flot.html"><span class="menu-text">Flot Charts</span></a></li>
-                                <li><a href="echarts.bar.html"><span class="menu-text">Bar echarts</span></a></li>
-                                <li><a href="echarts.pie.html"><span class="menu-text">Pie echarts</span></a></li>
-                                <li><a href="echarts.line.html"><span class="menu-text">Line echarts</span></a></li>
-                                <li><a href="echarts.map.html"><span class="menu-text">Map echarts</span></a></li>
-                                <li><a href="echarts.scatter.html"><span class="menu-text">Scatter echarts</span></a></li>
-                                <li><a href="echarts.custom.html"><span class="menu-text">Custom echarts</span></a></li>
-                            </ul>
-                        </li>
-
-                        <li class="has-submenu">
-                            <a href="javascript:void(0)" class="submenu-toggle">
-                                <i class="menu-icon zmdi zmdi-pin zmdi-hc-lg"></i>
-                                <span class="menu-text">Maps</span>
-                                <i class="menu-caret zmdi zmdi-hc-sm zmdi-chevron-right"></i>
-                            </a>
-                            <ul class="submenu">
-                                <li><a href="map-google.html"><span class="menu-text">Google Maps</span></a></li>
-                                <li><a href="map-vector.html"><span class="menu-text">Vector Maps</span></a></li>
-                            </ul>
-                        </li>
-
-                        <li class="has-submenu">
-                            <a href="javascript:void(0)" class="submenu-toggle">
-                                <i class="menu-icon zmdi zmdi-apps zmdi-hc-lg"></i>
-                                <span class="menu-text">Apps</span>
-                                <span class="label label-info menu-label">2</span>
-                                <i class="menu-caret zmdi zmdi-hc-sm zmdi-chevron-right"></i>
-                            </a>
-                            <ul class="submenu">
-                                <li><a href="calendar.html"><span class="menu-text">Calendar</span></a></li>
-                                <li><a href="contacts.html"><span class="menu-text">Contacts</span></a></li>
-                            </ul>
-                        </li>
-
-                        <li class="menu-separator"><hr></li>
-
-                        <li>
-                            <a href="documentation.html">
-                                <i class="menu-icon zmdi zmdi-file-text zmdi-hc-lg"></i>
-                                <span class="menu-text">Documentation</span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="javascript:void(0)">
-                                <i class="menu-icon zmdi zmdi-settings zmdi-hc-lg"></i>
-                                <span class="menu-text">Settings</span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="javascript:void(0)">
-                                <i class="menu-icon zmdi zmdi-language-javascript zmdi-hc-lg"></i>
-                                <span class="menu-text">Angular Version</span>
-                            </a>
-                        </li>
-                    </ul><!-- .app-menu -->
-                </div><!-- .menubar-scroll-inner -->
-            </div><!-- .menubar-scroll -->
-        </aside>
-        <!--========== END app aside -->
-
-        <!-- navbar search -->
-        <div id="navbar-search" class="navbar-search collapse">
-            <div class="navbar-search-inner">
-                <form action="#">
-                    <span class="search-icon"><i class="fa fa-search"></i></span>
-                    <input class="search-field" type="search" placeholder="search..."/>
-                </form>
-                <button type="button" class="search-close" data-toggle="collapse" data-target="#navbar-search" aria-expanded="false">
-                    <i class="fa fa-close"></i>
-                </button>
-            </div>
-            <div class="navbar-search-backdrop" data-toggle="collapse" data-target="#navbar-search" aria-expanded="false"></div>
-        </div><!-- .navbar-search -->
-    @endif
-
-    <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
-            <div class="container">
-                <div class="navbar-header">
-
-                    <!-- Collapsed Hamburger -->
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                        <span class="sr-only">Toggle Navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-
-                    <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
-                    </a>
-                </div>
-
-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                        &nbsp;
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
-                        <!-- Authentication Links -->
-                        @if (Auth::guest())
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
-                        @else
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="card card-block">
+                            <div class="">
+                                <div>Memory usage</div>
+                                <h5 class="m-b-0">
+                                    <span>804</span> &nbsp;
+                                    <span class="small">
+                        <i class="fa fa-level-up text-success"></i>
+                        +76%
+                      </span>
+                                </h5>
+                                <div class="small">
+                                    Updated:&nbsp;
+                                    <span>
+                        05:35 AM
+                      </span>
+                                </div>
+                            </div>
+                            <hr class="m-x-n m-y-2" />
+                            <div class="dashboard-bar chart" style="height:269px"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card card-block p-b-0">
+                            <div class="text-overflow">
+                    <span class="text-success">
+                      10 minutes
+                    </span>
+                                to Space Headquaters
+                            </div>
+                            <small>1 Infinite Loop</small>
+                            <div class="us-map" style="height: 292px"></div>
+                            <div class="m-x-n">
+                                <a href="javascript:;" class="b-t p-a-1 block l-h">
+                                    <i class="material-icons">arrow_forward</i>
+                                    <span>Navigate to this location</span>
                                 </a>
-
-                                <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                        <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
-
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li>
-                        @endif
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h6>Recent notifications</h6>
+                <ul class="list-group m-b-1">
+                    <li class="list-group-item notification-bar-success">
+                        <div href="#" class="notification-bar-icon">
+                            <div><i></i></div>
+                        </div>
+                        <div class="notification-bar-details">
+                            <a href="#" class="notification-bar-title">
+                                Betty Simmons completed a task
+                            </a>
+                            <span class="text-muted">
+                    14 hours ago
+                  </span>
+                        </div>
+                    </li>
+                </ul>
+                <ul class="list-group">
+                    <li class="list-group-item notification-bar-fail">
+                        <div href="#" class="notification-bar-icon">
+                            <div><i></i></div>
+                        </div>
+                        <div class="notification-bar-details">
+                            <a href="#" class="notification-bar-title">
+                                You have 8 projects still pending
+                            </a>
+                            <span class="text-muted">
+                    26 mins ago
+                  </span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <!-- bottom footer -->
+            <div class="content-footer">
+                <nav class="footer-right">
+                    <ul class="nav">
+                        <li>
+                            <a href="javascript:;">Feedback</a>
+                        </li>
                     </ul>
+                </nav>
+                <nav class="footer-left">
+                    <ul class="nav">
+                        <li>
+                            <a href="javascript:;">
+                                <span>Copyright</span>
+                                &copy; 2016 Your App
+                            </a>
+                        </li>
+                        <li class="hidden-md-down">
+                            <a href="javascript:;">Privacy</a>
+                        </li>
+                        <li class="hidden-md-down">
+                            <a href="javascript:;">Terms</a>
+                        </li>
+                        <li class="hidden-md-down">
+                            <a href="javascript:;">help</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <!-- /bottom footer -->
+        </div>
+        <!-- /main area -->
+    </div>
+    <!-- /content panel -->
+
+    <!--Chat panel-->
+    <div class="modal fade sidebar-modal chat-panel" tabindex="-1" role="dialog" aria-labelledby="chat-panel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="chat-header">
+                    <a class="pull-right" href="javascript:;" data-dismiss="modal">
+                        <i class="material-icons">close</i>
+                    </a>
+                    <div class="chat-header-title">People</div>
+                </div>
+                <div class="modal-body flex scroll-y">
+                    <div class="chat-group">
+                        <div class="chat-group-header">Favourites</div>
+                        <a href="javascript:;" data-toggle="modal" data-target=".chat-message">
+                            <span class="status-online"></span>
+                            <span>Catherine Moreno</span>
+                        </a>
+                        <a href="javascript:;" data-toggle="modal" data-target=".chat-message">
+                            <span class="status-online"></span>
+                            <span>Denise Peterson</span>
+                        </a>
+                        <a href="javascript:;" data-toggle="modal" data-target=".chat-message">
+                            <span class="status-away"></span>
+                            <span>Charles Wilson</span>
+                        </a>
+                        <a href="javascript:;" data-toggle="modal" data-target=".chat-message">
+                            <span class="status-away"></span>
+                            <span>Melissa Welch</span>
+                        </a>
+                        <a href="javascript:;" data-toggle="modal" data-target=".chat-message">
+                            <span class="status-no-disturb"></span>
+                            <span>Vincent Peterson</span>
+                        </a>
+                        <a href="javascript:;" data-toggle="modal" data-target=".chat-message">
+                            <span class="status-offline"></span>
+                            <span>Pamela Wood</span>
+                        </a>
+                    </div>
+                    <div class="chat-group">
+                        <div class="chat-group-header">Online</div>
+                        <a href="javascript:;" data-toggle="modal" data-target=".chat-message">
+                            <span class="status-online"></span>
+                            <span>Tammy Carpenter</span>
+                        </a>
+                        <a href="javascript:;" data-toggle="modal" data-target=".chat-message">
+                            <span class="status-away"></span>
+                            <span>Emma Sullivan</span>
+                        </a>
+                        <a href="javascript:;" data-toggle="modal" data-target=".chat-message">
+                            <span class="status-no-disturb"></span>
+                            <span>Andrea Brewer</span>
+                        </a>
+                        <a href="javascript:;" data-toggle="modal" data-target=".chat-message">
+                            <span class="status-online"></span>
+                            <span>Betty Simmons</span>
+                        </a>
+                    </div>
+                    <div class="chat-group">
+                        <div class="chat-group-header">Other</div>
+                        <a href="javascript:;" data-toggle="modal" data-target=".chat-message">
+                            <span class="status-offline"></span>
+                            <span>Denise Peterson</span>
+                        </a>
+                        <a href="javascript:;" data-toggle="modal" data-target=".chat-message">
+                            <span class="status-offline"></span>
+                            <span>Jose Rivera</span>
+                        </a>
+                        <a href="javascript:;" data-toggle="modal" data-target=".chat-message">
+                            <span class="status-offline"></span>
+                            <span>Diana Robertson</span>
+                        </a>
+                        <a href="javascript:;" data-toggle="modal" data-target=".chat-message">
+                            <span class="status-offline"></span>
+                            <span>William Fields</span>
+                        </a>
+                        <a href="javascript:;" data-toggle="modal" data-target=".chat-message">
+                            <span class="status-offline"></span>
+                            <span>Emily Stanley</span>
+                        </a>
+                        <a href="javascript:;" data-toggle="modal" data-target=".chat-message">
+                            <span class="status-offline"></span>
+                            <span>Jack Hunt</span>
+                        </a>
+                        <a href="javascript:;" data-toggle="modal" data-target=".chat-message">
+                            <span class="status-offline"></span>
+                            <span>Sharon Rice</span>
+                        </a>
+                        <a href="javascript:;" data-toggle="modal" data-target=".chat-message">
+                            <span class="status-offline"></span>
+                            <span>Mary Holland</span>
+                        </a>
+                        <a href="javascript:;" data-toggle="modal" data-target=".chat-message">
+                            <span class="status-offline"></span>
+                            <span>Diane Hughes</span>
+                        </a>
+                        <a href="javascript:;" data-toggle="modal" data-target=".chat-message">
+                            <span class="status-offline"></span>
+                            <span>Steven Smith</span>
+                        </a>
+                        <a href="javascript:;" data-toggle="modal" data-target=".chat-message">
+                            <span class="status-offline"></span>
+                            <span>Emily Henderson</span>
+                        </a>
+                        <a href="javascript:;" data-toggle="modal" data-target=".chat-message">
+                            <span class="status-offline"></span>
+                            <span>Wayne Kelly</span>
+                        </a>
+                        <a href="javascript:;" data-toggle="modal" data-target=".chat-message">
+                            <span class="status-offline"></span>
+                            <span>Jane Garcia</span>
+                        </a>
+                        <a href="javascript:;" data-toggle="modal" data-target=".chat-message">
+                            <span class="status-offline"></span>
+                            <span>Jose Jimenez</span>
+                        </a>
+                        <a href="javascript:;" data-toggle="modal" data-target=".chat-message">
+                            <span class="status-offline"></span>
+                            <span>Rachel Burton</span>
+                        </a>
+                        <a href="javascript:;" data-toggle="modal" data-target=".chat-message">
+                            <span class="status-offline"></span>
+                            <span>Samantha Ruiz</span>
+                        </a>
+                    </div>
                 </div>
             </div>
-        </nav>
+        </div>
     </div>
-    @yield('content')
-    <!-- Scripts -->
 
-    <script src="{{ asset('libs/bower/jquery/dist/jquery.js') }}"></script>
-    <script src="{{ asset('libs/bower/jquery-ui/jquery-ui.min.js') }}"></script>
-    <script src="{{ asset('libs/bower/jQuery-Storage-API/jquery.storageapi.min.js') }}"></script>
-    <script src="{{ asset('libs/bower/bootstrap-sass/assets/javascripts/bootstrap.js') }}"></script>
-    <script src="{{ asset('libs/bower/jquery-slimscroll/jquery.slimscroll.js') }}"></script>
-    <script src="{{ asset('libs/bower/perfect-scrollbar/js/perfect-scrollbar.jquery.js') }}"></script>
-    <script src="{{ asset('libs/bower/PACE/pace.min.js') }}"></script>
-    <!-- build:js ../assets/js/app.min.js -->
-    <script src="{{ asset('assets/js/library.js') }}"></script>
-    <script src="{{ asset('assets/js/plugins.js') }}"></script>
-    <script src="{{ asset('assets/js/app.js') }}"></script>
-    <!-- endbuild -->
-    <script src="{{ asset('libs/bower/moment/moment.js') }}"></script>
-    <script src="{{ asset('libs/bower/fullcalendar/dist/fullcalendar.min.js') }}"></script>
-    <script src="{{ asset('assets/js/fullcalendar.js') }}"></script>
-    <!-- endbuild -->
+    <div class="modal fade chat-message" tabindex="-1" role="dialog" aria-labelledby="chat-message" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="chat-header">
+                    <div class="pull-right dropdown">
+                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="material-icons">more_vert</i>
+                        </a>
+                        <div class="dropdown-menu" role="menu">
+                            <a class="dropdown-item" href="javascript:;">Profile</a>
+                            <a class="dropdown-item" href="javascript:;">Clear messages</a>
+                            <a class="dropdown-item" href="javascript:;">Delete conversation</a>
+                            <a class="dropdown-item" href="javascript:;" data-dismiss="modal">Close chat</a>
+                        </div>
+                    </div>
+                    <div class="chat-conversation-title">
+                        <img src="images/face1.jpg" class="avatar avatar-xs img-circle m-r-1 pull-left" alt="">
+                        <div class="overflow-hidden">
+                            <span><strong>Charles Wilson</strong></span>
+                            <small>Last seen today at 03:11</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-body flex scroll-y">
+                    <p class="text-xs-center text-muted small text-uppercase bold m-b-1">Yesterday</p>
+                    <div class="chat-conversation-user them">
+                        <div class="chat-conversation-message">
+                            <p>Hey.</p>
+                        </div>
+                    </div>
+                    <div class="chat-conversation-user them">
+                        <div class="chat-conversation-message">
+                            <p>How are the wife and kids, Taylor?</p>
+                        </div>
+                    </div>
+                    <div class="chat-conversation-user me">
+                        <div class="chat-conversation-message">
+                            <p>Pretty good, Samuel.</p>
+                        </div>
+                    </div>
+                    <p class="text-xs-center text-muted small text-uppercase bold m-b-1">Today</p>
+                    <div class="chat-conversation-user them">
+                        <div class="chat-conversation-message">
+                            <p>Curabitur blandit tempus porttitor.</p>
+                        </div>
+                    </div>
+                    <div class="chat-conversation-user me">
+                        <div class="chat-conversation-message">
+                            <p>Goodnight!</p>
+                        </div>
+                    </div>
+                    <div class="chat-conversation-user them">
+                        <div class="chat-conversation-message">
+                            <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-conversation-footer">
+                    <button class="chat-left">
+                        <i class="material-icons">face</i>
+                    </button>
+                    <div class="chat-input" contenteditable=""></div>
+                    <button class="chat-right">
+                        <i class="material-icons">photo</i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/Chat panel-->
+
+</div>
+
+<script type="text/javascript">
+    window.paceOptions = {
+        document: true,
+        eventLag: true,
+        restartOnPushState: true,
+        restartOnRequestAfter: true,
+        ajax: {
+            trackMethods: [ 'POST','GET']
+        }
+    };
+</script>
+
+<!-- build:js({.tmp,app}) scripts/app.min.js -->
+<script src="{{asset('vendor/jquery/dist/jquery.js')}}"></script>
+<script src="{{asset('vendor/pace/pace.js')}}"></script>
+<script src="{{asset('vendor/tether/dist/js/tether.js')}}"></script>
+<script src="{{asset('vendor/bootstrap/dist/js/bootstrap.js')}}"></script>
+<script src="{{asset('vendor/fastclick/lib/fastclick.js')}}"></script>
+<script src="{{asset('scripts/constants.js')}}"></script>
+<script src="{{asset('scripts/main.js')}}"></script>
+<!-- endbuild -->
+
+<!-- page scripts -->
+<script src="{{asset('vendor/flot/jquery.flot.js')}}"></script>
+<script src="{{asset('vendor/flot/jquery.flot.resize.js')}}"></script>
+<script src="{{asset('vendor/flot/jquery.flot.stack.js')}}"></script>
+<script src="{{asset('vendor/flot-spline/js/jquery.flot.spline.js')}}"></script>
+<script src="{{asset('vendor/bower-jvectormap/jquery-jvectormap-1.2.2.min.js')}}"></script>
+<script src="{{asset('data/maps/jquery-jvectormap-us-aea.js')}}"></script>
+<script src="{{asset('vendor/jquery.easy-pie-chart/dist/jquery.easypiechart.js')}}"></script>
+<script src="{{asset('vendor/noty/js/noty/packaged/jquery.noty.packaged.min.js')}}"></script>
+<script src="{{asset('scripts/helpers/noty-defaults.js')}}"></script>
+<!-- end page scripts -->
+
+<!-- initialize page scripts -->
+<script src="{{asset('scripts/dashboard/dashboard.js')}}"></script>
+<!-- end initialize page scripts -->
+
 </body>
 </html>
