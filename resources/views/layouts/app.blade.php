@@ -21,7 +21,18 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- page stylesheets -->
-    <link rel="stylesheet" href="{{asset('vendor/bower-jvectormap/jquery-jvectormap-1.2.2.css')}}"/>
+    <link rel="stylesheet" href="{{asset('vendor/jquery.tagsinput/src/jquery.tagsinput.css')}}">
+    <link rel="stylesheet" href="{{asset('vendor/intl-tel-input/build/css/intlTelInput.css')}}">
+    <link rel="stylesheet" href="{{asset('vendor/bootstrap-daterangepicker/daterangepicker.css')}}">
+    <link rel="stylesheet" href="{{asset('vendor/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css')}}">
+    <link rel="stylesheet" href="{{asset('vendor/clockpicker/dist/bootstrap-clockpicker.min.css')}}">
+    <link rel="stylesheet" href="{{asset('vendor/mjolnic-bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css')}}">
+    <link rel="stylesheet" href="{{asset('vendor/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.css')}}">
+    <link rel="stylesheet" href="{{asset('vendor/jquery-labelauty/source/jquery-labelauty.css')}}">
+    <link rel="stylesheet" href="{{asset('vendor/multiselect/css/multi-select.css')}}">
+    <link rel="stylesheet" href="{{asset('vendor/ui-select/dist/select.css')}}">
+    <link rel="stylesheet" href="{{asset('vendor/select2/select2.css')}}">
+    <link rel="stylesheet" href="{{asset('vendor/selectize/dist/css/selectize.css')}}">
     <!-- end page stylesheets -->
 
     <!-- build:css({.tmp,app}) styles/app.min.css -->
@@ -56,7 +67,7 @@
         <div class="nav-profile dropdown" style="background-color: #e8e7e7">
             <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
                 <div class="user-image">
-                    <img src="images/avatar.jpg" class="avatar img-circle" alt="user" title="user"/>
+                    <img src="{{asset('images/avatar.jpg')}}" class="avatar img-circle" alt="user" title="user"/>
                 </div>
                 <div class="user-info expanding-hidden">
                     {{Auth::user()->name}}
@@ -110,7 +121,7 @@
                     </a>
                     <ul class="sub-menu">
                         <li>
-                            <a href="#">
+                            <a href="{{url('/terceros/nuevo')}}">
                                 <span>Nuevo tercero</span>
                             </a>
                         </li>
@@ -655,20 +666,27 @@
 <!-- endbuild -->
 
 <!-- page scripts -->
-<script src="{{asset('vendor/flot/jquery.flot.js')}}"></script>
-<script src="{{asset('vendor/flot/jquery.flot.resize.js')}}"></script>
-<script src="{{asset('vendor/flot/jquery.flot.stack.js')}}"></script>
-<script src="{{asset('vendor/flot-spline/js/jquery.flot.spline.js')}}"></script>
-<script src="{{asset('vendor/bower-jvectormap/jquery-jvectormap-1.2.2.min.js')}}"></script>
-<script src="{{asset('data/maps/jquery-jvectormap-us-aea.js')}}"></script>
-<script src="{{asset('vendor/jquery.easy-pie-chart/dist/jquery.easypiechart.js')}}"></script>
-<script src="{{asset('vendor/noty/js/noty/packaged/jquery.noty.packaged.min.js')}}"></script>
-<script src="{{asset('scripts/helpers/noty-defaults.js')}}"></script>
+<script src="{{asset('vendor/jquery.tagsinput/src/jquery.tagsinput.js')}}"></script>
+<script src="{{asset('vendor/intl-tel-input//build/js/intlTelInput.min.js')}}"></script>
+<script src="{{asset('vendor/moment/min/moment.min.js')}}"></script>
+<script src="{{asset('vendor/bootstrap-daterangepicker/daterangepicker.js')}}"></script>
+<script src="{{asset('vendor/bootstrap-datepicker/js/bootstrap-datepicker.js')}}"></script>
+<script src="{{asset('vendor/bootstrap-timepicker/js/bootstrap-timepicker.js')}}"></script>
+<script src="{{asset('vendor/clockpicker/dist/jquery-clockpicker.min.js')}}"></script>
+<script src="{{asset('vendor/mjolnic-bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js')}}"></script>
+<script src="{{asset('vendor/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js')}}"></script>
+<script src="{{asset('vendor/select2/select2.min.js')}}"></script>
+<script src="{{asset('vendor/selectize/dist/js/standalone/selectize.min.js')}}"></script>
+<script src="{{asset('vendor/jquery-labelauty/source/jquery-labelauty.js')}}"></script>
+<script src="{{asset('vendor/bootstrap-maxlength/src/bootstrap-maxlength.js')}}"></script>
+<script src="{{asset('vendor/typeahead.js/dist/typeahead.bundle.js')}}"></script>
+<script src="{{asset('vendor/multiselect/js/jquery.multi-select.js')}}"></script>
 <!-- end page scripts -->
 
 <!-- initialize page scripts -->
-<script src="{{asset('scripts/dashboard/dashboard.js')}}"></script>
+<script src="{{asset('scripts/forms/plugins.js')}}"></script>
 <!-- end initialize page scripts -->
+
 
 @yield('scripts')
 

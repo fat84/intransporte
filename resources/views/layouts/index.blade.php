@@ -16,7 +16,7 @@
 
     <meta name="theme-color" content="#4C7FF0">
 
-    <title>Milestone - Bootstrap 4 Dashboard Template</title>
+    <title>{{config('app.name')}}</title>
 
     <!-- page stylesheets -->
     <!-- end page stylesheets -->
