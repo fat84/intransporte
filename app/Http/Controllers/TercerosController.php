@@ -3,6 +3,8 @@
 namespace intransporte\Http\Controllers;
 
 use Illuminate\Http\Request;
+use intransporte\Http\Requests\TerceroRequest;
+use intransporte\Tercero;
 
 class TercerosController extends Controller
 {
@@ -11,7 +13,9 @@ class TercerosController extends Controller
 
     }
 
-    public function guardar(){
+    //guardar tercero en la base de datos
+    public function guardar(TerceroRequest $request){
+        $tercero = new Tercero($request->all());
 
     }
 }
