@@ -21,6 +21,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- page stylesheets -->
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="{{asset('vendor/jquery.tagsinput/src/jquery.tagsinput.css')}}">
     <link rel="stylesheet" href="{{asset('vendor/intl-tel-input/build/css/intlTelInput.css')}}">
     <link rel="stylesheet" href="{{asset('vendor/bootstrap-daterangepicker/daterangepicker.css')}}">
@@ -42,8 +43,7 @@
     <link rel="stylesheet" href="{{asset('vendor/animate.css/animate.css')}}"/>
     <link rel="stylesheet" href="{{asset('styles/app.css')}}" id="load_styles_before"/>
     <link rel="stylesheet" href="{{asset('styles/app.skins.css')}}"/>
-    <link rel="stylesheet" href="{{asset('css/sweetalert.css')}}"/>
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+
 
     <!-- endbuild -->
     @yield('css')
@@ -158,7 +158,7 @@
                     </a>
                     <ul class="sub-menu">
                         <li>
-                            <a href="{{url('vehiculo')}}">
+                            <a href="#">
                                 <span>Nuevo vehiculo</span>
                             </a>
                         </li>
@@ -688,7 +688,6 @@
 
 <!-- initialize page scripts -->
 <script src="{{asset('scripts/forms/plugins.js')}}"></script>
-<script src="{{asset('js/sweetalert.min.js')}}"></script>
 <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
 <!-- end initialize page scripts -->
 

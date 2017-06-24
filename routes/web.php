@@ -29,7 +29,3 @@ Route::get('/terceros/nuevo',function(){
 });
 //Guardar tercero
 Route::post('/terceros/nuevo/guardar','TercerosController@guardar');
-
-//vehiculos
-//Route::get('vehiculo');
-Route::resource('vehiculo','VehiculoController');
