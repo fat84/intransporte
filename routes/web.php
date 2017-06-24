@@ -21,5 +21,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 //Formularios para terceros
 Route::get('/terceros/nuevo',function(){
-   return view('terceros.nuevo');
+    $ciudades = intransporte\Ciudad::orderBy('nombre_ciudad', 'ASC')->get();
+   return view('terceros.nuevo', ['ciudades'=>$ciudades]);
 });
