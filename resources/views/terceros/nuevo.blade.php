@@ -7,7 +7,7 @@
 @section('content')
     <div class="card">
         <div class="card-block">
-            <form action="{{url('/terceros/nuevo/save')}}" role="form" method="POST">
+            <form action="{{url('/terceros/nuevo/guardar')}}" role="form" method="POST">
                 {{csrf_token()}}
                 <div class="m-b-1">
                     <h6>Datos principales</h6>
@@ -27,8 +27,8 @@
                             <div class="m-b">
                                 <select data-placeholder="" name="tipo_persona" class="select2 m-b-1"
                                         style="width: 100%;">
-                                    <option value="Persona natural">Persona natural</option>
-                                    <option value="Persona juridica">Persona Juridica</option>
+                                    <option value="Persona natural" @if(old('tipo_persona')=="Persona natural") selected @endif>Persona natural</option>
+                                    <option value="Persona juridica" @if(old('tipo_persona')=="Persona juridica") selected @endif >Persona Juridica</option>
                                 </select>
                             </div>
                             <!--</div>-->
@@ -41,11 +41,11 @@
                             <div class="m-b">
                                 <select data-placeholder="" name="tipo_documento" class="select2 m-b-1"
                                         style="width: 100%;">
-                                    <option value="NIT">NIT</option>
-                                    <option value="CC">Cedula ciudadania</option>
-                                    <option value="CE">Cedula extranjeria</option>
-                                    <option value="PAS">Pasaporte</option>
-                                    <option value="DNI">Otro</option>
+                                    <option value="NIT" @if(old('tipo_documento')=="NIT") selected @endif >NIT</option>
+                                    <option value="CC" @if(old('tipo_documento')=="CC") selected @endif >Cedula ciudadania</option>
+                                    <option value="CE" @if(old('tipo_documento')=="CE") selected @endif >Cedula extranjeria</option>
+                                    <option value="PAS" @if(old('tipo_documento')=="PAS") selected @endif >Pasaporte</option>
+                                    <option value="DNI" @if(old('tipo_documento')=="DNI") selected @endif >Otro</option>
                                 </select>
                             </div>
                             <!--</div>-->
@@ -83,10 +83,10 @@
                         <label class="control-label" for="">Ciudad:</label>
                         <!--<div class="m-b">-->
                         <!--<select data-placeholder="" name="ciudad_id" class="select2 m-b-1" style="width: 100%;">-->
-                        <select id="select-beast" class="demo-default" placeholder="Seleccione la ciudad">
+                        <select id="select-beast" name="ciudad_id" class="demo-default" placeholder="Seleccione la ciudad">
                             <option value="">Seleccione la ciudad</option>
                             @foreach($ciudades as $ciudad)
-                                <option value="{{$ciudad->id}}">{{$ciudad->nombre_ciudad}}
+                                <option value="{{$ciudad->id}}" @if(old('ciudad_id')==$ciudad->id) selected @endif>{{$ciudad->nombre_ciudad}}
                                     ,{{$ciudad->nombre_departamento}}</option>
                             @endforeach
                         </select>
@@ -105,7 +105,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <div>
-                                <input class="to-labelauty" type="checkbox" data-labelauty="Es cliente" checked/>
+                                <input class="to-labelauty" type="checkbox" data-labelauty="Es cliente" @if(old('es_cliente')==null) @ @elseif(old('es_cliente')=="NIT") checked @endif />
                             </div>
                         </div>
                     </div>
