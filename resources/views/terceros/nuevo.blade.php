@@ -8,7 +8,7 @@
     <div class="card">
         <div class="card-block">
             <form action="{{url('/terceros/nuevo/guardar')}}" role="form" method="POST">
-                {{csrf_token()}}
+                {{csrf_field()}}
                 <div class="m-b-1">
                     <h6>Datos principales</h6>
                     <hr/>
@@ -18,6 +18,9 @@
                         <div class="form-group">
                             <label class="control-label" for="nombre">Nombre / Razón social:</label>
                             <input class="form-control" id="nombre" name="nombre" type="text" value="{{old('nombre')}}">
+                            @if ($errors->has('nombre'))
+                                <span class="help-block">{{ $errors->first('nombre') }}</span>
+                            @endif
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -30,6 +33,9 @@
                                     <option value="Persona natural" @if(old('tipo_persona')=="Persona natural") selected @endif>Persona natural</option>
                                     <option value="Persona juridica" @if(old('tipo_persona')=="Persona juridica") selected @endif >Persona Juridica</option>
                                 </select>
+                                @if ($errors->has('tipo_persona'))
+                                    <span class="help-block">{{ $errors->first('tipo_persona') }}</span>
+                                @endif
                             </div>
                             <!--</div>-->
                         </div>
@@ -47,6 +53,9 @@
                                     <option value="PAS" @if(old('tipo_documento')=="PAS") selected @endif >Pasaporte</option>
                                     <option value="DNI" @if(old('tipo_documento')=="DNI") selected @endif >Otro</option>
                                 </select>
+                                @if ($errors->has('tipo_documento'))
+                                    <span class="help-block">{{ $errors->first('tipo_documento') }}</span>
+                                @endif
                             </div>
                             <!--</div>-->
                         </div>
@@ -56,6 +65,9 @@
                             <label class="control-label" for="documento">Número de documento:</label>
                             <input class="form-control" id="documento" name="documento" type="text"
                                    value="{{old('documento')}}">
+                            @if ($errors->has('documento'))
+                                <span class="help-block">{{ $errors->first('documento') }}</span>
+                            @endif
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -63,6 +75,9 @@
                             <label class="control-label" for="correo">Correo electrónico:</label>
                             <input class="form-control" placeholder="" id="correo" name="correo" type="email"
                                    value="{{old('correo')}}">
+                            @if ($errors->has('correo'))
+                                <span class="help-block">{{ $errors->first('correo') }}</span>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -77,6 +92,9 @@
                             <label class="control-label" for="direccion">Dirección:</label>
                             <input class="form-control" id="direccion" name="direccion" type="text"
                                    value="{{old('direccion')}}">
+                            @if ($errors->has('direccion'))
+                                <span class="help-block">{{ $errors->first('direccion') }}</span>
+                            @endif
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -90,6 +108,9 @@
                                     ,{{$ciudad->nombre_departamento}}</option>
                             @endforeach
                         </select>
+                        @if ($errors->has('ciudad_id'))
+                            <span class="help-block">{{ $errors->first('ciudad_id') }}</span>
+                    @endif
                         <!--</div>-->
                     </div>
                     <div class="col-md-6">
@@ -97,6 +118,9 @@
                             <label class="control-label" for="documento">Teléfono:</label>
                             <input class="form-control" id="telefono" name="telefono" type="text"
                                    value="{{old('telefono')}}">
+                            @if ($errors->has('telefono'))
+                                <span class="help-block">{{ $errors->first('telefono') }}</span>
+                            @endif
                         </div>
                     </div>
                     <div class="col-md-12">
@@ -105,21 +129,21 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <div>
-                                <input class="to-labelauty" type="checkbox" data-labelauty="Es cliente" @if(old('es_cliente')==null) @ @elseif(old('es_cliente')=="NIT") checked @endif />
+                                <input class="to-labelauty" type="checkbox" name="es_cliente" data-labelauty="Es cliente" value="1" @if(Empty(old('es_cliente'))) checked @elseif(old('es_cliente')=="1") checked @endif />
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <div>
-                                <input class="to-labelauty" type="checkbox" data-labelauty="Es empleado"/>
+                                <input class="to-labelauty" type="checkbox" data-labelauty="Es empleado" name="es_empleado" value="1" @if(old('es_empleado')=="1") checked @endif />
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <div>
-                                <input class="to-labelauty" type="checkbox" data-labelauty="Es proveedor"/>
+                                <input class="to-labelauty" type="checkbox" data-labelauty="Es proveedor" name="es_proveedor" value="1" @if(old('es_proveedor')=="1") checked @endif/>
                             </div>
                         </div>
                     </div>

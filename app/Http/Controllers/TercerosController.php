@@ -16,6 +16,7 @@ class TercerosController extends Controller
     //guardar tercero en la base de datos
     public function guardar(TerceroRequest $request){
         $tercero = new Tercero($request->all());
+        $tercero->save();
 
     }
 }
