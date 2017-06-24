@@ -26,9 +26,9 @@ class TerceroRequest extends FormRequest
         return [
             'nombre' => 'required|string|max:255',
             'tipo_persona' => 'required|string|max:255',
-            'tipo_documento' => 'required|string|min:2|confirmed',
+            'tipo_documento' => 'required|string|min:2',
             'documento' => 'required|string|min:5|unique:tercero',
-            'correo' => 'string|email:unique:tercero',
+            'correo' => 'nullable|email',
         ];
     }
 }

@@ -20,7 +20,9 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 //####### RUTAS TERCEROS ##########//
-//Formularios para terceros
+//lista de terceros
+Route::get('/terceros','TercerosController@index');
+//Formularios para tercero nuevo
 Route::get('/terceros/nuevo',function(){
     $ciudades = intransporte\Ciudad::orderBy('nombre_ciudad', 'ASC')->get();
    return view('terceros.nuevo', ['ciudades'=>$ciudades]);

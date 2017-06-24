@@ -42,6 +42,8 @@
     <link rel="stylesheet" href="{{asset('vendor/animate.css/animate.css')}}"/>
     <link rel="stylesheet" href="{{asset('styles/app.css')}}" id="load_styles_before"/>
     <link rel="stylesheet" href="{{asset('styles/app.skins.css')}}"/>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+
     <!-- endbuild -->
     @yield('css')
 </head>
@@ -126,7 +128,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="{{url('/terceros')}}">
                                 <span>Lista de terceros</span>
                             </a>
                         </li>
@@ -685,6 +687,7 @@
 
 <!-- initialize page scripts -->
 <script src="{{asset('scripts/forms/plugins.js')}}"></script>
+<script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
 <!-- end initialize page scripts -->
 
 

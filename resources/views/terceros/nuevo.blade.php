@@ -15,16 +15,16 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="form-group">
+                        <div class="form-group {{ $errors->has('nombre') ? ' has-danger' : '' }}">
                             <label class="control-label" for="nombre">Nombre / Razón social:</label>
                             <input class="form-control" id="nombre" name="nombre" type="text" value="{{old('nombre')}}">
                             @if ($errors->has('nombre'))
-                                <span class="help-block">{{ $errors->first('nombre') }}</span>
+                                <span class="text-danger">{{ $errors->first('nombre') }}</span>
                             @endif
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="form-group">
+                        <div class="form-group {{ $errors->has('tipo_persona') ? ' has-danger' : '' }}">
                             <label class="control-label" for="">Tipo de empresa:</label>
                             <!--<div class="m-b">-->
                             <div class="m-b">
@@ -34,14 +34,14 @@
                                     <option value="Persona juridica" @if(old('tipo_persona')=="Persona juridica") selected @endif >Persona Juridica</option>
                                 </select>
                                 @if ($errors->has('tipo_persona'))
-                                    <span class="help-block">{{ $errors->first('tipo_persona') }}</span>
+                                    <span class="text-danger">{{ $errors->first('tipo_persona') }}</span>
                                 @endif
                             </div>
                             <!--</div>-->
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="form-group">
+                        <div class="form-group {{ $errors->has('tipo_documento') ? ' has-danger' : '' }}">
                             <label class="control-label" for="">Tipo de documento:</label>
                             <!--<div class="m-b">-->
                             <div class="m-b">
@@ -54,29 +54,29 @@
                                     <option value="DNI" @if(old('tipo_documento')=="DNI") selected @endif >Otro</option>
                                 </select>
                                 @if ($errors->has('tipo_documento'))
-                                    <span class="help-block">{{ $errors->first('tipo_documento') }}</span>
+                                    <span class="text-danger">{{ $errors->first('tipo_documento') }}</span>
                                 @endif
                             </div>
                             <!--</div>-->
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="form-group">
+                        <div class="form-group {{ $errors->has('documento') ? ' has-danger' : '' }}">
                             <label class="control-label" for="documento">Número de documento:</label>
                             <input class="form-control" id="documento" name="documento" type="text"
                                    value="{{old('documento')}}">
                             @if ($errors->has('documento'))
-                                <span class="help-block">{{ $errors->first('documento') }}</span>
+                                <span class="text-danger">{{ $errors->first('documento') }}</span>
                             @endif
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-6 {{ $errors->has('correo') ? ' has-danger' : '' }}">
                         <div class="form-group">
                             <label class="control-label" for="correo">Correo electrónico:</label>
                             <input class="form-control" placeholder="" id="correo" name="correo" type="email"
                                    value="{{old('correo')}}">
                             @if ($errors->has('correo'))
-                                <span class="help-block">{{ $errors->first('correo') }}</span>
+                                <span class="text-danger">{{ $errors->first('correo') }}</span>
                             @endif
                         </div>
                     </div>
@@ -93,7 +93,7 @@
                             <input class="form-control" id="direccion" name="direccion" type="text"
                                    value="{{old('direccion')}}">
                             @if ($errors->has('direccion'))
-                                <span class="help-block">{{ $errors->first('direccion') }}</span>
+                                <span class="text-danger">{{ $errors->first('direccion') }}</span>
                             @endif
                         </div>
                     </div>
@@ -109,7 +109,7 @@
                             @endforeach
                         </select>
                         @if ($errors->has('ciudad_id'))
-                            <span class="help-block">{{ $errors->first('ciudad_id') }}</span>
+                            <span class="text-danger">{{ $errors->first('ciudad_id') }}</span>
                     @endif
                         <!--</div>-->
                     </div>
@@ -119,7 +119,7 @@
                             <input class="form-control" id="telefono" name="telefono" type="text"
                                    value="{{old('telefono')}}">
                             @if ($errors->has('telefono'))
-                                <span class="help-block">{{ $errors->first('telefono') }}</span>
+                                <span class="text-danger">{{ $errors->first('telefono') }}</span>
                             @endif
                         </div>
                     </div>

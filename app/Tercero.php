@@ -9,6 +9,10 @@ class Tercero extends Model
     //
     protected $table = "tercero";
 
+
+    protected $fillable = ['nombre','tipo_persona','tipo_documento','documento','direccion','telefono',
+    'correo','es_proveedor', 'es_empleado', 'es_cliente','ciudad_id'];
+
     public function Ciudad(){
         return $this->belongsTo('intransporte\Ciudad');
     }
