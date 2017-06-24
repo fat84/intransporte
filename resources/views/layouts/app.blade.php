@@ -158,7 +158,7 @@
                     </a>
                     <ul class="sub-menu">
                         <li>
-                            <a href="#">
+                            <a href="{{url('vehiculo')}}">
                                 <span>Nuevo vehiculo</span>
                             </a>
                         </li>

@@ -13,7 +13,7 @@ class VehiculoRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,9 @@ class VehiculoRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'placa' => 'required|string|max:255',
+            'marca' => 'required|string|max:255',
+            'modelo' => 'required|int|max:4',
         ];
     }
 }

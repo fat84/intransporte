@@ -4,6 +4,8 @@ namespace intransporte\Http\Controllers;
 
 use Illuminate\Http\Request;
 use intransporte\Http\Controllers\Controller;
+use intransporte\Http\Requests\VehiculoRequest;
+use intransporte\Vehiculo;
 
 class VehiculoController extends Controller
 {
@@ -14,7 +16,7 @@ class VehiculoController extends Controller
      */
     public function index()
     {
-        //
+        return view('vehiculo.index');
     }
 
     /**
@@ -33,9 +35,14 @@ class VehiculoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(VehiculoRequest $request)
     {
-        //
+            $vehiculo = Vehiculo::create([
+              'placa'=> $request->placa,
+              'marca'=> $request->marca,
+              'modelo'=> $request->modelo
+            ]);
+           return redirect('vehiculo')->with('message','vehiculo creado correctamente');
     }
 
     /**
