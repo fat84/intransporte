@@ -27,9 +27,12 @@ Route::get('/terceros/nuevo',function(){
     $ciudades = intransporte\Ciudad::orderBy('nombre_ciudad', 'ASC')->get();
    return view('terceros.nuevo', ['ciudades'=>$ciudades]);
 });
+//Formulario editar tercero
+Route::get('/terceros/editar/{id}','TercerosController@editarForm');
 //Guardar tercero
 Route::post('/terceros/nuevo/guardar','TercerosController@guardar');
-
+//Guardar tercero
+Route::post('/terceros/editar/guardar','TercerosController@editar');
 //vehiculos
 //Route::get('vehiculo');
 Route::resource('vehiculo','VehiculoController');
