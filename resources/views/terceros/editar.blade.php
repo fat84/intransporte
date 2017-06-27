@@ -31,8 +31,8 @@
                             <div class="m-b">
                                 <select data-placeholder="" name="tipo_persona" class="select2 m-b-1"
                                         style="width: 100%;">
-                                    <option value="Persona natural" @if(old('tipo_persona')=="Persona natural") selected @endif>Persona natural</option>
-                                    <option value="Persona juridica" @if(old('tipo_persona')=="Persona juridica") selected @endif >Persona Juridica</option>
+                                    <option value="Persona natural" @if(old('tipo_persona')=="Persona natural") selected @elseif($tercero->tipo_persona == "Persona natural" && old('tipo_persona')==null) selected @endif >Persona natural</option>
+                                    <option value="Persona juridica" @if(old('tipo_persona')=="Persona juridica") selected  @elseif($tercero->tipo_persona == "Persona juridica" && old('tipo_persona')==null) selected @endif >Persona Juridica</option>
                                 </select>
                                 @if ($errors->has('tipo_persona'))
                                     <span class="text-danger">{{ $errors->first('tipo_persona') }}</span>
@@ -48,11 +48,11 @@
                             <div class="m-b">
                                 <select data-placeholder="" name="tipo_documento" class="select2 m-b-1"
                                         style="width: 100%;">
-                                    <option value="NIT" @if(old('tipo_documento')=="NIT") selected @endif >NIT</option>
-                                    <option value="CC" @if(old('tipo_documento')=="CC") selected @endif >Cedula ciudadania</option>
-                                    <option value="CE" @if(old('tipo_documento')=="CE") selected @endif >Cedula extranjeria</option>
-                                    <option value="PAS" @if(old('tipo_documento')=="PAS") selected @endif >Pasaporte</option>
-                                    <option value="DNI" @if(old('tipo_documento')=="DNI") selected @endif >Otro</option>
+                                    <option value="NIT" @if(old('tipo_documento')=="NIT") selected  @elseif($tercero->tipo_documento == "NIT" && old('tipo_documento')==null) selected @endif >NIT</option>
+                                    <option value="CC" @if(old('tipo_documento')=="CC") selected @elseif($tercero->tipo_documento == "CC" && old('tipo_documento')==null) selected @endif >Cedula ciudadania</option>
+                                    <option value="CE" @if(old('tipo_documento')=="CE") selected @elseif($tercero->tipo_documento == "CE" && old('tipo_documento')==null) selected @endif >Cedula extranjeria</option>
+                                    <option value="PAS" @if(old('tipo_documento')=="PAS") selected @elseif($tercero->tipo_documento == "PAS" && old('tipo_documento')==null) selected @endif >Pasaporte</option>
+                                    <option value="DNI" @if(old('tipo_documento')=="DNI") selected @elseif($tercero->tipo_documento == "DNI" && old('tipo_documento')==null) selected @endif >Otro</option>
                                 </select>
                                 @if ($errors->has('tipo_documento'))
                                     <span class="text-danger">{{ $errors->first('tipo_documento') }}</span>
@@ -65,7 +65,7 @@
                         <div class="form-group {{ $errors->has('documento') ? ' has-danger' : '' }}">
                             <label class="control-label" for="documento">Número de documento:</label>
                             <input class="form-control" id="documento" name="documento" type="text"
-                                   value="{{old('documento')}}">
+                                   value="@if(old('documento')==null) {{$tercero->documento}} @else {{old('documento')}} @endif">
                             @if ($errors->has('documento'))
                                 <span class="text-danger">{{ $errors->first('documento') }}</span>
                             @endif
@@ -75,7 +75,7 @@
                         <div class="form-group">
                             <label class="control-label" for="correo">Correo electrónico:</label>
                             <input class="form-control" placeholder="" id="correo" name="correo" type="email"
-                                   value="{{old('correo')}}">
+                                   value="@if(old('correo')==null) {{$tercero->correo}} @else {{old('correo')}} @endif">
                             @if ($errors->has('correo'))
                                 <span class="text-danger">{{ $errors->first('correo') }}</span>
                             @endif
@@ -92,7 +92,7 @@
                         <div class="form-group">
                             <label class="control-label" for="direccion">Dirección:</label>
                             <input class="form-control" id="direccion" name="direccion" type="text"
-                                   value="{{old('direccion')}}">
+                                   value="@if(old('direccion')==null) {{$tercero->direccion}} @else {{old('direccion')}} @endif ">
                             @if ($errors->has('direccion'))
                                 <span class="text-danger">{{ $errors->first('direccion') }}</span>
                             @endif
@@ -105,7 +105,7 @@
                         <select id="select-beast" name="ciudad_id" class="demo-default" placeholder="Seleccione la ciudad">
                             <option value="">Seleccione la ciudad</option>
                             @foreach($ciudades as $ciudad)
-                                <option value="{{$ciudad->id}}" @if(old('ciudad_id')==$ciudad->id) selected @endif>{{$ciudad->nombre_ciudad}}
+                                <option value="{{$ciudad->id}}" @if(old('ciudad_id')==$ciudad->id) selected @elseif(old('ciudad_id')==null && $tercero->ciudad_id == $ciudad->id) selected @endif >{{$ciudad->nombre_ciudad}}
                                     ,{{$ciudad->nombre_departamento}}</option>
                             @endforeach
                         </select>
@@ -118,7 +118,7 @@
                         <div class="form-group">
                             <label class="control-label" for="documento">Teléfono:</label>
                             <input class="form-control" id="telefono" name="telefono" type="text"
-                                   value="{{old('telefono')}}">
+                                   value="@if(old('telefono')==null) {{$tercero->telefono}} @else {{old('telefono')}} @endif">
                             @if ($errors->has('telefono'))
                                 <span class="text-danger">{{ $errors->first('telefono') }}</span>
                             @endif
@@ -130,21 +130,21 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <div>
-                                <input class="to-labelauty" type="checkbox" name="es_cliente" data-labelauty="Es cliente" value="1" @if(Empty(old('es_cliente'))) checked @elseif(old('es_cliente')=="1") checked @endif />
+                                <input class="to-labelauty" type="checkbox" name="es_cliente" data-labelauty="Es cliente" value="1" @if(Empty(old('es_cliente')) && $tercero->es_cliente) checked @elseif(old('es_cliente')=="1") checked @endif />
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <div>
-                                <input class="to-labelauty" type="checkbox" data-labelauty="Es empleado" name="es_empleado" value="1" @if(old('es_empleado')=="1") checked @endif />
+                                <input class="to-labelauty" type="checkbox" data-labelauty="Es empleado" name="es_empleado" value="1" @if(Empty(old('es_empleado')) && $tercero->es_empleado) checked @elseif(old('es_empleado')=="1") checked @endif/>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <div>
-                                <input class="to-labelauty" type="checkbox" data-labelauty="Es proveedor" name="es_proveedor" value="1" @if(old('es_proveedor')=="1") checked @endif/>
+                                <input class="to-labelauty" type="checkbox" data-labelauty="Es proveedor" name="es_proveedor" value="1" @if(Empty(old('es_proveedor')) && $tercero->es_proveedor) checked @elseif(old('es_proveedor')=="1") checked @endif />
                             </div>
                         </div>
                     </div>

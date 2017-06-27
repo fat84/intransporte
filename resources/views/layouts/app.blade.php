@@ -44,6 +44,7 @@
     <link rel="stylesheet" href="{{asset('styles/app.css')}}" id="load_styles_before"/>
     <link rel="stylesheet" href="{{asset('styles/app.skins.css')}}"/>
 
+    <script src="{{asset('js/intransporte.js')}}"></script>
 
     <!-- endbuild -->
     @yield('css')
@@ -104,13 +105,29 @@
                 </li>
                 <!-- /dashboard -->
 
-                <!-- productos -->
+                <!-- Productos -->
                 <li>
-                    <a href="#">
-                        <i class="material-icons text-primary">shopping_basket</i>
+                    <a href="javascript:;">
+                <span class="menu-caret">
+                  <i class="material-icons">arrow_drop_down</i>
+                </span>
+                        <i class="material-icons text-success"> fiber_manual_record</i>
                         <span>Productos</span>
                     </a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a href="{{url('/productos/nuevo')}}">
+                                <span>Nuevo producto</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{url('/productos')}}">
+                                <span>Lista de productos</span>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
+                <!-- /Productos -->
                 <!-- /productos -->
 
                 <!-- Terceros -->

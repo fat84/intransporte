@@ -36,3 +36,12 @@ Route::post('/terceros/editar/guardar','TercerosController@editar');
 //vehiculos
 //Route::get('vehiculo');
 Route::resource('vehiculo','VehiculoController');
+
+//####### RUTAS PRODUCTOS ##########//
+Route::get('/productos','ProductoController@index');
+Route::get('/productos/nuevo',function(){
+    $ciudades = intransporte\Ciudad::orderBy('nombre_ciudad', 'ASC')->get();
+    return view('productos.nuevo',['ciudades'=>$ciudades]);});
+Route::post('/productos/nuevo/guardar','ProductoController@guardar');
+Route::get('/productos/editar/{id}','ProductoController@editar');
+Route::post('/productos/editar/guardar','ProductoController@guardarEditar');

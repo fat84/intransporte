@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
 @section('pagina_nombre')
-    TERCEROS
+    PRODUCTOS
 @endsection
 @section('content')
     <div class="card">
         <div class="card-block">
             <div class="m-b-1">
-                <h6>Lista de terceros registrados</h6>
+                <h6>Lista de terceros productos registrados</h6>
                 <hr/>
             </div>
             <div class="row">
@@ -23,11 +23,10 @@
                     <table class="table table-bordered " id="tabla">
                         <thead>
                         <tr>
+                            <th>Código</th>
                             <th>Nombre</th>
-                            <th>Documento</th>
-                            <th>Dirección</th>
-                            <th>Ciudad</th>
-                            <th>teléfono</th>
+                            <th>Valor unidad</th>
+                            <th>Unidad</th>
                             <th>Tipo</th>
                             <th></th>
                         </tr>
@@ -46,30 +45,25 @@
     <script>
         $(function () {
             $.ajax({
-                url: '{{url('/terceros')}}',
+                url: '{{url('/productos')}}',
                 type: 'get',
                 dataType: "json",
                 beforeSend: function () {
                     $("#tabla").hide();
                 },
                 success: function (data) {
-                    var t = data.terceros;
+                    var t = data.productos;
                     var Html = "";
                     for (var i = 0; i < t.length; i++) {
                         //$(".progress").attr('max', t.length);
                         //$(".progress").attr('value', (i + 1));
                         Html += '<tr>' +
-                            '   <td>' + t[i].nombre + '</td>' +
-                            '   <td>' + t[i].tipo_documento + ' ' + t[i].documento + '</td>' +
-                            '   <td>' + t[i].direccion + '</td>' +
-                            '   <td>' + t[i].nombre_ciudad + ', '+t[i].nombre_departamento+'</td>' +
-                            '   <td>' + t[i].telefono + '</td>' +
-                            '   <td>' +
-                                    (t[i].es_cliente=="1"?'Cliente<br>':'')+
-                                    (t[i].es_empleado=="1"?'Empleado<br>':'')+
-                                    (t[i].es_proveedor=="1"?'Proveedor<br>':'')
-                            + '</td>' +
-                            '   <td><a href="{{url('/terceros/editar')}}/' + t[i].id + '">Editar</a></td>' +
+                            '   <td>' + t[i].codigo + '</td>' +
+                            '   <td>' + t[i].nombre +'</td>' +
+                            '   <td>$ ' + parseFloat(t[i].valor_und).formatMoney(2) + '</td>' +
+                            '   <td>' + t[i].unidad_medida + '</td>' +
+                            '   <td>' +(+ t[i].es_servicio=="1"?"Servicio":"Producto") + '</td>' +
+                            '   <td><a href="{{url('/productos/editar')}}/' + t[i].id + '">Editar</a></td>' +
                             '</tr>';
 
                     }

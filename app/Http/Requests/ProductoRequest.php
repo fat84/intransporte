@@ -4,7 +4,7 @@ namespace intransporte\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class TerceroRequest extends FormRequest
+class ProductoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,16 +23,14 @@ class TerceroRequest extends FormRequest
      */
     public function rules()
     {
-        $para_nuevo = "|unique";
-        if(! empty($this->id)){
-            $para_nuevo = "";
-        }
         return [
-            'nombre' => 'required|string|max:255',
-            'tipo_persona' => 'required|string|max:255',
-            'tipo_documento' => 'required|string|min:2',
-            'documento' => 'required|string|min:5'.$para_nuevo,
-            'correo' => 'nullable|email',
+            //
+            'codigo' => 'required|string|min:5|max:50',
+            'nombre' => 'required|string|min:5|max:255',
+            'valor_und' => 'required|numeric|min:0,max:99999999',
+            'impuesto' => 'required|numeric|min:0|max:100',
+            'unidad_medida' => 'required|string|min:1|max:10',
+            'es_servicio' => 'required|int|min:0|max:1',
         ];
     }
 }
