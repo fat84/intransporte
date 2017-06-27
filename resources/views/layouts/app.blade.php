@@ -176,13 +176,9 @@
                         <span>Vehiculos</span>
                     </a>
                     <ul class="sub-menu">
+
                         <li>
-                            <a href="#">
-                                <span>Nuevo vehiculo</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
+                            <a href="{{url('vehiculo')}}">
                                 <span>Listado de vehiculos</span>
                             </a>
                         </li>
