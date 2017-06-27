@@ -26,7 +26,7 @@ class VehiculoRequest extends FormRequest
         return [
             'placa' => 'required|string|max:255',
             'marca' => 'required|string|max:255',
-            'modelo' => 'required|int|max:4',
+            'modelo' => 'required|int|max:9999|min:1900',
         ];
     }
 }

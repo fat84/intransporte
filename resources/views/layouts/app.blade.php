@@ -43,7 +43,9 @@
     <link rel="stylesheet" href="{{asset('vendor/animate.css/animate.css')}}"/>
     <link rel="stylesheet" href="{{asset('styles/app.css')}}" id="load_styles_before"/>
     <link rel="stylesheet" href="{{asset('styles/app.skins.css')}}"/>
+    <link rel="stylesheet" href="{{asset('css/sweetalert.css')}}"/>
 
+    <script src="{{asset('vendor/jquery/dist/jquery.js')}}"></script>
     <script src="{{asset('js/intransporte.js')}}"></script>
 
     <!-- endbuild -->
@@ -676,7 +678,7 @@
 </div>
 
 <!-- build:js({.tmp,app}) scripts/app.min.js -->
-<script src="{{asset('vendor/jquery/dist/jquery.js')}}"></script>
+
 <script src="{{asset('vendor/pace/pace.js')}}"></script>
 <script src="{{asset('vendor/tether/dist/js/tether.js')}}"></script>
 <script src="{{asset('vendor/bootstrap/dist/js/bootstrap.js')}}"></script>
@@ -705,6 +707,7 @@
 
 <!-- initialize page scripts -->
 <script src="{{asset('scripts/forms/plugins.js')}}"></script>
+<script src="{{asset('js/sweetalert.min.js')}}"></script>
 <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
 <!-- end initialize page scripts -->
 

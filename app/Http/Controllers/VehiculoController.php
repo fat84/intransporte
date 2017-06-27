@@ -7,8 +7,10 @@ use intransporte\Http\Controllers\Controller;
 use intransporte\Http\Requests\VehiculoRequest;
 use intransporte\Vehiculo;
 
+
 class VehiculoController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +18,9 @@ class VehiculoController extends Controller
      */
     public function index()
     {
-        return view('vehiculo.index');
+     //   $vehiculos = Vehiculo::all();
+       $vehiculos = Vehiculo::withTrashed()->where('id','>',0)->get();
+        return view('vehiculo.index',compact('vehiculos'));
     }
 
     /**
@@ -64,7 +68,8 @@ class VehiculoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $vehiculo = Vehiculo::find($id);
+        return view('vehiculo.editar',['vehiculo' => $vehiculo]);
     }
 
     /**
@@ -74,9 +79,12 @@ class VehiculoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(VehiculoRequest $request, $id)
     {
-        //
+        $vehiculo = Vehiculo::find($id);
+        $vehiculo->fill($request->all());
+        $vehiculo->save();
+        return redirect('vehiculo/' . $id . '/edit')->with('message','vehiculo actualizado correctamente');
     }
 
     /**
@@ -87,6 +95,12 @@ class VehiculoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = Vehiculo::find($id)->delete();
+        return redirect('vehiculo')->with('message','Vehiculo deshabilitado correctamente');
+    }
+
+    public function habilitar($id){
+        $data = Vehiculo::withTrashed()->where('id', '=', $id)->restore();
+        return redirect('vehiculo')->with('message','Vehiculo habilitado :)');
     }
 }

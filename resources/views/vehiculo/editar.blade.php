@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('nombre_pagina')
-   Vehiculos
+    Vehiculos
 @endsection
 
 @section('content')
@@ -17,9 +17,17 @@
     @endif
     <div class="card">
         <div class="card-block">
-            {!! Form::open(['action' => 'VehiculoController@store']) !!}
-            <form action="{{url('/terceros/nuevo/guardar')}}" role="form" method="POST">
-                {{csrf_field()}}
+            {!! Form::model($vehiculo,['route'=>['vehiculo.update',$vehiculo->id],'method'=>'PUT']) !!}
+            {{ csrf_field() }}
+            @if(count($errors) > 0)
+                <div class="alert alert-danger sing-box" role="alert">
+                    <ul>
+                        @foreach($errors->all() as $errors)
+                            <li>{!! $errors !!}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
                 <div class="m-b-1">
                     <h6>Datos principales</h6>
                     <hr/>
@@ -28,7 +36,8 @@
                     <div class="col-md-12">
                         <div class="form-group {{ $errors->has('nombre') ? ' has-danger' : '' }}">
                             <label class="control-label" for="placa">Placa del vehiculo:</label>
-                            <input required class="form-control" id="placa" name="placa" type="text" value="{{old('placa')}}">
+                            {!! Form::text('placa',null,['class'=>'form-control','placeholder'=>'Placa del vehiculo']) !!}
+                           <!-- <input required class="form-control" id="placa" name="placa" type="text" value="{{old('placa')}}">-->
                             @if ($errors->has('placa'))
                                 <span class="text-danger">{{ $errors->first('placa') }}</span>
                             @endif
@@ -39,7 +48,65 @@
                             <label class="control-label" for="">Marca del vehiculo:</label>
                             <!--<div class="m-b">-->
                             <div class="m-b">
-                                <select data-placeholder="" name="marca" class="select2 m-b-1"
+
+                                {!! Form::select('marca', [
+                              '' => 'Seleccione una marca',
+                              'Alfa Romeo' => 'Alfa Romeo',
+                              'Aston Martin' => 'Aston Martin',
+                              'Audi' => 'Audi',
+                              'Autovaz' => 'Autovaz',
+                              'Bentley' => 'Bentley',
+                              'Bmw' => 'Bmw',
+                              'Cadillac' => 'Cadillac',
+                              'Caterham' => 'Caterham',
+                              'Chevrolet' => 'Chevrolet',
+                              'Chrysler' => 'Chrysler',
+                              'Citroen' => 'Citroen',
+                              'Daihatsu' => 'Daihatsu',
+                              'Dodge' => 'Dodge',
+                              'Ferrari' => 'Ferrari',
+                              'Fiat' => 'Fiat',
+                              'Ford' => 'Ford',
+                              'Honda' => 'Honda',
+                              'Hummer' => 'Hummer',
+                              'Hyundai' => 'Hyundai',
+                              'Isuzu' => 'Isuzu',
+                              'Jaguar' => 'Jaguar',
+                              'Jeep' => 'Jeep',
+                              'Kia' => 'Kia',
+                              'Lamborghini' => 'Lamborghini',
+                              'Lancia' => 'Lancia',
+                              'Land Rover' => 'Land Rover',
+                              'Lexus' => 'Lexus',
+                              'Lotus' => 'Lotus',
+                              'Maserati' => 'Maserati',
+                              'Mazda' => 'Mazda',
+                              'Mercedes Benz' => 'Mercedes Benz',
+                              'MG' => 'MG',
+                              'Mini' => 'Mini',
+                              'Mitsubishi' => 'Mitsubishi',
+                              'Morgan' => 'Morgan',
+                              'Nissan' => 'Nissan',
+                              'Opel' => 'Opel',
+                              'Peugeot' => 'Peugeot',
+                              'Porsche' => 'Porsche',
+                              'Renault' => 'Renault',
+                              'Rolls Royce' => 'Rolls Royce',
+                              'Rover' => 'Rover',
+                              'Saab' => 'Saab',
+                              'Seat' => 'Seat',
+                              'Skoda' => 'Skoda',
+                              'Smart' => 'Smart',
+                              'Ssangyong' => 'Ssangyong',
+                              'Subaru' => 'Subaru',
+                              'Suzuki' => 'Suzuki',
+                              'Tata' => 'Tata',
+                              'Toyota' => 'Toyota',
+                              'Volkswagen' => 'Volkswagen',
+                              'Volvo' => 'Volvo',
+                              'Otro' => 'Otro'],null,['class' => 'form-control']
+                                                  ) !!}
+                              <!--  <select data-placeholder="" name="marca" class="select2 m-b-1"
                                         style="width: 100%;" required="">
                                     <option value="" >Seccione una marca</option>
                                     <option value="Alfa Romeo" @if(old('marca')=="Alfa Romeo") selected @endif>Alfa Romeo</option>
@@ -96,7 +163,7 @@
                                     <option value="Volkswagen"@if(old('marca')=="Volkswagen") selected @endif>Volkswagen</option>
                                     <option value="Volvo" @if(old('marca')=="Volvo") selected @endif>Volvo</option>
                                     <option value="Otro" @if(old('marca')=="Otro") selected @endif>Volvo</option>
-                                    </select>
+                                </select>-->
                                 @if ($errors->has('marca'))
                                     <span class="text-danger">{{ $errors->first('marca') }}</span>
                                 @endif
@@ -107,7 +174,9 @@
                     <div class="col-md-6">
                         <div class="form-group {{ $errors->has('modelo') ? ' has-danger' : '' }}">
                             <label class="control-label" for="modelo">Modelo del vehiculo:</label>
-                            <input placeholder="ej: 1992" max="4" required class="form-control" id="modelo" name="modelo" type="text" value="{{old('modelo')}}">
+                            {!! Form::text('modelo',null,['class'=>'form-control','placeholder'=>'Ej: 1992']) !!}
+                           <!-- <input placeholder="ej: 1992" required class="form-control" id="modelo" name="modelo" type="text" value="{{old('modelo')}}">
+                            -->
                             @if ($errors->has('modelo'))
                                 <span class="text-danger">{{ $errors->first('modelo') }}</span>
                             @endif
@@ -126,113 +195,11 @@
                         </div>
                     </div>
                 </div>
-            </form>
+           {!! Form::close() !!}
         </div>
     </div>
 
-
-    <div class="card">
-        <div class="card-block">
-            <div class="m-b-1">
-                <h6>Lista de terceros registrados</h6>
-                <hr/>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <br>
-                    <table class="table table-bordered " id="tabla">
-                        <thead>
-                        <tr>
-                            <th>Placa</th>
-                            <th>Marca</th>
-                            <th>Modelo</th>
-                            <th>Acción</th>
-                        </tr>
-                        </thead>
-                        <tfoot>
-                        <tr>
-                            <th>Placa</th>
-                            <th>Marca</th>
-                            <th>Modelo</th>
-                            <th>Acción</th>
-                        </tr>
-                        </tfoot>
-                        <tbody id="tbody">
-                        @foreach($vehiculos as $vehiculo)
-                          @if($vehiculo->trashed())
-                              <tr>
-                                <td style="color: red">{{$vehiculo->placa}}</td>
-                                <td style="color: red">{{$vehiculo->marca}}</td>
-                                <td style="color: red">{{$vehiculo->modelo}}</td>
-                                <td>
-                                    <div class="dropdown btn-group">
-                                        <button type="button" class="btn btn-info btn-block dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
-                                           Acción
-                                            <span class="caret"></span>
-                                        </button>
-                                        <div class="dropdown-menu" role="menu">
-                                            {!! link_to_route('vehiculo.edit', $title = 'Editar', $parameters = $vehiculo->id, $attributes = ['class'=>'dropdown-item']) !!}
-                                          <!--  <a class="dropdown-item" href="{{url('/vehiculo/'.$vehiculo->id.'/edit')}}">
-                                                Editar
-                                            </a>-->
-                                            <a class="dropdown-item" onclick="HabilitarVehiculo{{$vehiculo->id}}()" href="#">
-                                                Habilitar
-                                            </a>
-
-                                                <script>
-                                                    function HabilitarVehiculo{{$vehiculo->id}}(){
-                                                        $('#HabilitarVehiculo{{$vehiculo->id}}').submit();
-                                                    }
-                                                </script>
-                                                <form action="vehiculoHabilitar/{{$vehiculo->id}}" method="get" id="HabilitarVehiculo{{$vehiculo->id}}">
-                                                </form>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                              @else
-                              <tr>
-                                  <td style="color: blue">{{$vehiculo->placa}}</td>
-                                  <td style="color: blue">{{$vehiculo->marca}}</td>
-                                  <td style="color: blue">{{$vehiculo->modelo}}</td>
-                                  <td>
-                                      <div class="dropdown btn-group">
-                                          <button type="button" class="btn btn-info btn-block dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
-                                              Acción
-                                              <span class="caret"></span>
-                                          </button>
-                                          <div class="dropdown-menu" role="menu">
-                                          {!! link_to_route('vehiculo.edit', $title = 'Editar', $parameters = $vehiculo->id, $attributes = ['class'=>'dropdown-item']) !!}
-                                          <!--  <a class="dropdown-item" href="{{url('/vehiculo/'.$vehiculo->id.'/edit')}}">
-                                                Editar
-                                            </a>-->
-                                              <a class="dropdown-item" onclick="eliminarVehiculo{{$vehiculo->id}}()" href="#">
-                                                  Desabilitar
-                                              </a>
-
-                                              <script>
-                                                  function eliminarVehiculo{{$vehiculo->id}}(){
-                                                      $('#eliminarVehiculo{{$vehiculo->id}}').submit();
-                                                  }
-                                              </script>
-
-                                              {!!Form::open(['route'=>['vehiculo.destroy',$vehiculo->id],'method'=>'DELETE','id'=>'eliminarVehiculo'.$vehiculo->id])!!}
-                                              {!! Form::close() !!}
-                                          </div>
-                                      </div>
-                                  </td>
-                              </tr>
-                              @endif
-                        @endforeach
-                        </tbody>
-                    </table>
-                    <br>
-                </div>
-            </div>
-        </div>
-    </div>
-@endsection
-
+    @stop
 @section('scripts')
     <script>
         $( document ).ready(function() {

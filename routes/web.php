@@ -34,7 +34,7 @@ Route::post('/terceros/nuevo/guardar','TercerosController@guardar');
 //Guardar tercero
 Route::post('/terceros/editar/guardar','TercerosController@editar');
 //vehiculos
-//Route::get('vehiculo');
+Route::get('vehiculoHabilitar/{id}','VehiculoController@habilitar');
 Route::resource('vehiculo','VehiculoController');
 
 //####### RUTAS PRODUCTOS ##########//
