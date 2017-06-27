@@ -153,12 +153,12 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="{{url('/obras/nuevo')}}">
                                 <span>Nueva obra</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="{{url('/obras')}}">
                                 <span>Listado de obras</span>
                             </a>
                         </li>

@@ -126,4 +126,5 @@
     create: false,
     sortField: 'text'
   });
+
 })(jQuery);

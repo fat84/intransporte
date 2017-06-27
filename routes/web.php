@@ -45,3 +45,15 @@ Route::get('/productos/nuevo',function(){
 Route::post('/productos/nuevo/guardar','ProductoController@guardar');
 Route::get('/productos/editar/{id}','ProductoController@editar');
 Route::post('/productos/editar/guardar','ProductoController@guardarEditar');
+
+
+//####### RUTAS OBRAS ##########//
+Route::get('/obras', 'ObraController@index');
+Route::get('/obras/nuevo',function(){
+    $terceros = intransporte\Tercero::OrderBy('nombre','ASC')->get();
+    $ciudades = intransporte\Ciudad::orderBy('nombre_ciudad', 'ASC')->get();
+    return view('obras.nuevo', ['ciudades'=>$ciudades, 'terceros'=>$terceros]);
+});
+Route::post('/obras/nuevo/guardar','ObraController@guardar');
+Route::get('/obras/editar/{id}','ObraController@editar');
+Route::post('/obras/editar/guardar','ObraController@guardarEditar');

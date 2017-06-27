@@ -13,7 +13,7 @@ class ObraRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -26,11 +26,12 @@ class ObraRequest extends FormRequest
         return [
             //
             'nombre'=>'required|string|min:5|max:255',
-            'direccion'=>'required|string|min:5',
+            'direccion'=>'required|string|min:5|max:255',
             'telefono' => 'nullable|string|min:6',
-            'ciudad_id' => 'required|integer',
-            'encargado' => 'nullable|string',
-            'tercero_id' => 'required|integer',
+            'ciudad_id' => 'required|integer|min:1',
+            'encargado' => 'nullable|string|min:5|max:255',
+            'tercero_id' => 'required|integer|min:1',
+            'activo' => 'required|int|min:0|max:1',
         ];
     }
 }

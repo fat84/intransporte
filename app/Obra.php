@@ -9,6 +9,8 @@ class Obra extends Model
     //
     protected $table = "obra";
 
+    protected $fillable = ['nombre', 'direccion', 'ciudad_id', 'telefono', 'tercero_id', 'encargado', 'activo'];
+
 
     public function Ciudad(){
         return $this->belongsTo('intransporte\Ciudad');
