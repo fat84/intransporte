@@ -8,6 +8,20 @@
 
 ## Change Log
 
+### v7.9.1 - 06-30-2017
+- Fix transformer implementation when parameter requires an object. #1235
+
+### v7.9.0 - 06-29-2017
+- Process and transform data first before filtering and ordering collection #1232
+- Support searching and sorting of added/edited columns when using collection.
+- Refactor make & render method.
+- Fix #694, #1229, #1142, etc.
+- Fix merging of column definitions. #1233
+
+### v7.8.1 - 06-27-2017
+- Set columns orderable & searchable property as true by default. #1228
+- In relation to [yajra/laravel-datatables-html#13](https://github.com/yajra/laravel-datatables-html/pull/13).
+
 ### v7.8.0 - 06-23-2017
 - Extract default columns definition to config. #1175
 

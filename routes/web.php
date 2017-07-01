@@ -33,9 +33,13 @@ Route::get('/terceros/editar/{id}','TercerosController@editarForm');
 Route::post('/terceros/nuevo/guardar','TercerosController@guardar');
 //Guardar tercero
 Route::post('/terceros/editar/guardar','TercerosController@editar');
-//vehiculos
+
+
+//####### RUTAS VEHICULOS ##########//
 Route::get('vehiculoHabilitar/{id}','VehiculoController@habilitar');
 Route::resource('vehiculo','VehiculoController');
+Route::get('vehiculo/asignacion/lista','VehiculoController@listaAsignacion');
+Route::post('vehiculo/asignacion/asignar','VehiculoController@asignarConductor');
 
 //####### RUTAS PRODUCTOS ##########//
 Route::get('/productos','ProductoController@index');

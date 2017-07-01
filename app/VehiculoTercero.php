@@ -9,6 +9,8 @@ class VehiculoTercero extends Model
     //
     protected $table = "vehiculo_tercero";
 
+    protected $fillable = ['vehiculo_id', 'tercero_id','fecha_asignacion','fecha_retiro'];
+
     public function Despacho(){
         return $this->hasMany('intransporte\Despacho', 'vehiculo_tercero', 'id');
     }

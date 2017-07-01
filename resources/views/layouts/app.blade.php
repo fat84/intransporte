@@ -27,7 +27,8 @@
     <link rel="stylesheet" href="{{asset('vendor/bootstrap-daterangepicker/daterangepicker.css')}}">
     <link rel="stylesheet" href="{{asset('vendor/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css')}}">
     <link rel="stylesheet" href="{{asset('vendor/clockpicker/dist/bootstrap-clockpicker.min.css')}}">
-    <link rel="stylesheet" href="{{asset('vendor/mjolnic-bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css')}}">
+    <link rel="stylesheet"
+          href="{{asset('vendor/mjolnic-bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css')}}">
     <link rel="stylesheet" href="{{asset('vendor/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.css')}}">
     <link rel="stylesheet" href="{{asset('vendor/jquery-labelauty/source/jquery-labelauty.css')}}">
     <link rel="stylesheet" href="{{asset('vendor/multiselect/css/multi-select.css')}}">
@@ -183,7 +184,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="{{url('vehiculo/asignacion/lista')}}">
                                 <span>Conductores asignados</span>
                             </a>
                         </li>
@@ -441,6 +442,17 @@
         <!-- main area -->
         <div class="main-content">
             <div class="content-view">
+                @if(Session::has('success'))
+                    <div class="alert alert-success alert-dismissable">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        {{Session::get('success')}}
+                    </div>
+                    @elseif(Session::has('warning'))
+                    <div class="alert alert-danger alert-dismissable">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        {{Session::get('warning')}}
+                    </div>
+                @endif
                 @yield('content')
             </div>
             <!-- bottom footer -->

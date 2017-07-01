@@ -7,7 +7,7 @@
     <div class="card">
         <div class="card-block">
             <div class="m-b-1">
-                <h6>Lista de terceros productos registrados</h6>
+                <h6>Lista de productos registrados</h6>
                 <hr/>
             </div>
             <div class="row">
