@@ -188,6 +188,11 @@
                                 <span>Conductores asignados</span>
                             </a>
                         </li>
+                        <li>
+                            <a href="{{url('vehiculo/gastos/lista')}}">
+                                <span>Gastos de los vehiculos</span>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 <!-- /Vehiculos -->

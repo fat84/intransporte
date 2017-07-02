@@ -139,4 +139,8 @@ class VehiculoController extends Controller
             return redirect('vehiculo/asignacion/lista')->with(['warning'=>'Conductor no pudo ser asignado. Intente nuevamente']);
         }
     }
+
+    public function listaGastosVehiculos(){
+        return view('vehiculo_gasto.lista');
+    }
 }
