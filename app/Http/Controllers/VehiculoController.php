@@ -4,12 +4,13 @@ namespace intransporte\Http\Controllers;
 
 use Illuminate\Http\Request;
 use intransporte\Http\Controllers\Controller;
+use intransporte\Http\Requests\VehiculoGastoRequest;
 use intransporte\Http\Requests\VehiculoRequest;
 use intransporte\Tercero;
 use intransporte\Vehiculo;
 use Illuminate\Support\Facades\DB;
+use intransporte\VehiculoGasto;
 use intransporte\VehiculoTercero;
-
 
 
 class VehiculoController extends Controller
@@ -111,21 +112,22 @@ class VehiculoController extends Controller
 
     public function listaAsignacion()
     {
-        $terceros = Tercero::where('es_empleado','=','1')->get();
+        $terceros = Tercero::where('es_empleado', '=', '1')->get();
         $vehiculos = DB::table('vehiculo')
             ->leftJoin('vehiculo_tercero', 'vehiculo.id', '=', 'vehiculo_tercero.vehiculo_id')
-            ->leftJoin('tercero', 'tercero.id' , '=', 'vehiculo_tercero.tercero_id')
-            ->select('vehiculo.*','tercero.nombre as conductor_nombre', 'tercero.documento as coductor_documento', 'tercero.id as tercero_id')
+            ->leftJoin('tercero', 'tercero.id', '=', 'vehiculo_tercero.tercero_id')
+            ->select('vehiculo.*', 'tercero.nombre as conductor_nombre', 'tercero.documento as coductor_documento', 'tercero.id as tercero_id')
             ->whereNull('fecha_retiro')
-        ->paginate(9);
-        return view('vehiculo.asignacion',['vehiculos'=>$vehiculos, 'terceros'=>$terceros]);
+            ->paginate(9);
+        return view('vehiculo.asignacion', ['vehiculos' => $vehiculos, 'terceros' => $terceros]);
 
 
     }
 
-    public function asignarConductor(Request $request){
+    public function asignarConductor(Request $request)
+    {
         DB::table('vehiculo_tercero')
-            ->where('vehiculo_tercero.vehiculo_id','=', $request->vehiculo_id)
+            ->where('vehiculo_tercero.vehiculo_id', '=', $request->vehiculo_id)
             ->update(['vehiculo_tercero.fecha_retiro' => date('Y-m-d')]);
 
 
@@ -133,14 +135,30 @@ class VehiculoController extends Controller
         $var->vehiculo_id = $request->vehiculo_id;
         $var->tercero_id = $request->tercero_id;
         $var->fecha_asignacion = date('Y-m-d');
-        if($var->save()){
-            return redirect('vehiculo/asignacion/lista')->with(['success'=>'Conductor asignado correctamente']);
-        }else{
-            return redirect('vehiculo/asignacion/lista')->with(['warning'=>'Conductor no pudo ser asignado. Intente nuevamente']);
+        if ($var->save()) {
+            return redirect('vehiculo/asignacion/lista')->with(['success' => 'Conductor asignado correctamente']);
+        } else {
+            return redirect('vehiculo/asignacion/lista')->with(['warning' => 'Conductor no pudo ser asignado. Intente nuevamente']);
         }
     }
 
-    public function listaGastosVehiculos(){
-        return view('vehiculo_gasto.lista');
+    public function listaGastosVehiculos(Request $request)
+    {
+        $vehiculos = Vehiculo::all();
+        if ($request->ajax()) {
+
+            $lista_gastos = DB::table('vehiculo_gasto')
+                ->leftJoin('vehiculo', 'vehiculo.id', '=', 'vehiculo_gasto.vehiculo_id')
+                ->leftJoin('user', 'user.id', '=', 'vehiculo_gasto.user_id')
+                ->select('vehiculo_gasto.id', 'vehiculo.id,', 'vehiculo.placa', 'user.name as usuario_nombre',
+                    'vehiculo_gasto.concepto', 'vehiculo_gasto.valor','vehiculo_gasto.fecha')
+                ->orderBy('vehiculo_gasto.fecha','desc');
+            return response()->json(['gastos' => $lista_gastos]);
+        }
+        return view('vehiculo_gasto.lista',['vehiculos'=>$vehiculos]);
+    }
+
+    public function guardarGastosVehiculos(VehiculoGastoRequest $request){
+        dd($request);
     }
 }
