@@ -63,3 +63,15 @@ Route::get('/obras/nuevo',function(){
 Route::post('/obras/nuevo/guardar','ObraController@guardar');
 Route::get('/obras/editar/{id}','ObraController@editar');
 Route::post('/obras/editar/guardar','ObraController@guardarEditar');
+
+//####### RUTAS DESPACHOS ##########//
+Route::get('nuevo_despacho','DespachoController@index');
+Route::post('consultarObras','DespachoController@consultarObras');
+Route::post('addProducto','DespachoController@store');
+Route::post('cartConsulta','DespachoController@cartConsulta');
+Route::post('actualizarCantidad','DespachoController@update');
+Route::post('eliminarProducto','DespachoController@destroy');
+Route::post('factutarProductos','DespachoController@facturar');
+
+
+

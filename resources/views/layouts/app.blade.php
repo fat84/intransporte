@@ -208,7 +208,7 @@
                     </a>
                     <ul class="sub-menu">
                         <li>
-                            <a href="#">
+                            <a href="{{url('nuevo_despacho')}}">
                                 <span>Nuevo despacho</span>
                             </a>
                         </li>
@@ -721,6 +721,7 @@
 <!-- initialize page scripts -->
 <script src="{{asset('scripts/forms/plugins.js')}}"></script>
 <script src="{{asset('js/sweetalert.min.js')}}"></script>
+<script src="{{asset('js/accounting.js')}}"></script>
 <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
 <!-- end initialize page scripts -->
 
