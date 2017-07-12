@@ -43,7 +43,7 @@
                         <label class="control-label" for="">Obras:</label>
                         <!--<div class="m-b">-->
                         <div class="m-b">
-                            <select data-placeholder="" name="obra" id="obra" class="select2 m-b-1"
+                            <select  name="obra" id="obra" class="form-control"
                                     style="width: 100%;" required="">
                             </select>
                         </div>
@@ -141,17 +141,19 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <h4 class="modal-title" id="myModalLabel">Facturación de productos</h4>
+                    <h4 class="modal-title" id="myModalLabel">Despacho de productos</h4>
                 </div>
                 <div class="modal-body">
-                    <h4>Total a pagar:  <span style="font-size: 20px;font-weight: bold;" id="totalApagar"></span></h4><br>
-                    <label>Dinero recibido:</label>
-                    <input class="form-control" id="dineroRecibido" placeholder="Dinero recibido" onkeyup="dineroRecibido()"><br>
-                    <label>Vueltos:</label>
-                    <input class="form-control" disabled="" id="vueltos">
-                   <!-- <h4>Vueltos:  <span style="font-size: 20px;font-weight: bold;" id="vueltos"></span></h4>-->
-                    <br>
-                    <div id="botonFactura"></div>
+                    <select class="form-control" required id="vehiculo">
+                        <option value="">Seleccionar vehiculo</option>
+                        @foreach($vehiculo_tercero as $vehiculo_tercero)
+                        @if($vehiculo_tercero->fecha_retiro == null)
+                        <option value="{{$vehiculo_tercero->id}}">Conductor: {{$vehiculo_tercero->tercero->nombre}} (Placa: {{$vehiculo_tercero->vehiculo->placa}})</option>
+                        @endif
+                        @endforeach
+                    </select><br></br>
+                    <button class="btn btn-success btn-block" id="botonDespachar" onclick="despachar()">Crear despacho</button>
+                    <div id="mensajeDespacho"></div>
                 </div>
             </div>
         </div>

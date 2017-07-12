@@ -72,6 +72,7 @@ Route::post('cartConsulta','DespachoController@cartConsulta');
 Route::post('actualizarCantidad','DespachoController@update');
 Route::post('eliminarProducto','DespachoController@destroy');
 Route::post('factutarProductos','DespachoController@facturar');
+Route::post('despachar','DespachoController@despachar');
 
 
 

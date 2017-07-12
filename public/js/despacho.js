@@ -27,7 +27,7 @@ function obras() {
                         'Este tercero no tiene obras',
                         'error'
                     );
-                    $('#obra').html(' ');
+                    $('#obra').html('<option value="">Sin obras</option>');
                 } else {
                     const a = data;
                     b = a.resultado;
@@ -86,6 +86,9 @@ function showProductos(data) {
     b = a.content;
     resultado = "";
     totalImpuesto = 0;
+    totalCuenta = 0;
+    imp = 0;
+    impDivido = 0;
     for (var i = 0 in b) {
         cantidad = parseFloat(b[i].qty);
         precio = parseFloat(b[i].price);
@@ -121,14 +124,14 @@ function showProductos(data) {
         '<td></td>' +
         '<td></td>' +
         '<td style="font-size: 17px;font-weight: bold">Total cuenta:</td>' +
-        '<td style="font-size: 17px;font-weight: bold">'+accounting.formatMoney(totalCuenta)+'<input hidden value="'+totalCuenta+'" id="totalcuentaCarrito"></td>' +
+        '<td style="font-size: 17px;font-weight: bold">'+accounting.formatMoney(totalCuenta)+'<input hidden  value="'+totalCuenta+'" id="totalcuentaCarrito"></td>' +
         '<td></td>' +
         '</tr>';
     botonesPago = '<tr>' +
         '<td></td>' +
         '<td></td>' +
         '<td></td>' +
-        '<td><a class="btn btn-success btn-block " data-toggle="modal" data-target=".bd-example-modal" onclick="facturarProductos()">Facturar</a></td>' +
+        '<td><a class="btn btn-success btn-block " data-toggle="modal" data-target=".bd-example-modal" onclick="facturarProductos()">Despachar</a></td>' +
         '<td></td>' +
         '</tr>';
     $('#contenido').html(resultado+detallado+detallado2+detallado3+botonesPago);
@@ -146,28 +149,77 @@ function dineroRecibido() {
     $('#vueltos').val(accounting.formatMoney(vueltos));
 
     if(vueltos >= 0){
-        $('#botonFactura').html('<a class="btn btn-block btn-success" onclick="facturar(vueltos)">Generar Factura</a>');
+        $('#botonFactura').html('<a class="btn btn-block btn-success" onclick="facturar(vueltos)">Generar Despacho</a>');
     }else {
         $('#botonFactura').html('')
     }
 
 }
 
-function facturar() {
-    var parametros = {
+function despachar() {
 
+    tercero = $('#tercero').val();
+    obra = $('#obra').val();
+    vehiculo = $('#vehiculo').val();
+    cuenta = $('#totalcuentaCarrito').val();
+    var parametros = {
+        'tercero':tercero,
+        'obra':obra,
+        'vehiculo':vehiculo
     };
-    var ruta = '/factutarProductos';
-    $.ajax({
-        url: ruta,
-        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-        type: 'POST',
-        dataType: 'json',
-        data: parametros,
-        success: function (data) {
-        }
-    });
+    var ruta = '/despachar';
+    if(tercero == ''){
+        swal(
+            'Algo salio mal!',
+            'Debe seleccionar un tercero',
+            'error'
+        );
+        return false;
+    } else  if(obra == ''){
+        swal(
+            'Algo salio mal!',
+            'Debe seleccionar una Obra',
+            'error'
+        );
+        return false;
+    }else if (vehiculo == ''){
+        swal(
+            'Algo salio mal!',
+            'Debe seleccionar un Vehiculo',
+            'error'
+        );
+        return false;
+    }else if (cuenta <= 0){
+        swal(
+            'Algo salio mal!',
+            'No hay productos, debe habe por lo menos un producto',
+            'error'
+        );
+        return false;
+    }
+    else {
+
+        $.ajax({
+            url: ruta,
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            type: 'POST',
+            dataType: 'json',
+            data: parametros,
+            success: function (data) {
+            console.log(data)
+                location.reload();
+                $( "#botonDespachar" ).prop( "disabled", false );
+                $( "#botonDespachar" ).html( "Despachando espere..." );
+                swal(
+                    'En hora buena!',
+                    'Despacho compleatado',
+                    'success'
+                );
+            }
+        });
+    }
 }
+
 
 
 function actualizarCantidad(idRow,idProducto) {

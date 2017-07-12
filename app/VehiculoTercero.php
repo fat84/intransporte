@@ -11,15 +11,15 @@ class VehiculoTercero extends Model
 
     protected $fillable = ['vehiculo_id', 'tercero_id','fecha_asignacion','fecha_retiro'];
 
-    public function Despacho(){
+    public function despacho(){
         return $this->hasMany('intransporte\Despacho', 'vehiculo_tercero', 'id');
     }
 
-    public function  Tercero(){
+    public function  tercero(){
         return $this->belongsTo('intransporte\Tercero','tercero_id','id');
     }
 
-    public function  Vehiculo(){
-        return $this->belongsTo('intransporte\Vehiculo_id','vehiculo_id','id');
+    public function  vehiculo(){
+        return $this->belongsTo('intransporte\Vehiculo','vehiculo_id','id');
     }
 }
