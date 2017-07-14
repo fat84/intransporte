@@ -21,7 +21,7 @@
                         <select id="select-beast" name="tercero_id" class="demo-default" placeholder="Seleccione el tercero asociado">
                             <option value="">Seleccione el tercero</option>
                             @foreach($terceros as $tercero)
-                                <option value="{{$tercero->id}}" @if(old('tercero_id')==$tercero->id) selected @endif>{{$tercero->nombre}}
+                                <option value="{{$tercero->id}}" @if($tercero_seleccionado==$tercero->id) selected @elseif(old('tercero_id')==$tercero->id) selected @endif>{{$tercero->nombre}}
                                     ({{$tercero->tipo_documento}} {{$tercero->documento}})</option>
                             @endforeach
                         </select>

@@ -632,7 +632,7 @@
                         </div>
                     </div>
                     <div class="chat-conversation-title">
-                        <img src="images/face1.jpg" class="avatar avatar-xs img-circle m-r-1 pull-left" alt="">
+                        <img src="{{asset('images/face1.jpg')}}" class="avatar avatar-xs img-circle m-r-1 pull-left" alt="">
                         <div class="overflow-hidden">
                             <span><strong>Charles Wilson</strong></span>
                             <small>Last seen today at 03:11</small>

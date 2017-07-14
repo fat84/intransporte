@@ -23,7 +23,7 @@ class TerceroRequest extends FormRequest
      */
     public function rules()
     {
-        $para_nuevo = "|unique";
+        $para_nuevo = "|unique:tercero,documento";
         if(! empty($this->id)){
             $para_nuevo = "";
         }

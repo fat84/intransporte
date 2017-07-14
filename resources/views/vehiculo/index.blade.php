@@ -373,7 +373,12 @@
                     "url": "//cdn.datatables.net/plug-ins/1.10.13/i18n/Spanish.json"
                 }
             });
+
+            @if($errors->isEmpty()==false)
+                $("#myModal").modal('show');
+            @endif
         });
+
     </script>
 
 @endsection

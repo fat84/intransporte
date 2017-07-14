@@ -33,9 +33,12 @@ class TercerosController extends Controller
         $tercero = new Tercero($request->except('_token'));
         $mensaje = "error";
         if($tercero->save()){
-            $mensaje = "ok";
+            $mensaje = "tercero agregado correctamente";
         }
-        return redirect('/terceros')->with(['mensaje'=>$mensaje]);
+        if($tercero->es_cliente == '1'){
+            return redirect('/obras/nuevo/'.$tercero->id)->with(['success'=>$mensaje.', ahora puede agregarle obras para poder hacerle despachos']);
+        }
+        return redirect('/terceros')->with(['success'=>$mensaje]);
 
     }
 

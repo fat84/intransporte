@@ -3,6 +3,7 @@
 namespace intransporte\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use intransporte\Vehiculo;
 
 class VehiculoGastoRequest extends FormRequest
 {
@@ -13,7 +14,7 @@ class VehiculoGastoRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return !\Auth::guest();
     }
 
     /**
@@ -24,7 +25,11 @@ class VehiculoGastoRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'vehiculo_id' => 'Required|int|min:1',
+            'user_id' => 'required|int|min:1',
+            'valor' => 'required|numeric|min:0|max:99999999',
+            'concepto' => 'required|string|min:1|max:255',
+            'fecha' => 'required|date|after:yesterday'
         ];
     }
 }

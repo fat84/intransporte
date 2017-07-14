@@ -41,7 +41,7 @@ Route::resource('vehiculo','VehiculoController');
 Route::get('vehiculo/asignacion/lista','VehiculoController@listaAsignacion');
 Route::post('vehiculo/asignacion/asignar','VehiculoController@asignarConductor');
 Route::get('vehiculo/gastos/lista','VehiculoController@listaGastosVehiculos');
-Route::get('vehiculo/gastos/guardar','VehiculoController@guardarGastosVehiculos');
+Route::post('vehiculo/gastos/guardar','VehiculoController@guardarGastosVehiculos');
 
 //####### RUTAS PRODUCTOS ##########//
 Route::get('/productos','ProductoController@index');
@@ -59,6 +59,11 @@ Route::get('/obras/nuevo',function(){
     $terceros = intransporte\Tercero::OrderBy('nombre','ASC')->get();
     $ciudades = intransporte\Ciudad::orderBy('nombre_ciudad', 'ASC')->get();
     return view('obras.nuevo', ['ciudades'=>$ciudades, 'terceros'=>$terceros]);
+});
+Route::get('/obras/nuevo/{tercero}',function($tercero){
+    $terceros = intransporte\Tercero::OrderBy('nombre','ASC')->get();
+    $ciudades = intransporte\Ciudad::orderBy('nombre_ciudad', 'ASC')->get();
+    return view('obras.nuevo', ['ciudades'=>$ciudades, 'terceros'=>$terceros, 'tercero_seleccionado'=>$tercero]);
 });
 Route::post('/obras/nuevo/guardar','ObraController@guardar');
 Route::get('/obras/editar/{id}','ObraController@editar');

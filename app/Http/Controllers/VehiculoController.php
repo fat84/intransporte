@@ -144,21 +144,33 @@ class VehiculoController extends Controller
 
     public function listaGastosVehiculos(Request $request)
     {
-        $vehiculos = Vehiculo::all();
+
         if ($request->ajax()) {
 
             $lista_gastos = DB::table('vehiculo_gasto')
                 ->leftJoin('vehiculo', 'vehiculo.id', '=', 'vehiculo_gasto.vehiculo_id')
-                ->leftJoin('user', 'user.id', '=', 'vehiculo_gasto.user_id')
-                ->select('vehiculo_gasto.id', 'vehiculo.id,', 'vehiculo.placa', 'user.name as usuario_nombre',
+                ->leftJoin('users', 'users.id', '=', 'vehiculo_gasto.user_id')
+                ->select('vehiculo_gasto.id', 'vehiculo.id as vehiculo_id', 'vehiculo.placa', 'users.name as usuario_nombre',
                     'vehiculo_gasto.concepto', 'vehiculo_gasto.valor','vehiculo_gasto.fecha')
-                ->orderBy('vehiculo_gasto.fecha','desc');
+                ->orderBy('vehiculo_gasto.fecha','desc')->get();
+
             return response()->json(['gastos' => $lista_gastos]);
+        }else{
+            $vehiculos = Vehiculo::all();
+            return view('vehiculo_gasto.lista',['vehiculos'=>$vehiculos]);
         }
-        return view('vehiculo_gasto.lista',['vehiculos'=>$vehiculos]);
+
     }
 
     public function guardarGastosVehiculos(VehiculoGastoRequest $request){
-        dd($request);
+        $gasto = new VehiculoGasto($request->except('_token'));
+        if(\Auth::user()->id != $gasto->user_id){
+            return redirect('vehiculo/gastos/lista')->with(['warning' => 'Estas intentando registrar un gasto como otro usuario. Intenta de nuevo.']);
+        }
+        if($gasto->save()){
+            return redirect('vehiculo/gastos/lista')->with(['success' => 'Gasto registrado correctamente correctamente']);
+        }else{
+            return redirect('vehiculo/gastos/lista')->with(['warning' => 'Gasto no pudo ser registrado. Intente nuevamente']);
+        }
     }
 }

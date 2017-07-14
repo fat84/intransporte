@@ -52,15 +52,15 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                 aria-hidden="true">&times;</span></button>
-                    <div class="modal-title"><h2>Registrar nuevo vehiculo</h2></div>
+                    <div class="modal-title"><h2>Registrar nuevo gasto a vehiculo</h2></div>
                 </div>
                 <div class="modal-body">
                     <div class="card">
                         <div class="card-block">
-                            {!! Form::open(['action' => 'VehiculoController@store']) !!}
-                            <form action="{{url('vehiculos/g')}}" role="form" method="POST">
+                            <form action="{{url('vehiculo/gastos/guardar')}}" role="form" method="POST">
                                 {{csrf_field()}}
                                 <div class="row">
+                                    <input type="hidden" value="{{Auth::user()->id}}" name="user_id"/>
                                     <div class="col-md-12">
                                         <label class="control-label" for="">Seleccione el vehiculo del gasto:</label>
                                         <!--<div class="m-b">-->
@@ -87,18 +87,36 @@
                                             <label class="control-label" for="focusedInput">Descripción del
                                                 gasto:</label>
                                             <input class="form-control" name="concepto" type="text"
-                                                   value="">
+                                                   value="{{old('concepto')}}" required>
+                                            @if ($errors->has('concepto'))
+                                                <span class="text-danger">{{ $errors->first('concepto') }}</span>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
+                                            <label class="control-label" for="focusedInput">Fecha:</label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon">$</span>
+                                                <input type="date" name="fecha" value="@if(old('fecha')==null){{\date('Y-m-d')}}@else{{old('fecha')}}@endif" class="form-control" required>
+                                            </div>
+                                            @if ($errors->has('fecha'))
+                                                <span class="text-danger">{{ $errors->first('fecha') }}</span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
                                             <label class="control-label" for="focusedInput">Valor:</label>
                                             <div class="input-group">
                                                 <span class="input-group-addon">$</span>
-                                                <input type="text" name="valor" class="form-control">
+                                                <input type="text" name="valor" value="{{old('valor')}}" class="form-control" required>
                                             </div>
+                                            @if ($errors->has('valor'))
+                                                <span class="text-danger">{{ $errors->first('valor') }} como valor</span>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -115,7 +133,6 @@
                                         </div>
                                     </div>
                                 </div>
-                            </form>
                             </form>
                         </div>
                     </div>
@@ -147,7 +164,7 @@
                             '   <td>' + t[i].fecha + '</td>' +
                             '   <td>' + t[i].placa + ' ' + '</td>' +
                             '   <td>' + t[i].usuario_nombre + '</td>' +
-                            '   <td>' + t[i].valor + '</td>' +
+                            '   <td>$' + parseFloat(t[i].valor).formatMoney(2) + '</td>' +
                             '   <td><a href="{{url('/terceros/editar')}}/' + t[i].id + '">Ver</a></td>' +
                             '   <td><a href="{{url('/terceros/editar')}}/' + t[i].id + '">Editar</a></td>' +
                             '</tr>';
@@ -165,6 +182,9 @@
                     $("#progress").hide();
                 }
             });
+            @if($errors->isEmpty()==false)
+             $("#myModal").modal('show');
+            @endif
         });
     </script>
 @endsection
