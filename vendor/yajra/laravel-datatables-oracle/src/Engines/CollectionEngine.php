@@ -147,44 +147,11 @@ class CollectionEngine extends BaseEngine
     }
 
     /**
-     * Perform global search.
-     *
-     * @return void
-     */
-    public function filtering()
-    {
-        $keyword = $this->request->keyword();
-
-        if ($this->isSmartSearch()) {
-            $this->smartGlobalSearch($keyword);
-
-            return;
-        }
-
-        $this->globalSearch($keyword);
-    }
-
-    /**
-     * Perform multi-term search by splitting keyword into
-     * individual words and searches for each of them.
-     *
-     * @param string $keyword
-     */
-    private function smartGlobalSearch($keyword)
-    {
-        $keywords = array_filter(explode(' ', $keyword));
-
-        foreach ($keywords as $keyword) {
-            $this->globalSearch($keyword);
-        }
-    }
-
-    /**
      * Perform global search for the given keyword.
      *
      * @param string $keyword
      */
-    private function globalSearch($keyword)
+    protected function globalSearch($keyword)
     {
         if ($this->isCaseInsensitive()) {
             $keyword = Str::lower($keyword);
@@ -201,11 +168,11 @@ class CollectionEngine extends BaseEngine
                     if (! $value = Arr::get($data, $column)) {
                         continue;
                     }
-                    
+
                     if (is_array($value)) {
                         continue;
                     }
-                    
+
                     if ($this->isCaseInsensitive()) {
                         $value = Str::lower($value);
                     }
@@ -303,11 +270,31 @@ class CollectionEngine extends BaseEngine
                 $this->ordering();
                 $this->filterRecords();
                 $this->paginate();
+
+                $this->revertIndexColumn($mDataSupport);
             }
 
             return $this->render($this->collection->values()->all());
         } catch (\Exception $exception) {
             return $this->errorResponse($exception);
+        }
+    }
+
+    /**
+     * Revert transformed DT_Row_Index back to it's original values.
+     *
+     * @param bool $mDataSupport
+     */
+    private function revertIndexColumn($mDataSupport)
+    {
+        if ($this->columnDef['index']) {
+            $index = $mDataSupport ? config('datatables.index_column', 'DT_Row_Index') : 0;
+            $start = (int) $this->request->input('start');
+            $this->collection->transform(function ($data) use ($index, &$start) {
+                $data[$index] = ++$start;
+
+                return $data;
+            });
         }
     }
 }

@@ -78,6 +78,8 @@ Route::post('actualizarCantidad','DespachoController@update');
 Route::post('eliminarProducto','DespachoController@destroy');
 Route::post('factutarProductos','DespachoController@facturar');
 Route::post('despachar','DespachoController@despachar');
+Route::get('invoice/{id}','DespachoController@invoice');
+Route::get('listaDespachos','DespachoController@listaDespachos');
 
 
 

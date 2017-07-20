@@ -88,6 +88,7 @@ function showProductos(data) {
     totalImpuesto = 0;
     totalCuenta = 0;
     imp = 0;
+    subtotal = 0;
     impDivido = 0;
     for (var i = 0 in b) {
         cantidad = parseFloat(b[i].qty);
@@ -97,12 +98,14 @@ function showProductos(data) {
         console.log(impuesto);
         imp = precio * impDivido;
         totalImpuesto += imp*cantidad;
-        totalCuenta = (precio*cantidad);
+        totalCuenta += (precio*cantidad);
+        subtotal += precio * cantidad;
+
         resultado += '<tr>' +
             '<td>' + b[i].name + '</td>' +
-            '<td>' + b[i].price + '</td>' +
+            '<td>' +accounting.formatMoney(precio) + '</td>' +
             '<td><input type="number" id="qty'+b[i].id+'" class="form-control" value="'+cantidad+'" onchange="actualizarCantidad(\''+b[i].rowId+'\',\''+b[i].id+'\')"></td>' +
-            '<td>' + precio * cantidad + '</td>' +
+            '<td>' +accounting.formatMoney(precio * cantidad)  + '</td>' +
             '<td><i class="material-icons text-danger" onclick="eliminarProducto(\''+b[i].rowId+'\')">delete</i></td>' +
             '</tr>';
     }
@@ -110,7 +113,7 @@ function showProductos(data) {
         '<td></td>' +
         '<td></td>' +
         '<td style="font-size: 17px;font-weight: bold">Subtotal:</td>' +
-        '<td style="font-size: 17px;font-weight: bold">'+accounting.formatMoney(totalCuenta-totalImpuesto)+'</td>' +
+        '<td style="font-size: 17px;font-weight: bold">'+accounting.formatMoney(subtotal)+'</td>' +
         '<td></td>' +
         '</tr>';
     detallado2 = '<tr>' +
@@ -124,7 +127,7 @@ function showProductos(data) {
         '<td></td>' +
         '<td></td>' +
         '<td style="font-size: 17px;font-weight: bold">Total cuenta:</td>' +
-        '<td style="font-size: 17px;font-weight: bold">'+accounting.formatMoney(totalCuenta)+'<input hidden  value="'+totalCuenta+'" id="totalcuentaCarrito"></td>' +
+        '<td style="font-size: 17px;font-weight: bold">'+accounting.formatMoney(totalCuenta+totalImpuesto)+'<input hidden  value="'+totalCuenta+'" id="totalcuentaCarrito"></td>' +
         '<td></td>' +
         '</tr>';
     botonesPago = '<tr>' +
@@ -198,7 +201,8 @@ function despachar() {
         return false;
     }
     else {
-
+        $( "#botonDespachar" ).prop( "disabled", true );
+        $( "#botonDespachar" ).html( "Despachando espere..." );
         $.ajax({
             url: ruta,
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
@@ -207,21 +211,30 @@ function despachar() {
             data: parametros,
             success: function (data) {
             console.log(data)
-                location.reload();
                 $( "#botonDespachar" ).prop( "disabled", false );
                 $( "#botonDespachar" ).html( "Despachando espere..." );
+                $('#botonesOp').html(' <button class="btn btn-success btn-block" onclick="recibo(\''+data.idDespacho+'\')">Imprimir recibo</button><br>' +
+                                    ' <button class="btn btn-success btn-block" onclick="recargar()">Crear nuevo despacho</button>');
+              //  window.open('/invoice/'+data.idDespacho,'_blank');
+                //  window.location="/invoice/"+data.idDespacho;
+
                 swal(
                     'En hora buena!',
                     'Despacho compleatado',
                     'success'
                 );
+              //  location.reload();
             }
         });
     }
 }
 
-
-
+function recibo(dato) {
+    window.open('/invoice/'+dato,'_blank');
+}
+function recargar() {
+    location.reload();
+}
 function actualizarCantidad(idRow,idProducto) {
     qty =$('#qty'+idProducto).val();
     var parametros = {

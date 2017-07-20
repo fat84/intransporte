@@ -152,8 +152,11 @@
                         @endif
                         @endforeach
                     </select><br></br>
-                    <button class="btn btn-success btn-block" id="botonDespachar" onclick="despachar()">Crear despacho</button>
-                    <div id="mensajeDespacho"></div>
+                    <div id="botonesOp">
+                        <button class="btn btn-success btn-block" id="botonDespachar" onclick="despachar()">Crear despacho</button>
+                        <div id="mensajeDespacho"></div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -170,7 +173,7 @@
                 "url": "//cdn.datatables.net/plug-ins/1.10.13/i18n/Spanish.json"
             }
         });
-        showConsultaProductos();
+      
 
     });
 </script>
