@@ -82,4 +82,15 @@ Route::get('invoice/{id}','DespachoController@invoice');
 Route::get('listaDespachos','DespachoController@listaDespachos');
 
 
+//####### RUTAS REPORTES GENERALES ##########//
+
+Route::get('reporte/general/productos','ReporteGeneral@indexProductos');
+Route::post('reporte/general/productos','ReporteGeneral@generarProductos');
+
+Route::get('reporte/general/obras','ReporteGeneral@indexObras');
+Route::post('reporte/general/obras','ReporteGeneral@generarObras');
+
+Route::get('reporte/general/vehiculos','ReporteGeneral@indexVehiculos');
+Route::post('reporte/general/vehiculos','ReporteGeneral@generarVehiculos');
+
 

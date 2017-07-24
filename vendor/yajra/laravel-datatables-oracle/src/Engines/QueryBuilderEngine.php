@@ -23,6 +23,13 @@ use Yajra\Datatables\Request;
 class QueryBuilderEngine extends BaseEngine
 {
     /**
+     * Filtered query results.
+     *
+     * @var mixed
+     */
+    protected $results;
+
+    /**
      * @param \Illuminate\Database\Query\Builder $builder
      * @param \Yajra\Datatables\Request $request
      */
@@ -551,7 +558,7 @@ class QueryBuilderEngine extends BaseEngine
                         $other   = $model->getQualifiedParentKeyName();
                     } else {
                         $foreign = $model->getQualifiedForeignKey();
-                        $other   = $model->getQualifiedOtherKeyName();
+                        $other   = $model->getQualifiedOwnerKeyName();
                     }
             }
             $this->performJoin($table, $foreign, $other);
@@ -609,6 +616,7 @@ class QueryBuilderEngine extends BaseEngine
             $sql = ! $this->isCaseInsensitive() ? 'REGEXP_LIKE( ' . $column . ' , ? )' : 'REGEXP_LIKE( LOWER(' . $column . ') , ?, \'i\' )';
             $this->query->whereRaw($sql, [$keyword]);
         } elseif ($this->database == 'pgsql') {
+            $column = $this->castColumn($column);
             $sql = ! $this->isCaseInsensitive() ? $column . ' ~ ?' : $column . ' ~* ? ';
             $this->query->whereRaw($sql, [$keyword]);
         } else {
@@ -731,7 +739,7 @@ class QueryBuilderEngine extends BaseEngine
      */
     public function results()
     {
-        return $this->query->get();
+        return $this->results ?: $this->results = $this->query->get();
     }
 
     /**

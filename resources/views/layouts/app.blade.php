@@ -213,7 +213,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="{{url('listaDespachos')}}">
                                 <span>Listado de despachos</span>
                             </a>
                         </li>
@@ -263,17 +263,17 @@
                     </a>
                     <ul class="sub-menu">
                         <li>
-                            <a href="#">
+                            <a href="{{url('reporte/general/productos')}}">
                                 <span>Reporte de productos</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
-                                <span>Reporte de despachos</span>
+                            <a href="{{url('reporte/general/obras')}}">
+                                <span>Reporte por obras</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="{{url('reporte/general/vehiculos')}}">
                                 <span>Reporte de vehiculos</span>
                             </a>
                         </li>
@@ -365,12 +365,14 @@
                         <input class="form-control" type="text" placeholder="Search"/>
                     </form>
                 </div>-->
-                <div class="navbar-item nav navbar-nav">
+                <!--<div class="navbar-item nav navbar-nav">
                     <div class="nav-item nav-link dropdown">
+                        {{--
                         <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="material-icons">Notificaciones</i>
                             <span class="tag tag-danger">4</span>
                         </a>
+                        Notificaciones
                         <div class="dropdown-menu dropdown-menu-right notifications">
                             <div class="dropdown-item">
                                 <div class="notifications-wrapper">
@@ -433,13 +435,16 @@
                                 </div>
                                 <div class="notification-footer">Notifications</div>
                             </div>
-                        </div>
+                        </div>--}}
                     </div>
+                    {{--
+                    Chat
                     <a href="javascript:;" class="nav-item nav-link nav-link-icon" data-toggle="modal"
                        data-target=".chat-panel" data-backdrop="false">
                         <i class="material-icons">chat_bubble</i>
-                    </a>
+                    </a>--}}
                 </div>
+                -->
             </div>
         </nav>
         <!-- /top header -->
@@ -452,7 +457,7 @@
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                         {{Session::get('success')}}
                     </div>
-                    @elseif(Session::has('warning'))
+                @elseif(Session::has('warning'))
                     <div class="alert alert-danger alert-dismissable">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                         {{Session::get('warning')}}
@@ -632,7 +637,8 @@
                         </div>
                     </div>
                     <div class="chat-conversation-title">
-                        <img src="{{asset('images/face1.jpg')}}" class="avatar avatar-xs img-circle m-r-1 pull-left" alt="">
+                        <img src="{{asset('images/face1.jpg')}}" class="avatar avatar-xs img-circle m-r-1 pull-left"
+                             alt="">
                         <div class="overflow-hidden">
                             <span><strong>Charles Wilson</strong></span>
                             <small>Last seen today at 03:11</small>

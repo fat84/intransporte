@@ -8,6 +8,15 @@
 
 ## Change Log
 
+### v7.9.5 - 07-21-2017
+- Add text cast for pgsql regex search #1279, credits to @martimarkov.
+- Use static class to resolve datatables instance. #1282, Re-apply fix for #464, #465.
+- Fix duplicate queries when transforming the output. PR #1283, Fix #1280.
+
+### v7.9.4 - 07-14-2017
+- Change getQualifiedOtherKeyName to getQualifiedOwnerKeyName #1254. Credits to @zizohassan.
+- Readme: implictly set "--provider" when publishing #1255. Credits to @uniconstructor.
+
 ### v7.9.3 - 07-12-2017
 - Revert transformed `DT_Row_Index` back to it's original values. #1259
 - Fix searching not triggered with zero value. #1257

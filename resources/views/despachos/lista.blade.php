@@ -24,8 +24,8 @@
             <table class="table table-bordered " id="tabla">
                 <thead>
                 <tr>
-                    <th>Numero</th>
                     <th>Prefijo</th>
+                    <th>Numero</th>
                     <th>Fecha</th>
                     <th>Cliente</th>
                     <th>Obra</th>
@@ -35,8 +35,8 @@
                 </thead>
                 <tfoot>
                 <tr>
-                    <th>Numero</th>
                     <th>Prefijo</th>
+                    <th>Numero</th>
                     <th>Fecha</th>
                     <th>Cliente</th>
                     <th>Obra</th>
@@ -47,13 +47,15 @@
                 <tbody id="tbody">
                     @foreach($despacho as $despacho)
                         <tr>
-                            <th>{{$despacho->numero}}</th>
                             <th>{{$despacho->prefijo}}</th>
+                            <th>{{$despacho->numero}}</th>
                             <th>{{$despacho->fecha}}</th>
                             <th>{{$despacho->nombreTercero}}</th>
                             <th>{{$despacho->nombreObra}}</th>
                             <th>{{$despacho->nombreVendedor}}</th>
-                            <th><a href="invoice/{{$despacho->idDespacho}}" target="_blank">Imprimir</a></th>
+                            <th>
+                                <a href="invoice/{{$despacho->idDespacho}}" target="_blank">Imprimir</a>
+                            </th>
                         </tr>
                         @endforeach
 
