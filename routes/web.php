@@ -93,4 +93,8 @@ Route::post('reporte/general/obras','ReporteGeneral@generarObras');
 Route::get('reporte/general/vehiculos','ReporteGeneral@indexVehiculos');
 Route::post('reporte/general/vehiculos','ReporteGeneral@generarVehiculos');
 
+//####### RUTAS REPORTES ESPECIFICOS ##########//
+
+Route::get('reporte/especifico/producto','ReporteEspecificoController@indexProducto');
+
 

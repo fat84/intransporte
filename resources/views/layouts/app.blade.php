@@ -282,6 +282,7 @@
                 <!-- /Reportes generales, que incluyen saldos globales  -->
 
                 <!-- Reportes especificos, de un cliente, o un vehiculo, o un producto-->
+                <!--
                 <li>
                     <a href="javascript:;">
                 <span class="menu-caret">
@@ -308,6 +309,7 @@
                         </li>
                     </ul>
                 </li>
+                -->
                 <!-- Reportes especificos, de un cliente, o un vehiculo, o un producto-->
                 <li>
                     <hr/>
