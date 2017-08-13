@@ -73,6 +73,7 @@
 @stop
 @section('scripts')
     <script>
+
         $(document).ready(function () {
             $('#tabla').DataTable({
                 "language": {

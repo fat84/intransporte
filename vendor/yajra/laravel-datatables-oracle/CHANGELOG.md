@@ -8,6 +8,21 @@
 
 ## Change Log
 
+### v7.9.9 - 08-01-2017
+- Patch configuration override issue. #1311
+- Fix escapeColumns bug. #1306, credits to @lk77.
+
+### v7.9.8 - 08-01-2017
+- Fix fetching of column definitions. #1310
+- Fix #1307, #1305, #1306, #1302.
+
+### v7.9.7 - 07-29-2017
+- Merge array recursive. #1303
+
+### v7.9.6 - 07-29-2017
+- Whitelisting src directory in phpunit.xml #1298, credits to @lk77.
+- Fixed configuration override issue. #1293, credits to @zgldh.
+
 ### v7.9.5 - 07-21-2017
 - Add text cast for pgsql regex search #1279, credits to @martimarkov.
 - Use static class to resolve datatables instance. #1282, Re-apply fix for #464, #465.

@@ -68,13 +68,8 @@ abstract class BaseEngine implements DataTableEngineContract
         'index'     => false,
         'append'    => [],
         'edit'      => [],
-        'excess'    => ['rn', 'row_num'],
         'filter'    => [],
         'order'     => [],
-        'escape'    => '*',
-        'raw'       => ['action'],
-        'blacklist' => ['password', 'remember_token'],
-        'whitelist' => '*',
     ];
 
     /**
@@ -252,7 +247,7 @@ abstract class BaseEngine implements DataTableEngineContract
     public function removeColumn()
     {
         $names                     = func_get_args();
-        $this->columnDef['excess'] = array_merge($this->columnDef['excess'], $names);
+        $this->columnDef['excess'] = array_merge($this->getColumnsDefinition()['excess'], $names);
 
         return $this;
     }
@@ -660,7 +655,7 @@ abstract class BaseEngine implements DataTableEngineContract
         $config  = config('datatables.columns');
         $allowed = ['excess', 'escape', 'raw', 'blacklist', 'whitelist'];
 
-        return array_merge(array_only($config, $allowed), $this->columnDef);
+        return array_replace_recursive(array_only($config, $allowed), $this->columnDef);
     }
 
     /**
@@ -930,7 +925,7 @@ abstract class BaseEngine implements DataTableEngineContract
     public function pushToBlacklist($column)
     {
         if (! $this->isBlacklisted($column)) {
-            array_push($this->columnDef['blacklist'], $column);
+            $this->columnDef['blacklist'][] = $column;
         }
 
         return $this;
@@ -944,11 +939,13 @@ abstract class BaseEngine implements DataTableEngineContract
      */
     protected function isBlacklisted($column)
     {
-        if (in_array($column, $this->columnDef['blacklist'])) {
+        $colDef = $this->getColumnsDefinition();
+
+        if (in_array($column, $colDef['blacklist'])) {
             return true;
         }
 
-        if ($this->columnDef['whitelist'] === '*' || in_array($column, $this->columnDef['whitelist'])) {
+        if ($colDef['whitelist'] === '*' || in_array($column, $colDef['whitelist'])) {
             return false;
         }
 
