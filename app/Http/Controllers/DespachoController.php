@@ -212,4 +212,16 @@ class DespachoController extends Controller
 
         return view('despachos.lista',compact('despacho'));
     }
+    public function actualizarPrecio(Request $request){
+        $idrow = $request->idProducto;
+        Cart::update($idrow, ['price' => $request->nuevoPrecio]);
+
+        $cart = Cart::content();
+        $subtotal = Cart::subtotal();
+        return response()->json([
+            'content'=> $cart,
+            'subtotal'=> $subtotal
+        ]);
+
+    }
 }

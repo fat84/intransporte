@@ -80,6 +80,7 @@ Route::post('factutarProductos','DespachoController@facturar');
 Route::post('despachar','DespachoController@despachar');
 Route::get('invoice/{id}','DespachoController@invoice');
 Route::get('listaDespachos','DespachoController@listaDespachos');
+Route::post('actualizarPrecio','DespachoController@actualizarPrecio');
 
 
 //####### RUTAS REPORTES GENERALES ##########//

@@ -161,8 +161,28 @@
             </div>
         </div>
     </div>
+    <div class="modal fade bd-example-modal-precio" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">Cambiar precio</h4>
+                </div>
+                <div class="modal-body">
+                    <label>Nuevo precio</label>
+                    <input id="nuevoPrecio" type="number" name="nuevoPrecio" class="form-control" placeholder="Nuevo precio">
+                    <input hidden id="idRowNuevoPrecio"  class="form-control">
+                    <br>
+                    <div id="botonesOp">
+                        <button class="btn btn-success btn-block" id="botonDespachar" onclick="actualizarPrecio()">Cambiar precio</button>
+                    </div>
 
-
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 @section('scripts')
 <script src="{{asset('js/despacho.js')}}"></script>
@@ -173,8 +193,8 @@
                 "url": "//cdn.datatables.net/plug-ins/1.10.13/i18n/Spanish.json"
             }
         });
-      
 
+        showConsultaProductos();
     });
 </script>
 @endsection

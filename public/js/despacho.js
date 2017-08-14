@@ -103,7 +103,7 @@ function showProductos(data) {
 
         resultado += '<tr>' +
             '<td>' + b[i].name + '</td>' +
-            '<td>' +accounting.formatMoney(precio) + '</td>' +
+            '<td><a data-toggle="modal" data-target=".bd-example-modal-precio" onclick="cambiarPrecio(\''+b[i].rowId+'\',\''+precio+'\')">' +accounting.formatMoney(precio) + '</a></td>' +
             '<td><input type="number" id="qty'+b[i].id+'" class="form-control" value="'+cantidad+'" onchange="actualizarCantidad(\''+b[i].rowId+'\',\''+b[i].id+'\')"></td>' +
             '<td>' +accounting.formatMoney(precio * cantidad)  + '</td>' +
             '<td><i class="material-icons text-danger" onclick="eliminarProducto(\''+b[i].rowId+'\')">delete</i></td>' +
@@ -140,6 +140,45 @@ function showProductos(data) {
     $('#contenido').html(resultado+detallado+detallado2+detallado3+botonesPago);
 }
 
+function cambiarPrecio(id,precio) {
+    $('#idRowNuevoPrecio').val(id);
+    $('#nuevoPrecio').val(precio);
+}
+function actualizarPrecio() {
+   idRow = $('#idRowNuevoPrecio').val();
+   nuevoPrecio = $('#nuevoPrecio').val();
+   if(nuevoPrecio == ''){
+       swal(
+           'Algo salio mal!',
+           'el precio no puede estar vacio',
+           'error'
+       );
+       return false;
+   }else {
+       var parametros = {
+           'idProducto': idRow,
+           'nuevoPrecio': nuevoPrecio,
+
+       };
+       var ruta = '/actualizarPrecio';
+       $.ajax({
+           url: ruta,
+           headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+           type: 'POST',
+           dataType: 'json',
+           data: parametros,
+           success: function (data) {
+               //  console.log(data)
+               showProductos(data);
+               swal(
+                   'En hor buena',
+                   'el precio ha sido actualizado',
+                   'success'
+               );
+           }
+       });
+   }
+}
 function facturarProductos() {
     totalCuenta = $('#totalcuentaCarrito').val();
     $('#totalApagar').html(accounting.formatMoney(totalCuenta));
