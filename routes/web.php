@@ -99,3 +99,6 @@ Route::post('reporte/general/vehiculos','ReporteGeneral@generarVehiculos');
 Route::get('reporte/especifico/producto','ReporteEspecificoController@indexProducto');
 
 
+//**factuacion**//
+Route::get('facturacion','FacturacionController@index');
+//**factuacion**//

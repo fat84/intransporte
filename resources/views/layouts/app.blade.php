@@ -232,7 +232,7 @@
                     </a>
                     <ul class="sub-menu">
                         <li>
-                            <a href="{{url('')}}">
+                            <a href="{{url('facturacion')}}">
                                 <span>Nuevo factura</span>
                             </a>
                         </li>

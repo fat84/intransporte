@@ -3,7 +3,7 @@
 namespace intransporte\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use DB;
 class FacturacionController extends Controller
 {
     /**
@@ -13,7 +13,14 @@ class FacturacionController extends Controller
      */
     public function index()
     {
-        //
+        $despacho = DB::table('despacho')
+            ->leftJoin('tercero','tercero.id','=','despacho.tercero_id')
+            ->leftJoin('obra','obra.id','=','despacho.obra_id')
+            ->leftJoin('users','users.id','=','despacho.usuario_id')
+            ->select('tercero.nombre as nombreTercero','despacho.numero','despacho.created_at as fecha',
+                'obra.nombre as nombreObra','users.name as nombreVendedor','despacho.prefijo','despacho.id as idDespacho')
+            ->get();
+        return view('facturacion.facturacion',compact('despacho'));
     }
 
     /**
