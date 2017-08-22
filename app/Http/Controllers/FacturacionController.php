@@ -17,8 +17,12 @@ class FacturacionController extends Controller
             ->leftJoin('tercero','tercero.id','=','despacho.tercero_id')
             ->leftJoin('obra','obra.id','=','despacho.obra_id')
             ->leftJoin('users','users.id','=','despacho.usuario_id')
+            ->leftJoin('despacho_detalle','despacho_detalle.despacho_id','=','despacho.id')
+            ->leftJoin('venta_detalle','venta_detalle.despacho_detalle_id','despacho_detalle.id')
+            ->where('venta_detalle.id', '=', null)
             ->select('tercero.nombre as nombreTercero','despacho.numero','despacho.created_at as fecha',
                 'obra.nombre as nombreObra','users.name as nombreVendedor','despacho.prefijo','despacho.id as idDespacho')
+            ->groupBy('despacho.id')
             ->get();
         return view('facturacion.facturacion',compact('despacho'));
     }
