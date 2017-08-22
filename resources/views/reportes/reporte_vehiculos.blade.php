@@ -112,12 +112,13 @@
                             <tr>
                                 <th>PLACA</th>
                                 <th>VEHICULO</th>
-                                <th>No. GASTOS</th>
-                                <th>TOTAL GASTADO</th>
+                                <th>GASTADO</th>
+                                <th>INGRESOS</th>
+                                <th>RESULTADO</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($gasto_vehiculos as $row)
+                            {{--@foreach($gasto_vehiculos as $row)
                                 <?php
                                 $total_enviado += $row->total_gasto;
                                 //$total_despachos += $row->num_despachos;
@@ -125,8 +126,37 @@
                                 <tr>
                                     <td>{{$row->placa}}</td>
                                     <td>{{$row->vehiculo_info}}</td>
-                                    <td>{{number_format($row->no_gastos,0)}}</td>
+                                    --}}{{--<td>{{number_format($row->no_gastos,0)}}</td>--}}{{--
                                     <td>{{number_format($row->total_gasto,2) }}</td>
+                                    <td>{{number_format($row->total_ingreso,2) }}</td>
+                                    <td>{{number_format( ($row->total_ingreso - $row->total_gasto) , 2) }}</td>
+                                </tr>
+                            @endforeach--}}
+                            @foreach($vehiculos as $row)
+                                <?php
+                                $gastado = 0;
+                                $ingresos = 0;
+                                ?>
+                                <tr>
+                                    <td>{{$row->placa}}</td>
+                                    <td>{{$row->marca}} {{$row->modelo}}</td>
+                                    <td>
+                                        @foreach($row->VehiculoGasto as $gasto)
+                                            <?php $gastado += $gasto->valor; ?>
+                                        @endforeach
+                                        {{$gastado}}
+                                    </td>
+                                    <td>
+                                        @foreach($row->VehiculoTercero as $vt)
+                                            @foreach($vt->despacho as $des)
+                                                @foreach($des->Detalles as $detalle)
+                                                    <?php $ingresos += ($detalle->cantidad * $detalle->valor_unidad); ?>
+                                                @endforeach
+                                            @endforeach
+                                        @endforeach
+                                        {{$ingresos}}
+                                    </td>
+
                                 </tr>
                             @endforeach
                             </tbody>
@@ -265,7 +295,7 @@
                             $data .= "]}, {name: '" . $row->placa . "' , data: [ ";
                         }
                         $fecha = \explode('-', $row->fecha);
-                        $data .= "[Date.UTC($fecha[0], ".($fecha[1]-1).", $fecha[2]), $row->cantidad_total],";
+                        $data .= "[Date.UTC($fecha[0], " . ($fecha[1] - 1) . ", $fecha[2]), $row->cantidad_total],";
                     }
                     $data .= "]";
                     ?>

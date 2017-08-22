@@ -15,6 +15,31 @@
             <div class="row">
                 <form action="{{url('reporte/general/obras')}}" method="post">
                     {{csrf_field()}}
+                    <div class="col-md-6">
+                        <div class="form-group form-group-sm">
+                            <label class="control-label" for="focusedInput">Seleccionar cliente:</label>
+                            <select data-placeholder="" name="tercero" id="tercero" class="select2 m-b-1"
+                                    style="width: 100%;" required="" onchange="obras()">
+                                <option value="">Selecciona un tercero</option>
+                                @foreach($terceros as $tercero)
+                                    <option value="{{$tercero->id}}" @if(empty($tercero_sel)==false && $tercero_sel == $tercero->id) selected @endif >{{$tercero->nombre}} - Nit.
+                                        ({{$tercero->documento}})
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group {{ $errors->has('marca') ? ' has-danger' : '' }}">
+                            <label class="control-label" for="">Obras:</label>
+                            <!--<div class="m-b">-->
+                            <div class="m-b">
+                                <select  name="obra" id="obra" class="form-control"
+                                         style="width: 100%;" required="">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                     <div class="col-md-12">
                         Seleccione el rango de fechas para generar el reporte:
                     </div>
@@ -45,6 +70,7 @@
         </div>
     </div>
     @if(empty($informacion_consolidado)== false)
+
         <?php
         $total_enviado = 0; $total_despachos = 0;
         ?>
@@ -157,9 +183,8 @@
 @endsection
 
 @section('scripts')
+    <script src="{{asset('js/reportes.js')}}"></script>
     @if(empty($informacion_consolidado)== false)
-
-
         <script src="{{asset('Highcharts/code/highcharts.js')}}"></script>
         <script src="{{asset('Highcharts/code/highcharts-3d.js')}}"></script>
         <script src="{{asset('Highcharts/code/modules/exporting.js')}}"></script>
@@ -218,7 +243,7 @@
                             $data .= "]}, {name: '" . $row->nombre_obra . "' , data: [ ";
                         }
                         $fecha = \explode('-', $row->fecha);
-                        $data .= "[Date.UTC($fecha[0], ".($fecha[1]-1).", $fecha[2]), $row->cantidad_total],";
+                        $data .= "[Date.UTC($fecha[0], " . ($fecha[1] - 1) . ", $fecha[2]), $row->cantidad_total],";
                     }
                     $data .= "]";
                     ?>
@@ -273,6 +298,8 @@
                     ]
                 }]
             });
+
+            obras('{{$obra}}','{{$tercero_sel}}');
 
         </script>
     @endif

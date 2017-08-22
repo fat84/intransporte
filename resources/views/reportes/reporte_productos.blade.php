@@ -15,6 +15,31 @@
             <div class="row">
                 <form action="{{url('reporte/general/productos')}}" method="post">
                     {{csrf_field()}}
+                    <div class="col-md-6">
+                        <div class="form-group form-group-sm">
+                            <label class="control-label" for="focusedInput">Seleccionar cliente:</label>
+                            <select data-placeholder="" name="tercero" id="tercero" class="select2 m-b-1"
+                                    style="width: 100%;" required="" onchange="obras()">
+                                <option value="">Selecciona un tercero</option>
+                                @foreach($terceros as $tercero)
+                                    <option value="{{$tercero->id}}" @if(empty($tercero_sel)==false && $tercero_sel == $tercero->id) selected @endif >{{$tercero->nombre}} - Nit.
+                                        ({{$tercero->documento}})
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group {{ $errors->has('marca') ? ' has-danger' : '' }}">
+                            <label class="control-label" for="">Obras:</label>
+                            <!--<div class="m-b">-->
+                            <div class="m-b">
+                                <select  name="obra" id="obra" class="form-control"
+                                         style="width: 100%;" required="">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                     <div class="col-md-12">
                         Seleccione el rango de fechas para generar el reporte:
                     </div>
@@ -157,6 +182,7 @@
 @endsection
 
 @section('scripts')
+    <script src="{{asset('js/reportes.js')}}"></script>
     @if(empty($informacion_consolidado)== false)
 
 
@@ -274,6 +300,7 @@
                 }]
             });
 
+            obras('{{$obra}}','{{$tercero_sel}}');
         </script>
     @endif
 @endsection

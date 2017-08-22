@@ -19,4 +19,5 @@ class Vehiculo extends Model
     public function VehiculoGasto(){
         return $this->hasMany('intransporte\VehiculoGasto', 'vehiculo_id', 'id');
     }
+
 }

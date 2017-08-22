@@ -41,6 +41,7 @@ Route::resource('vehiculo','VehiculoController');
 Route::get('vehiculo/asignacion/lista','VehiculoController@listaAsignacion');
 Route::post('vehiculo/asignacion/asignar','VehiculoController@asignarConductor');
 Route::get('vehiculo/gastos/lista','VehiculoController@listaGastosVehiculos');
+Route::get('vehiculo/gastos/ver/{id}','VehiculoController@verGastoVehiculos');
 Route::post('vehiculo/gastos/guardar','VehiculoController@guardarGastosVehiculos');
 
 //####### RUTAS PRODUCTOS ##########//

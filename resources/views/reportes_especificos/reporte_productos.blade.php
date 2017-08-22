@@ -157,6 +157,7 @@
 @endsection
 
 @section('scripts')
+    <script src="{{asset('js/despacho.js')}}"></script>
     @if(empty($informacion_consolidado)== false)
 
 

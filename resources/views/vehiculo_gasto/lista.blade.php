@@ -165,7 +165,7 @@
                             '   <td>' + t[i].placa + ' ' + '</td>' +
                             '   <td>' + t[i].usuario_nombre + '</td>' +
                             '   <td>$' + parseFloat(t[i].valor).formatMoney(2) + '</td>' +
-                            '   <td><a href="{{url('/terceros/editar')}}/' + t[i].id + '">Ver</a></td>' +
+                            '   <td><a href="{{url('vehiculo/gastos/ver')}}/' + t[i].id + '">Ver</a></td>' +
                             '   <td><a href="{{url('/terceros/editar')}}/' + t[i].id + '">Editar</a></td>' +
                             '</tr>';
 
