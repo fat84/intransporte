@@ -92,11 +92,11 @@
             $('#button').click( function () {
                 //alert( table.rows('.selected').data() +' row(s) selected' );
                 var despachos = table.rows('.selected').data();
+                console.log(despachos);
                 const idDespachos = [];
                 for (var i = 0 in despachos) {
                     idDespachos[i] = despachos[i][0];
-                    console.log(despachos[i][0]);
-
+                    console.log(idDespachos);
                  }
                 console.log(idDespachos);
                 //console.log(table.rows('.selected').data());

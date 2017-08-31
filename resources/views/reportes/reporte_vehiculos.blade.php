@@ -230,12 +230,11 @@
                 </div>
             </div>
         </div>
-    @endif
-@endsection
+        @endif
+@stop
 
 @section('scripts')
     @if(empty($informacion_consolidado)== false)
-
 
         <script src="{{asset('Highcharts/code/highcharts.js')}}"></script>
         <script src="{{asset('Highcharts/code/highcharts-3d.js')}}"></script>
@@ -353,4 +352,4 @@
 
         </script>
     @endif
-@endsection
+@stop
