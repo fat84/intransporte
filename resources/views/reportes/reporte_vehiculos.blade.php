@@ -114,24 +114,14 @@
                                 <th>VEHICULO</th>
                                 <th>GASTADO</th>
                                 <th>INGRESOS</th>
-                                <th>RESULTADO</th>
+                                <th>UTILIDAD</th>
                             </tr>
                             </thead>
                             <tbody>
-                            {{--@foreach($gasto_vehiculos as $row)
-                                <?php
-                                $total_enviado += $row->total_gasto;
-                                //$total_despachos += $row->num_despachos;
-                                ?>
-                                <tr>
-                                    <td>{{$row->placa}}</td>
-                                    <td>{{$row->vehiculo_info}}</td>
-                                    --}}{{--<td>{{number_format($row->no_gastos,0)}}</td>--}}{{--
-                                    <td>{{number_format($row->total_gasto,2) }}</td>
-                                    <td>{{number_format($row->total_ingreso,2) }}</td>
-                                    <td>{{number_format( ($row->total_ingreso - $row->total_gasto) , 2) }}</td>
-                                </tr>
-                            @endforeach--}}
+                            <?php
+                            $total_gastado = 0;
+                            $total_ingresado = 0;
+                            ?>
                             @foreach($vehiculos as $row)
                                 <?php
                                 $gastado = 0;
@@ -144,26 +134,38 @@
                                         @foreach($row->VehiculoGasto as $gasto)
                                             <?php $gastado += $gasto->valor; ?>
                                         @endforeach
-                                        {{$gastado}}
+                                        {{number_format($gastado,2)}}
                                     </td>
                                     <td>
-                                        @foreach($row->VehiculoTercero as $vt)
-                                            @foreach($vt->despacho as $des)
-                                                @foreach($des->Detalles as $detalle)
+                                        <?php $vtarray = $row->VehiculoTercero; ?>
+                                        @foreach($vtarray as $vt)
+                                            <?php $darray = $vt->despacho ; ?>
+                                            @foreach($darray as $des)
+                                                <?php $dtarray = $des->Detalles; ?>
+                                                @foreach($dtarray as $detalle)
                                                     <?php $ingresos += ($detalle->cantidad * $detalle->valor_unidad); ?>
                                                 @endforeach
                                             @endforeach
                                         @endforeach
-                                        {{$ingresos}}
+                                        {{number_format($ingresos,2)}}
+                                    </td>
+                                    <td>
+                                        {{number_format($ingresos-$gastado,2)}}
                                     </td>
 
                                 </tr>
+                                <?php
+                                $total_gastado += $gastado;
+                                $total_ingresado += $ingresos;
+                                ?>
                             @endforeach
                             </tbody>
                             <tfoot>
                             <tr style="font-weight: bold">
-                                <td colspan="3">TOTALES</td>
-                                <td>{{number_format($total_enviado,2)}}</td>
+                                <td colspan="2">TOTALES</td>
+                                <td>{{number_format($total_gastado,2)}}</td>
+                                <td>{{number_format($total_ingresado,2)}}</td>
+                                <td>{{number_format($total_ingresado-$total_gastado ,2)}}</td>
                             </tr>
                             </tfoot>
                         </table>
@@ -334,13 +336,13 @@
                 <?php
                     $codigo_prod = '';
                     $data = '';
-                    foreach ($informacion_consolidado as $row) {
-                        $data .= "{
+                    ?>
+                    @foreach ($informacion_consolidado as $row)
+                        <?php $data .= "{
                         name: '$row->placa',
                         y: $row->cantidad_total
-                    },";
-                    }
-                    ?>
+                    },";?>
+                    @endforeach
                 series: [{
                     name: 'Porductos ',
                     colorByPoint: true,

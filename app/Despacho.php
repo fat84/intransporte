@@ -9,8 +9,10 @@ class Despacho extends Model
     //
     protected $table = "despacho";
 
+    protected $fillable = ['despacho_id'];
+
     public function Detalles(){
-        return $this->belongsTo('intransporte\DespachoDetalle');
+        return $this->hasMany('intransporte\DespachoDetalle','despacho_id','id');
     }
 
     public function User(){
