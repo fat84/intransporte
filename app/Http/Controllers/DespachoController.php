@@ -171,6 +171,9 @@ class DespachoController extends Controller
             $despacho_detalle->despacho_id = $despacho->id;
             $despacho_detalle->producto_id = $producto->id;
             $despacho_detalle->cantidad = $producto->qty;
+            $despacho_detalle->valor_unidad = $producto->price;
+            $despacho_detalle->unidad = $producto->options->unidad_medida;
+            $despacho_detalle->impuesto = $producto->options->imp;
             $despacho_detalle->save();
         }
 

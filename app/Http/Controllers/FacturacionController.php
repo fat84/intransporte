@@ -4,6 +4,11 @@ namespace intransporte\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use intransporte\Despacho;
+use intransporte\DespachoDetalle;
+use intransporte\Venta;
+use intransporte\Venta_detalle;
+use Barryvdh\DomPDF\PDF;
 class FacturacionController extends Controller
 {
     /**
@@ -45,7 +50,45 @@ class FacturacionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $idDespachos = $request->idDespachos;
+
+        foreach ($idDespachos as $idDespacho) {
+            $des = Despacho::find($idDespacho);
+            $des_detalle = DespachoDetalle::where('despacho_id', '=', $des->id)->get();
+            $venta = new Venta;
+            $venta->tercero_id = $des->tercero_id;
+            $venta->numero = $request->numero_factura;
+            $venta->user_id = \Auth::user()->id;
+            $venta->total = 0;
+            $venta->iva = 0;
+            $venta->subtotal = 0;
+            $venta->save();
+            foreach ($des_detalle as $des_detalles) {
+                $venta_detalle = new Venta_detalle;
+                $venta_detalle->venta_id = $venta->id;
+                $venta_detalle->despacho_detalle_id = $des_detalles->id;
+                $venta_detalle->save();
+            }
+        }
+        return response()->json([
+            'idVenta'=>$venta->id
+        ]);
+    }
+    public function facturaExiste(Request $request){
+        $venta = Venta::where('numero','=',$request->numero_factura)->first();
+        return response()->json([
+            'venta'=> $venta
+        ]);
+    }
+
+    public function pdfVenta($id){
+        $venta = Venta::find($id);
+        $venta_detalle = Venta_detalle::where('venta_id','=',$id)->get();
+        $view =  \View::make('ventas.pdf', compact('venta','venta_detalle'))->render();
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf->loadHTML($view);
+        return $pdf->stream('invoice');
     }
 
     /**

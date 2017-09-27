@@ -28,5 +28,8 @@ class Tercero extends Model
     public function VehiculosTercero(){
         return $this->hasMany('intransporte\VehiculoTercero', 'tercero_id', 'id');
     }
+    public function venta(){
+        return $this->hasMany('intransporte\Venta','tercero_id','id');
+    }
 
 }

@@ -9,9 +9,10 @@ class Despacho extends Model
     //
     protected $table = "despacho";
 
-    protected $fillable = ['despacho_id'];
+    protected $fillable = ['id','despacho_id','prefijo','numero','tercero_id','usuario_id','obra_id',
+        'vehiculo_tercero'];
 
-    public function Detalles(){
+    public function detalles(){
         return $this->hasMany('intransporte\DespachoDetalle','despacho_id','id');
     }
 

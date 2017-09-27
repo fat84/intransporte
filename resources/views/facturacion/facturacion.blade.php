@@ -94,16 +94,16 @@
                 var despachos = table.rows('.selected').data();
                 console.log(despachos);
                 const idDespachos = [];
-                for (var i = 0 in despachos) {
+                for (i = 0; i < despachos.length; i++) {
                     idDespachos[i] = despachos[i][0];
-                    console.log(idDespachos);
-                 }
+                }
                 console.log(idDespachos);
-                //console.log(table.rows('.selected').data());
+                facturar(idDespachos);
             });
-           //showConsultaProductos();
         });
-        function facturar(id) {
+
+        function facturar(idDespachos) {
+
             swal({
                     title: "Numero de factura",
                     text: "Ingrese el nuemro de factura:",
@@ -113,15 +113,57 @@
                     animation: "slide-from-top",
                     inputPlaceholder: "Escribe numero de factura"
                 },
-                function(inputValue){
-                    if (inputValue === false) return false;
+                function (inputValue) {
+                    var parametros2 = {
+                        'numero_factura': inputValue
+                    };
+                    var ruta2 = '/facturaExiste';
+                    $.ajax({
+                        url: ruta2,
+                        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                        type: 'POST',
+                        dataType: 'json',
+                        data: parametros2,
+                        success: function (data2) {
+                            console.log(data2);
+                            if (data2.venta == null) {
+                                if (inputValue === false) return false;
 
-                    if (inputValue === "") {
-                        swal.showInputError("Debe ingresar el numero de factura");
-                        return false
-                    }
+                                if (inputValue === "") {
+                                    swal.showInputError("Debe ingresar el numero de factura");
+                                    return false
+                                }
+                                var parametros = {
+                                    'idDespachos': idDespachos,
+                                    'numero_factura': inputValue
+                                };
+                                var ruta = '/facturarDespacho';
+                                $.ajax({
+                                    url: ruta,
+                                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                                    type: 'POST',
+                                    dataType: 'json',
+                                    data: parametros,
+                                    success: function (data) {
+                                        console.log(data);
+                                        window.open("/pdfVenta/"+data.idVenta);
+                                    }
+                                });
+                                swal("En buena hora!", "El despacho: " + inputValue, "success");
+                            } else {
+                                if (inputValue === false) return false;
 
-                    swal("En buena hora!", "El despacho: " + inputValue, "success");
+                                if (inputValue === "") {
+                                    swal.showInputError("Debe ingresar el numero de factura");
+                                    return false
+                                }
+                                swal("Ya existe", "El numero: " + inputValue, "warning");
+                            }
+
+                        }
+                    });
+
+
                 });
         }
     </script>

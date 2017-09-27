@@ -102,4 +102,7 @@ Route::get('reporte/especifico/producto','ReporteEspecificoController@indexProdu
 
 //**factuacion**//
 Route::get('facturacion','FacturacionController@index');
+Route::post('facturarDespacho','FacturacionController@store');
+Route::post('facturaExiste','FacturacionController@facturaExiste');
+Route::get('pdfVenta/{id}','FacturacionController@pdfVenta');
 //**factuacion**//
